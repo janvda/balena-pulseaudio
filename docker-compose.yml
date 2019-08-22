@@ -1,0 +1,6 @@
+version: '2'
+services:
+  pa-server
+    build: ./pa-server
+  pa-client1
+    build: ./pa-client1
