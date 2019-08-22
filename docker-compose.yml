@@ -2,5 +2,8 @@ version: '2'
 services:
   pa-server:
     build: ./pa-server
+    labels:
+      io.balena.features.dbus: '1'
+      io.balena.features.kernel-modules: '1'
   pa-client1:
     build: ./pa-client1
