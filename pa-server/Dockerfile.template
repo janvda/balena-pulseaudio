@@ -1,10 +1,24 @@
 FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:buster-run
 
+ENV UNAME pacat
+
+# Set up the user (copy pasted from https://github.com/TheBiggerGuy/docker-pulseaudio-example/blob/master/Dockerfile)
+RUN export UNAME=$UNAME UID=1000 GID=1000 && \
+    mkdir -p "/home/${UNAME}" && \
+    echo "${UNAME}:x:${UID}:${GID}:${UNAME} User,,,:/home/${UNAME}:/bin/bash" >> /etc/passwd && \
+    echo "${UNAME}:x:${UID}:" >> /etc/group && \
+    mkdir -p /etc/sudoers.d && \
+    echo "${UNAME} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${UNAME} && \
+    chmod 0440 /etc/sudoers.d/${UNAME} && \
+    chown ${UID}:${GID} -R /home/${UNAME} && \
+    gpasswd -a ${UNAME} audio
+
 RUN apt-get update && apt-get install -y \
      pulseaudio pavucontrol  \
      #gstreamer1.0 gstreamer1.0-pulseaudio pulseaudio-utils \
      && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-USER jan
+USER $UNAME
+ENV HOME /home/pacat
 
 CMD tail -f /dev/null
