@@ -4,6 +4,7 @@ volumes:
 services:
   pa-server:
     build: ./pa-server
+    network_mode: host
     #privileged: true
     #labels:
      # io.balena.features.dbus: '1'
