@@ -1,0 +1,1 @@
+FROM woahbase/alpine-pulseaudio:armv7l
