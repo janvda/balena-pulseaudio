@@ -13,6 +13,8 @@ services:
      # - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
   pa-client1:
     build: ./pa-client1
+    environment:
+      - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
   alpine-pa:
     # based on https://github.com/woahbase/alpine-pulseaudio
     build: ./alpine-pa
