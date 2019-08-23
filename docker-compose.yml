@@ -23,7 +23,7 @@ services:
       io.balena.features.kernel-modules: '1'
     devices:
       - "/dev/snd:/dev/snd/"
-      #- "/dev/usb/snd:/dev/usb/snd"
+      - "/dev/usb/snd:/dev/usb/snd"
     cap_add:
       - NET_ADMIN
     ports:
