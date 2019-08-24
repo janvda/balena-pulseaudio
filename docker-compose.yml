@@ -17,7 +17,8 @@ services:
     labels:
       io.balena.features.dbus: '1'
     environment:
-      - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
+      - PULSE_SERVER=tcp:localhost:4713
+      #- DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
   pulseaudio-server:
     # based on https://github.com/woahbase/alpine-pulseaudio
     build: ./pulseaudio-server
