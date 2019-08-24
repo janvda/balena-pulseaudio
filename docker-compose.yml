@@ -2,8 +2,8 @@ version: '2'
 volumes:
   pulseaudio_shared_cookie:
 services:
-  pa-server:
-    build: ./pa-server
+  pulseaudio-server:
+    build: ./pulseaudio-server
     network_mode: host
     #privileged: true
     #labels:
