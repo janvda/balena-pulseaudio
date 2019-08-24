@@ -155,5 +155,8 @@ load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1;172.17.0.0/24
 
 load-module module-zeroconf-publish
 
-# JVA 2019-08-24: added to load connected USB audio device.
+# JVA 2019-08-24: added to lconnected USB audio microphone
 load-module module-alsa-source device=hw:1,0
+
+# JVA 2019-08-24: added also the hdmi audio on the raspberry pi.
+load-module module-alsa-sink device=hw:0,1
