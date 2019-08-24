@@ -1,3 +1,5 @@
 FROM woahbase/alpine-pulseaudio:armv7l
 
+COPY system.pa /etc/pulse/system.pa
+
 RUN wget https://www.kozco.com/tech/LRMonoPhase4.wav
