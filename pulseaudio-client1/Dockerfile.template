@@ -6,4 +6,4 @@ RUN apt-get update && apt-get install -y \
 
 RUN wget https://www.kozco.com/tech/LRMonoPhase4.wav
 
-CMD ["bash", "/start.sh"]
+CMD ["bash", "./start.sh"]
