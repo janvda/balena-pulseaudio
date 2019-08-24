@@ -31,3 +31,5 @@ load-module module-detect
 load-module module-esound-protocol-unix
 .endif
 load-module module-native-protocol-unix
+
+load-module module-alsa-source device=hw:1,0
