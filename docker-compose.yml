@@ -2,16 +2,14 @@ version: '2'
 volumes:
   pulseaudio_shared_cookie:
 services:
-  pulseaudio-client2:
-    build: ./pulseaudio-client2
+  pulseaudio-client1:
+    build: ./pulseaudio-client
     network_mode: host
     environment:
       - PULSE_SERVER=tcp:localhost:4713
-  pulseaudio-client1:
-    build: ./pulseaudio-client1
+  pulseaudio-client2:
+    build: ./pulseaudio-client
     network_mode: host
-    labels:
-      io.balena.features.dbus: '1'
     environment:
       - PULSE_SERVER=tcp:localhost:4713
   pulseaudio-server:
