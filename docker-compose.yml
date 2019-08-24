@@ -37,6 +37,7 @@ services:
     volumes:
       - 'pulseaudio_shared_cookie:/tmp/shared_cookie'
     environment:
+      - DISABLEBLUETOOTH=true
       - UDEV=1
       - PGID=1000
       - PUID=1000
