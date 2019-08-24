@@ -4,7 +4,7 @@
 
 below commands will list all the loaded modules, sinks and sources and play an audio file
 ```
-PULSE_SERVER="tcp:localhost:4713" pactl list short`
+PULSE_SERVER="tcp:localhost:4713" pactl list short
 PULSE_SERVER="tcp:localhost:4713" paplay LRMonoPhase4.wav
 ```
 
