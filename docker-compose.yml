@@ -1,6 +1,6 @@
 version: '2'
 volumes:
-  pulseaudio_unix_socket:
+  pulseaudio_unix_socket:  # shared volume where pulseaudio unix socket will be stored.
 services:
   pulseaudio-server:
     # based on https://github.com/woahbase/alpine-pulseaudio
@@ -20,7 +20,7 @@ services:
       - "4713:4713"
       - "80:4714"  # maps  public url port 80 to 4717 = module-http-protocol-tcp listens on this port
     volumes:
-      - 'pulseaudio_unix_socket:/data'
+      - 'pulseaudio_unix_socket/pulseaudio' # folder where pulseAudio unix socket is created.
     environment:
       - DISABLEBLUETOOTH=true
       - UDEV=1
@@ -42,5 +42,5 @@ services:
     depends_on:
       - pulseaudio-server
     volumes:
-      - 'pulseaudio_unix_socket:/data'
+      - 'pulseaudio_unix_socket:/pulseaudio'  # folder where pulseAudio unix socket is stored.
 
