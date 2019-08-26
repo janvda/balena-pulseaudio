@@ -18,6 +18,7 @@ services:
       - NET_ADMIN
     ports:
       - "4713:4713"
+      - "80:4714"  # maps publid url port to 4717 - 
     volumes:
       - 'pulseaudio_shared_cookie:/tmp/shared_cookie'
     environment:

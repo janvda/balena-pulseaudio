@@ -160,3 +160,6 @@ load-module module-alsa-source device=hw:1,0
 
 # JVA 2019-08-24: tried to define without succes the rapberry pi hdmi port as a pulseaudio sink.
 load-module module-alsa-sink device=hw:0,1
+
+# JVA 2019-08-26;:
+load-module module-http-protocol-tcp
