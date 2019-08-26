@@ -1,5 +1,7 @@
 # Interesting Commands
 
+1. activate 
+
 ## On the Client
 
 below commands will list all the loaded modules, sinks and sources and play an audio file
