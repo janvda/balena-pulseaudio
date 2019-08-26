@@ -1,6 +1,6 @@
 version: '2'
 volumes:
-  pulseaudio_shared_cookie:
+  pulseaudio_unix_socket:
 services:
   pulseaudio-server:
     # based on https://github.com/woahbase/alpine-pulseaudio
@@ -20,7 +20,7 @@ services:
       - "4713:4713"
       - "80:4714"  # maps  public url port 80 to 4717 = module-http-protocol-tcp listens on this port
     volumes:
-      - 'pulseaudio_shared_cookie:/tmp/shared_cookie'
+      - 'pulseaudio_unix_socket:/tmp/unix_socket'
     environment:
       - DISABLEBLUETOOTH=true
       - UDEV=1
@@ -40,4 +40,7 @@ services:
     environment:
       - PULSE_SERVER=tcp:localhost:4713``
     depends_on:
-      - pulseaudio-server
+      - pulseaudio-server``
+    volumes:
+      - 'pulseaudio_unix_socket:/tmp/unix_socket'
+      

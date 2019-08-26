@@ -164,3 +164,5 @@ load-module module-alsa-sink device=hw:0,1
 # JVA 2019-08-26: see https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/#index24h3
 # listens on port 4714.
 load-module module-http-protocol-tcp
+
+load-module module-native-protocol-unix auth-anonymous=1 socket=/tmp/unix_socket
