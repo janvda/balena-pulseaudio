@@ -17,8 +17,8 @@ services:
     cap_add:
       - NET_ADMIN
     ports:
-      - "4713:4713"
       - "80:4714"  # maps public url port 80 to 4717 = module-http-protocol-tcp listens on this port
+      - "4713:4713"
     volumes:
       - 'pulseaudio_shared_cookie:/tmp/shared_cookie'
     environment:
