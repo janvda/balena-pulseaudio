@@ -40,7 +40,7 @@ services:
     environment:
       - PULSE_SERVER=tcp:localhost:4713``
     depends_on:
-      - pulseaudio-server``
+      - pulseaudio-server
     volumes:
       - 'pulseaudio_unix_socket:/tmp/unix_socket'
-      
+
