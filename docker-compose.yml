@@ -2,17 +2,7 @@ version: '2'
 volumes:
   pulseaudio_shared_cookie:
 services:
-  pulseaudio-client1:
-    build: ./pulseaudio-client
-    network_mode: host
-    environment:
-      - PULSE_SERVER=tcp:localhost:4713
-  pulseaudio-client2:
-    build: ./pulseaudio-client
-    network_mode: host
-    environment:
-      - PULSE_SERVER=tcp:localhost:4713
-  pulseaudio-server:
+   pulseaudio-server:
     # based on https://github.com/woahbase/alpine-pulseaudio
     build: ./pulseaudio-server
     #restart: always
@@ -36,3 +26,17 @@ services:
       - PGID=1000
       - PUID=1000
       - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
+  pulseaudio-client1:
+    build: ./pulseaudio-client
+    network_mode: host
+    environment:
+      - PULSE_SERVER=tcp:localhost:4713
+    depends_on:
+      - pulseaudio-server
+  pulseaudio-client2:
+    build: ./pulseaudio-client
+    network_mode: host
+    environment:
+      - PULSE_SERVER=tcp:localhost:4713``
+    depends_on:
+      - pulseaudio-server
