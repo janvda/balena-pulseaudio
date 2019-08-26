@@ -20,7 +20,7 @@ services:
       - "4713:4713"
       - "80:4714"  # maps  public url port 80 to 4717 = module-http-protocol-tcp listens on this port
     volumes:
-      - 'pulseaudio_unix_socket:/tmp/unix_socket'
+      - 'pulseaudio_unix_socket:/data'
     environment:
       - DISABLEBLUETOOTH=true
       - UDEV=1
@@ -42,5 +42,5 @@ services:
     depends_on:
       - pulseaudio-server
     volumes:
-      - 'pulseaudio_unix_socket:/tmp/unix_socket'
+      - 'pulseaudio_unix_socket:/data'
 
