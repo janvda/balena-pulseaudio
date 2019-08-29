@@ -11,14 +11,15 @@ This balena application runs a pulseaudio server and demonstrates how it can be 
    1. headphone, earphone, ... plugged into the headphone jack of the raspberry pi.
    2. TV, monitor with speaker, ... connected to hdmi port of the raspberry pi.
    3. bluetooth speaker, bluetooth headset,...
+   4. (DAC) HAT with audio device or speaker connected to it.
 3. For recording audio the following can be used:
    1. USB microphone, USB camera with microphone, ...
    2. bluetooth headset, bluetooth speaker with microphone
+   3. HAT with one or more microphones
 
+## Interesting Commands
 
-# Interesting Commands
-
-## Change profile (e.g. headset, a2dp) of bluetooth device
+### Change profile (e.g. headset, a2dp) of bluetooth device
 
 1. Assure bluetooth device is connected (`bluetoothctl`) *TO BE DOCUMENTED*
 2. Identify card number and profile names by command: `pactl list cards`
