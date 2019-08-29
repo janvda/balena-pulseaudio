@@ -1,3 +1,21 @@
+# balena-pulseaudio
+
+## Introduction
+
+This balena application runs a pulseaudio server and demonstrates how it can be used for playing and recording audio on a raspberry pi.  It also supports playing and recording audio from bluetooth audio devices (bluetooth speakers, bluetooth headsets, ...)
+
+## Required Hardware
+
+1. Raspberry pi (although it is most likely very easy to port this to other devices)
+2. For playing audio the following can be used:
+   1. headphone, earphone, ... plugged into the headphone jack of the raspberry pi.
+   2. TV, monitor with speaker, ... connected to hdmi port of the raspberry pi.
+   3. bluetooth speaker, bluetooth headset,...
+3. For recording audio the following can be used:
+   1. USB microphone, USB camera with microphone, ...
+   2. bluetooth headset, bluetooth speaker with microphone
+
+
 # Interesting Commands
 
 ## Change profile (e.g. headset, a2dp) of bluetooth device
