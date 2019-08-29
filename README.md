@@ -17,6 +17,19 @@ This balena application runs a pulseaudio server and demonstrates how it can be 
    2. bluetooth headset, bluetooth speaker with microphone
    3. HAT with one or more microphones
 
+## Rationale
+
+The idea is to create a pulseaudio service (= `pulseaudio-server`) that can be reused in other balena applications requiring an audio interface.  This pulseaudio service is the only service having an interface with the audio hardware (including connected bluetooth devices): all other services requiring audio should do this via this pulseaudio service.
+
+## Features
+
+1. service `pulseaudio-client-tcp` demonstrates how a service can communicate with the `pulseaudio-server` via TCP.
+2. service `pulseaudio-client-unix` demonstrates how a service can communicate with the `pulseaudio-server` via a unix socket.
+3. demonstrate how commands `paplay`and `parecord` can be used to play and record audio.
+4. Support changing/showing any pulseaudio setting through command `pactl`.
+5. Support scanning/connecting/monitoring of bluetooth devices through command `bluetoothctl`
+6. Supports `pavucontrol` and `audacity`.  This requires an X-server (e.g. XQuartz on macbook) that is connected to the same local network.
+
 ## Interesting Commands
 
 ### Change profile (e.g. headset, a2dp) of bluetooth device
