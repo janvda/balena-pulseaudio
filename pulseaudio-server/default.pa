@@ -43,9 +43,8 @@ load-module module-switch-on-port-available
 #load-module module-pipe-sink
 
 ### Automatically load driver modules depending on the hardware available
-# regarding option tsched=0 see https://wiki.archlinux.org/index.php/PulseAudio/Troubleshooting#Glitches.2C_skips_or_crackling
 .ifexists module-udev-detect.so
-load-module module-udev-detect tsched=0
+load-module module-udev-detect
 .else
 ### Use the static hardware detection module (for systems that lack udev support)
 load-module module-detect
