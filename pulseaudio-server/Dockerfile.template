@@ -13,4 +13,5 @@ RUN wget https://www.kozco.com/tech/LRMonoPhase4.wav
 COPY default.pa /etc/pulse/default.pa
 COPY daemon.conf /etc/pulse/daemon.conf
 
-CMD tail -f /dev/null
+COPY start.sh /start.sh
+CMD ["bash", "/start.sh"]
