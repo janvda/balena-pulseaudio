@@ -1,6 +1,7 @@
 FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:buster-run
 
 RUN apt-get update && apt-get install -y \
+     bluez \
      pulseaudio pavucontrol \
      audacity \
      wget \
