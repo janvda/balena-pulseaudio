@@ -12,4 +12,4 @@ RUN wget https://www.kozco.com/tech/LRMonoPhase4.wav
 COPY default.pa /etc/pulse/default.pa
 COPY daemon.conf /etc/pulse/daemon.conf
 
-CMD ["pulseaudio", "-D" ]
+CMD ["bash", "pulseaudio -D" ]
