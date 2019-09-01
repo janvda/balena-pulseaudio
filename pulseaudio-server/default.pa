@@ -149,7 +149,10 @@ load-module module-alsa-sink
 # load-module module-alsa-sink device=hw:1,0
 
 # pretty insecure by itself
-load-module module-esound-protocol-tcp auth-anonymous=1
+
+# JVA commented next line ltdl-bind-now.c: Failed to open module module-esound-protocol-tcp.so: module-esound-protocol-tcp.so: cannot open shared object file: No such file or directory
+# load-module module-esound-protocol-tcp auth-anonymous=1
+
 # limit by subnet # 172.* used by docker, add your local network here
 load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1;172.17.0.0/24
 
@@ -159,7 +162,8 @@ load-module module-zeroconf-publish
 load-module module-alsa-source device=hw:1,0
 
 # JVA 2019-08-24: tried to define without succes the rapberry pi hdmi port as a pulseaudio sink.
-load-module module-alsa-sink device=hw:0,1
+# commented next line as this only works (I think) when connected by hdmi.
+# load-module module-alsa-sink device=hw:0,1
 
 # JVA 2019-08-26: see https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/#index24h3
 # listens on port 4714.
