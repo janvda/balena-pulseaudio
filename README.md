@@ -32,7 +32,7 @@ The idea is to create a pulseaudio service (= `pulseaudio-server`) that can be r
 
 ## Interesting Commands
 
-### Change profile (e.g. headset, a2dp) of bluetooth device
+### Change card profile (e.g. headset, a2dp) of bluetooth device
 
 1. Assure bluetooth device is connected (`bluetoothctl`) *TO BE DOCUMENTED*
 2. Identify card number and profile names by command: `pactl list cards`
