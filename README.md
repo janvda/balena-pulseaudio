@@ -58,4 +58,5 @@ https://github.com/mviereck/x11docker/wiki/Container-sound:-ALSA-or-Pulseaudio
 On the server:
 
 1. search (alsa) audio sinks using command `aplay -l` and (alsa) audio sources using command `arecord -l`
-2. load the module by command `pactl load-module module-alsa-source device=hw:1,0` - you can also add this to `/etc/pulse/default.pa`
+2. configure the audio source for pulseaudio by command `pactl load-module module-alsa-source device=hw:1,0` - you can also add this to `/etc/pulse/default.pa`
+3. configure the audio sink for pulseaudio by command `pactl load-module module-alsa-sink device=hw:2,0` - you can also add this to `/etc/pulse/default.pa`
