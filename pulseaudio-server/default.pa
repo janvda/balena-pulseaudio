@@ -65,7 +65,8 @@ load-module module-bluetooth-policy
 ## JVA 2019-09-06: added autodetect_mtu as proposed in https://github.com/raspberrypi/linux/issues/2229#issuecomment-391397669
 ##                 this should fix the issue with the bad audio playback with headset_head_unit profile
 .ifexists module-bluetooth-discover.so
-load-module module-bluetooth-discover  autodetect_mtu=yes
+#load-module module-bluetooth-discover autodetect_mtu=yes
+load-module module-bluetooth-discover
 .endif
 
 ### Load several protocols
