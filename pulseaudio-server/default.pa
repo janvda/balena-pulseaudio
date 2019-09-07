@@ -43,8 +43,9 @@ load-module module-switch-on-port-available
 #load-module module-pipe-sink
 
 ### Automatically load driver modules depending on the hardware available
+# JVA 2019-09-07 added tsched=0 for issue #14
 .ifexists module-udev-detect.so
-load-module module-udev-detect
+load-module module-udev-detect tsched=0
 .else
 ### Use the static hardware detection module (for systems that lack udev support)
 load-module module-detect
