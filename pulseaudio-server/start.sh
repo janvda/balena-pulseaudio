@@ -4,9 +4,10 @@
 
 if [ "$bluetooth_device_address" != '' ]; then
    echo "sleeping 40 sec..."
-   sleep 40
+   sleep 20
    echo "connecting to bluetooth device with mac = $bluetooth_device_address"
    echo -e 'connect $bluetooth_device_address' | bluetoothctl
+   sleep 20
    echo -e 'info $bluetooth_device_address' | bluetoothctl
    #echo -e 'disconnect $bluetooth_device_address' | bluetoothctl
    echo "end of connecting"
