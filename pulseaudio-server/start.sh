@@ -3,6 +3,8 @@
 # export bluetooth_device_address="A0:E9:DB:09:CF:FF"
 
 if [ "$bluetooth_device_address" != '' ]; then
+   echo "sleeping 40 sec..."
+   sleep 40
    echo "connecting to bluetooth device with mac = $bluetooth_device_address"
    echo -e 'connect $bluetooth_device_address' | bluetoothctl
    echo -e 'info $bluetooth_device_address' | bluetoothctl
