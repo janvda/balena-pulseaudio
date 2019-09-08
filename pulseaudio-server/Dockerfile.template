@@ -15,4 +15,5 @@ COPY default.pa /etc/pulse/default.pa
 COPY daemon.conf /etc/pulse/daemon.conf
 
 COPY start.sh /start.sh
+COPY connect.sh /connect.sh
 CMD ["bash", "/start.sh"]
