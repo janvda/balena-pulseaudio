@@ -30,6 +30,16 @@ The idea is to create a pulseaudio service (= `pulseaudio-server`) that can be r
 5. Support scanning/connecting/monitoring of bluetooth devices through command `bluetoothctl`
 6. Supports `pavucontrol` and `audacity`.  This requires an X-server (e.g. XQuartz on macbook) that is connected to the same local network.
 
+## Configuration
+
+### Bluetooth device
+
+If you want to communicate to a specific bluetooth audio device (e.g. bluetooth speaker) the following is needed:
+
+1. Identify the bluetooth device address
+2. pair and trust it
+3. set the environment variable bluetooth_device_address
+
 ## Interesting Commands
 
 ### Change card profile (e.g. headset, a2dp) of bluetooth device
