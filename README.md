@@ -36,9 +36,21 @@ The idea is to create a pulseaudio service (= `pulseaudio-server`) that can be r
 
 If you want to communicate to a specific bluetooth audio device (e.g. bluetooth speaker) the following is needed:
 
-1. Identify the bluetooth device address
-2. pair and trust it
+1. [How to ientify the bluetooth device address](#1-Identify-the-blue-tooth-device-address)(e.g. `A0:E9:DB:09:CF:FF`).
+2. pair and trust it. 
 3. set the environment variable `bluetooth_device_address`
+
+#### 1. Identify the bluetooth device address
+
+TBD
+
+#### 2. Pair and Trust you bluetooth device
+
+TBD
+
+#### 3. Set the environment variable `bluetooth_device_address`
+
+TBD
 
 ## Interesting Commands
 
