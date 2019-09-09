@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # run bluetooth connect loop
-/connect_bluetooth &
+/connect_bluetooth.sh &
 
 echo starting pulseaudio ...
 pulseaudio --log-level=4

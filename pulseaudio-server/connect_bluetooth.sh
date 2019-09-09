@@ -3,9 +3,9 @@
 # export bluetooth_device_address="A0:E9:DB:09:CF:FF"
 
 if [ "$bluetooth_device_address" != '' ]; then
-   echo "start connection loop for bluetooth device with mac = $bluetooth_device_address"
+   echo "start endless loop for connecting to bluetooth device with mac = $bluetooth_device_address"
    while (sleep 30)
-   echo "  reconnecting to $bluetooth_device_address if needed ..."
+   echo "  COMMAND:bluetoothctl connect $bluetooth_device_address"
    do
 bluetoothctl << EOF
 connect $bluetooth_device_address
