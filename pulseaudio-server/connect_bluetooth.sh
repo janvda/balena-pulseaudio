@@ -3,7 +3,7 @@
 
 if [ "$bluetooth_device_address" != '' ]; then
    sleep 20
-   echo "start endless loop for connecting to bluetooth device with mac = $bluetooth_device_address"
+   echo "[$0]: Start endless loop for connecting to bluetooth device with mac = $bluetooth_device_address"
    while true; do
      bluetoothctl <<- EOF > /dev/null
         connect $bluetooth_device_address
