@@ -38,7 +38,7 @@ If you want to communicate to a specific bluetooth audio device (e.g. bluetooth 
 
 1. Identify the bluetooth device address
 2. pair and trust it
-3. set the environment variable bluetooth_device_address
+3. set the environment variable `bluetooth_device_address`
 
 ## Interesting Commands
 
