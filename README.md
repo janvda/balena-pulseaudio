@@ -37,7 +37,7 @@ The idea is to create a pulseaudio service (= `pulseaudio-server`) that can be r
 If you want to communicate to a specific bluetooth audio device (e.g. bluetooth speaker) the following is needed:
 
 1. [Identify the bluetooth device address](#1-identify-the-bluetooth-device-address)(e.g. `A0:E9:DB:09:CF:FF`).
-2. [pair it](#2-pair-your-bluetooth-device)
+2. [pair the raspberry pi with the bluetooth device](#2-pair-the-raspberry-pi-with-the-bluetooth-device)
 3. [set the environment variable `bluetooth_device_address`](#3-set-the-environment-variable-bluetooth_device_address)
 
 #### 1. Identify the bluetooth device address
@@ -45,19 +45,19 @@ If you want to communicate to a specific bluetooth audio device (e.g. bluetooth 
 There are several ways to determine the device address (a kind of MAC address) of your bluetooth device.
 
 One possible way: 
+
 1. open a terminal session for the `pulseaudio-server` service in your BalenaCloud dashboard.
 2. within that session enter the command `bluetoothctl`
 3. within the `bluetoothctl`-session enter the command `scan on`.  
 4. assure that your bluetooth device is switched on and listening for bluetooth connections.
 5. In the `bluetoothctl`-session you should see the bluetooth device addresses appearing (e.g. `[NEW] Device 75:E0:1C:D7:D4:68 CC-RT-BLE` - where `CC-RT-BLE` is the name of the device).
-6. For some bluetooth devices the scan might not display a meaningful name but the device address (e.g. `[NEW] Device 6E:F1:B6:0E:DD:51 6E-F1-B6-0E-DD-51`).  In that case [pairing the device](#2-pair-your-bluetooth-device) might be needed first to be able to see the actual device name instead of the device address.
+6. For some bluetooth devices the scan might not display a meaningful name but the device address (e.g. `[NEW] Device 6E:F1:B6:0E:DD:51 6E-F1-B6-0E-DD-51`).  In that case [pairing with the device](#2-pair-the-raspberry-pi-with-the-bluetooth-device) might be needed first to be able to see the actual device name instead of the device address.
 7. **TIP**: the command `help` will list all possible commands you can enter in the `bluetoothctl`-session.
-7. the command `exit` or `quit`can be used to leave the `bluetoothctl`-session.
+8. the command `exit` or `quit`can be used to leave the `bluetoothctl`-session.
 
+#### 2. Pair the raspberry pi with the bluetooth device
 
-#### 2. Pair your bluetooth device
-
-This should be done only once.  Once the device is paired, it is remembered even after a reboot of the raspberry pi device.
+This should be done only once.  Once the device is paired, it is remembered even after a reboot of the raspberry pi device.  For more information read the [introduction to pairing](https://docs.ubuntu.com/core/en/stacks/bluetooth/bluez/docs/reference/pairing/introduction).
 
 The steps for pairing:
 
