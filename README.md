@@ -69,6 +69,7 @@ card 2: Device [USB2.0 Device], device 0: USB Audio [USB Audio]
   Subdevices: 1/1
   Subdevice #0: subdevice #0
 root@ba7c427:/#
+```
 
 5. So in the above output you can easily find back the Card ID (which is 2) and the Device ID (which is 0) of the connected audio playback devices.
 6. Now, we have to do the same for the audio capture devices by running the command `arecord -l`.  See an example output below which shows 2 connected audio capture devices: playstation eye camera with micro (= `card 1: CameraB409241 [USB Camera-B4.09.24.1], device 0: USB Audio [USB Audio]`) and my speaker which also has a micronphone (= `card 2: Device [USB2.0 Device], device 0: USB Audio [USB Audio]`)
