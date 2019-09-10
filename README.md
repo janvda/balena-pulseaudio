@@ -68,7 +68,12 @@ The steps for pairing:
 
 #### 3. Set the environment variable `bluetooth_device_address`
 
-TBD
+In your BalenaCloud dashboard: Add the following Device Service Variable for the service `pulseaudio-server`.
+Of course it is also possible to set this in the `docker-compose.yml` for that service.
+
+| Name                                            | Value |
+|------------------------------------------------ | ----- |
+| **bluetooth_device_address**  | if specified then at startup, the `pulseaudio-server` will connect to this device and will retry connecting every 60 sec.  This address should have a format like `6E:F1:B6:0E:DD:51`.  Note that it will only work if [the raspberry pi has paired with this device](Pair the raspberry pi with the bluetooth device). |
 
 ## Interesting Commands
 
