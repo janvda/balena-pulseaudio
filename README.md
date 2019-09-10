@@ -85,7 +85,7 @@ Of course it is also possible to set this environment variable in the `docker-co
 
 After step 3 you can validate if an automatic connection is made to this device.
 
-1. First assure that bluetooth audio device is able to accept bluetooth connection and within range of your raspberry pi.
+1. First assure that bluetooth audio device is able to accept bluetooth connections and is within range of your raspberry pi.
 2. open a terminal session for the `pulseaudio-server` service in your BalenaCloud dashboard.
 2. within that session enter the command `bluetoothctl`.  In case of successful connection you should see something like (instead of `GEAR4 SPW` you should see the name of your bluetooth device)
 
