@@ -87,7 +87,15 @@ card 2: Device [USB2.0 Device], device 0: USB Audio [USB Audio]
 root@ba7c427:/#
 ```
 
-7. So in the above output you can easily find back the Card ID and Device of the connected audio capture devices.
+7. So in the above output you can easily find back the Card ID and Device ID of the connected audio capture devices.
+
+#### 3. Set the device service variables `alsa-sink1`, `alsa-sink2`, ... , `alsa-source1`, `alsa-source2`,...
+
+TBD 
+
+#### 4. Validate the configuration
+
+TBD
 
 ### Bluetooth device
 
