@@ -30,9 +30,9 @@ The idea is to create a pulseaudio service (= `pulseaudio-server`) that can be r
 5. Support scanning/connecting/monitoring of bluetooth devices through command `bluetoothctl`
 6. Supports `pavucontrol` and `audacity`.  This requires an X-server (e.g. XQuartz on macbook) that is connected to the same local network.
 
-## Configuration
+## Configuration of the `pulseaudio-server` service
 
-### Audio devices connected via USB
+### Configuration of Audio devices connected via USB
 
 If you have one or more audio devices ( speaker, camera with microphone, ...) that you want to (permanently) connect to the USB ports of the raspberry pi then they can be configured as follows:
 
@@ -97,7 +97,7 @@ TBD
 
 TBD
 
-### Bluetooth device
+### Configuration of a Bluetooth device
 
 If you have a bluetooth audio device (e.g. bluetooth speaker, bluetooth head-set) and you want to play and/or record audio from this device then the following is needed:
 
