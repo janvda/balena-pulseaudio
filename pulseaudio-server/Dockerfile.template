@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN wget https://www.kozco.com/tech/LRMonoPhase4.wav
 
-COPY default.pa /etc/pulse/default.pa
+COPY default_without_alsa_sinks_and_sources.pa /etc/pulse/default_without_alsa_sinks_and_sources.pa
 COPY daemon.conf /etc/pulse/daemon.conf
 
 COPY start.sh /start.sh
