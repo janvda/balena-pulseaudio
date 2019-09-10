@@ -34,16 +34,16 @@ The idea is to create a pulseaudio service (= `pulseaudio-server`) that can be r
 
 ### Audio devices connected via USB
 
-If you have one or more audio devices ( speaker, camera with microphone, ...) that you want to connect to the USB ports of the raspberry pi then they can be configured as follows:
+If you have one or more audio devices ( speaker, camera with microphone, ...) that you want to (permanently) connect to the USB ports of the raspberry pi then they can be configured as follows:
 
 1. Connect the audio devices to the USB ports of the raspberry pi
-2. Determine the Card ID and Device ID of all the connected audio devices
+2. Determine the Card ID and Device ID of all the connected audio devices(#2-determine-the-card-id-and-device-id-of-the-connected-audio-devices)
 3. Set the device service variables `alsa-sink1`, `alsa-sink2`, ... , `alsa-source1`, `alsa-source2`,...
 4. Validate the configuration
 
-#### 2. Determine the Card ID and Device ID of a connected audio device
+#### 2. Determine the Card ID and Device ID of the connected audio devices
 
-The Card ID and Device ID of an audio device (speaker, headset, camera with microphone, ...) that is connected to one of the USB ports of the raspberry py can be determined as follows:
+The Card ID and Device ID of the audio devices (speaker, headset, camera with microphone, ...) that are connected to the USB ports of the raspberry py can be determined as follows:
 
 1. Connect the audio devices to the USB ports of the raspberry pi.
 2. Restart the `pulseaudio-server` service via your BalenaCloud dashboard.
