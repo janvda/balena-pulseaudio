@@ -32,6 +32,19 @@ The idea is to create a pulseaudio service (= `pulseaudio-server`) that can be r
 
 ## Configuration
 
+### Audio devices connected via USB
+
+If you have one or more audio devices ( speaker, camera with microphone, ...) that you want to connect (permanently) to the USB ports of the raspberry pi then they can be configured as follows:
+
+1.  Connect the audio devices to the USB ports of the raspberry pi
+2.  Determine the Card ID and Device ID of all the connected audio devices 
+3.  Set the device service variables `alsa-sink1`, `alsa-sink2`, ... , `alsa-source1`, `alsa-source2`,...
+4.  Validate the configuration
+
+#### 2. Determine the Card ID and Device ID of a connected audio device
+
+TBD
+
 ### Bluetooth device
 
 If you have a bluetooth audio device (e.g. bluetooth speaker, bluetooth head-set) and you want to play and/or record audio from this device then the following is needed: 
