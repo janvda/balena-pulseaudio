@@ -44,7 +44,7 @@ If you want to communicate to a specific bluetooth audio device (e.g. bluetooth 
 
 There are several ways to determine the device address (a kind of MAC address) of your bluetooth device.
 
-One possible way: 
+One possible way:
 
 1. open a terminal session for the `pulseaudio-server` service in your BalenaCloud dashboard.
 2. within that session enter the command `bluetoothctl`
@@ -57,7 +57,7 @@ One possible way:
 
 #### 2. Pair the raspberry pi with the bluetooth device
 
-This should be done only once.  Once the device is paired, it is remembered even after a reboot of the raspberry pi device.  For more information read the [introduction to pairing](https://docs.ubuntu.com/core/en/stacks/bluetooth/bluez/docs/reference/pairing/introduction).
+This should be done only once.  Once the device is paired, it is remembered even after a reboot of the raspberry pi device.
 
 The steps for pairing:
 
@@ -66,6 +66,8 @@ The steps for pairing:
 3. within the `bluetoothctl`-session enter the command `pair <bluetooth device address>`
 4. With the command `info <bluetooth device address>` you can check if the pairing was successful.
 
+ For more information about pairing: [introduction to pairing](https://docs.ubuntu.com/core/en/stacks/bluetooth/bluez/docs/reference/pairing/introduction).
+
 #### 3. Set the environment variable `bluetooth_device_address`
 
 In your BalenaCloud dashboard: Add the following Device Service Variable for the service `pulseaudio-server`.
@@ -73,7 +75,7 @@ Of course it is also possible to set this in the `docker-compose.yml` for that s
 
 | Name                                            | Value |
 |------------------------------------------------ | ----- |
-| **bluetooth_device_address**  | if specified then at startup, the `pulseaudio-server` will connect to this device and will retry connecting every 60 sec.  This address should have a format like `6E:F1:B6:0E:DD:51`.  Note that it will only work if [the raspberry pi has paired with this device](Pair the raspberry pi with the bluetooth device). |
+| **bluetooth_device_address**  | if specified then at startup, the `pulseaudio-server` will connect to this device and will retry connecting every 60 sec.  This address should have a format like `6E:F1:B6:0E:DD:51`.  Note that it will only work if [the raspberry pi has paired with this device](#2-pair-the-raspberry-pi-with-the-bluetooth-device). |
 
 ## Interesting Commands
 
