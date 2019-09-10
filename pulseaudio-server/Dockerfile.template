@@ -15,4 +15,6 @@ COPY default.pa /etc/pulse/default.pa
 COPY daemon.conf /etc/pulse/daemon.conf
 
 COPY start.sh /start.sh
+COPY connect_bluetooth.sh /connect_bluetooth.sh
+RUN  chmod a+x /connect_bluetooth.sh
 CMD ["bash", "/start.sh"]
