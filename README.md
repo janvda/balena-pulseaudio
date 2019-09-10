@@ -32,7 +32,7 @@ The idea is to create a pulseaudio service (= `pulseaudio-server`) that can be r
 
 ## Configuration of the `pulseaudio-server` service
 
-### Configuration of Audio devices connected via USB
+### A. Configuration of Audio devices connected via USB
 
 If you have one or more audio devices ( speaker, camera with microphone, ...) that you want to (permanently) connect to the USB ports of the raspberry pi then they can be configured as follows:
 
@@ -97,7 +97,7 @@ TBD
 
 TBD
 
-### Configuration of a Bluetooth device
+### B. Configuration of a Bluetooth device
 
 If you have a bluetooth audio device (e.g. bluetooth speaker, bluetooth head-set) and you want to play and/or record audio from this device then the following is needed:
 
