@@ -34,20 +34,63 @@ The idea is to create a pulseaudio service (= `pulseaudio-server`) that can be r
 
 ### Audio devices connected via USB
 
-If you have one or more audio devices ( speaker, camera with microphone, ...) that you want to connect (permanently) to the USB ports of the raspberry pi then they can be configured as follows:
+If you have one or more audio devices ( speaker, camera with microphone, ...) that you want to connect to the USB ports of the raspberry pi then they can be configured as follows:
 
-1.  Connect the audio devices to the USB ports of the raspberry pi
-2.  Determine the Card ID and Device ID of all the connected audio devices 
-3.  Set the device service variables `alsa-sink1`, `alsa-sink2`, ... , `alsa-source1`, `alsa-source2`,...
-4.  Validate the configuration
+1. Connect the audio devices to the USB ports of the raspberry pi
+2. Determine the Card ID and Device ID of all the connected audio devices
+3. Set the device service variables `alsa-sink1`, `alsa-sink2`, ... , `alsa-source1`, `alsa-source2`,...
+4. Validate the configuration
 
 #### 2. Determine the Card ID and Device ID of a connected audio device
 
-TBD
+The Card ID and Device ID of an audio device (speaker, headset, camera with microphone, ...) that is connected to one of the USB ports of the raspberry py can be determined as follows:
+
+1. Connect the audio devices to the USB ports of the raspberry pi.
+2. Restart the `pulseaudio-server` service via your BalenaCloud dashboard.
+3. open a terminal session for the `pulseaudio-server` service in your BalenaCloud dashboard.
+4. run the command `aplay -l`.  This will list all playback devices (e.g. a speaker).  See an example output of this command below.  So you can see that besides the USB device `card 2: Device [USB2.0 Device], device 0: USB Audio [USB Audio]` it is also listing the raspberry pi audio jack (= `card 0: ALSA [bcm2835 ALSA], device 0: bcm2835 ALSA [bcm2835 ALSA]` and the raspberry pi hdmi port (= `card 0: ALSA [bcm2835 ALSA], device 1: bcm2835 ALSA [bcm2835 IEC958/HDMI]`)
+
+```
+root@ba7c427:/# aplay -l
+**** List of PLAYBACK Hardware Devices ****
+card 0: ALSA [bcm2835 ALSA], device 0: bcm2835 ALSA [bcm2835 ALSA]
+  Subdevices: 7/7
+  Subdevice #0: subdevice #0
+  Subdevice #1: subdevice #1
+  Subdevice #2: subdevice #2
+  Subdevice #3: subdevice #3
+  Subdevice #4: subdevice #4
+  Subdevice #5: subdevice #5
+  Subdevice #6: subdevice #6
+card 0: ALSA [bcm2835 ALSA], device 1: bcm2835 ALSA [bcm2835 IEC958/HDMI]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 2: Device [USB2.0 Device], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+root@ba7c427:/#
+
+5. So in the above output you can easily find back the Card ID (which is 2) and the Device ID (which is 0) of the connected audio playback devices.
+6. Now, we have to do the same for the audio capture devices by running the command `arecord -l`.  See an example output below which shows 2 connected audio capture devices: playstation eye camera with micro (= `card 1: CameraB409241 [USB Camera-B4.09.24.1], device 0: USB Audio [USB Audio]`) and my speaker which also has a micronphone (= `card 2: Device [USB2.0 Device], device 0: USB Audio [USB Audio]`)
+
+```
+root@ba7c427:/# arecord -l
+**** List of CAPTURE Hardware Devices ****
+xcb_connection_has_error() returned true
+card 1: CameraB409241 [USB Camera-B4.09.24.1], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 2: Device [USB2.0 Device], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+root@ba7c427:/#
+```
+
+7. So in the above output you can easily find back the Card ID and Device of the connected audio capture devices.
 
 ### Bluetooth device
 
-If you have a bluetooth audio device (e.g. bluetooth speaker, bluetooth head-set) and you want to play and/or record audio from this device then the following is needed: 
+If you have a bluetooth audio device (e.g. bluetooth speaker, bluetooth head-set) and you want to play and/or record audio from this device then the following is needed:
 
 1. [Identify the device address of your bluetooth audio device](#1-identify-the-bluetooth-device-address) (e.g. `A0:E9:DB:09:CF:FF`).
 2. [pair the raspberry pi with your bluetooth device](#2-pair-the-raspberry-pi-with-the-bluetooth-device)
@@ -105,7 +148,7 @@ After step 3 you can validate if an automatic connection is made to this device.
 ```
 root@ba7c427:/# bluetoothctl
 Agent registered
-[GEAR4 SPW]# 
+[GEAR4 SPW]#
 ```
 
 4. within the `bluetoothctl`-session enter the command `info <bluetooth device address>` or most likely command `info` is sufficient.  You should get something like:
@@ -126,7 +169,7 @@ Device A0:E9:DB:09:CF:FF (public)
         UUID: Audio Sink                (0000110b-0000-1000-8000-00805f9b34fb)
         UUID: Advanced Audio Distribu.. (0000110d-0000-1000-8000-00805f9b34fb)
         UUID: Handsfree                 (0000111e-0000-1000-8000-00805f9b34fb)
-[GEAR4 SPW]# 
+[GEAR4 SPW]#
 ```
 
 5. Check if you see a line with `Connected: yes` in above output and this confirms that the bluetooth connection has been properly setup.
