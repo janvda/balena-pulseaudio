@@ -38,8 +38,8 @@ If you have one or more audio devices ( speaker, camera with microphone, ...) th
 
 1. Connect the audio devices to the USB ports of the raspberry pi
 2. [Determine the Card ID and Device ID of all the connected audio devices](#2-determine-the-card-id-and-device-id-of-the-connected-audio-devices)
-3. Set the device service variables `alsa-sink1`, `alsa-sink2`, ... , `alsa-source1`, `alsa-source2`,...
-4. Validate the configuration
+3. [Set the device service variables `alsa-sink1`, `alsa-sink2`, ... , `alsa-source1`, `alsa-source2`,...](#3-set-the-device-service-variables-alsa_sink1-alsa_sink2---alsa_source1-alsa-source2)
+4. [Validate the configuration](#4-validate-the-configuration)
 
 #### 2. Determine the Card ID and Device ID of the connected audio devices
 
@@ -131,12 +131,13 @@ device=hw:1,0 source_name=PS3_eye_camera"
 The following can be done to validate the configuration;
 
 1. Open a terminal session for the `pulseaudio-server` service in your BalenaCloud dashboard.
-2. Run the command `pactl list sinks short` which will list all sinks (= audio playback devices) configured in pulseaudio.  See example output here below.  Note that besides the sinks configured via `alsa_sink<X>` variables, you will also see the `alsa_output.default` sink (=  the audio jack port of your rasperry pi) and maybe bluetooth sink if you have also configured a bluetooth device (see below).
+2. Run the command `pactl list sinks short` which will list all sinks (= audio playback devices) configured in pulseaudio.  See example output here below.  Note that besides the sinks configured via `alsa_sink<X>` variables, you will also see the `alsa_output.default` sink (=  the audio jack port of your rasperry pi) and maybe bluetooth sink (see 3rd sink) if you have also configured a bluetooth device.
 
 ```
 root@ba7c427:/# pactl list sinks short
 1       alsa_output.default     module-alsa-sink.c      s16le 2ch 44100Hz       SUSPENDED
 2       alsa_output.hw_2_0      module-alsa-sink.c      s16le 2ch 48000Hz       SUSPENDED
+3       bluez_sink.A0_E9_DB_09_CF_FF.a2dp_sink  module-bluez5-device.c  s16le 2ch 44100Hz       SUSPENDED
 root@ba7c427:/# 
 ```
 
@@ -148,6 +149,7 @@ root@ba7c427:/# pactl list sources short
 2       alsa_output.hw_2_0.monitor      module-alsa-sink.c      s16le 2ch 48000Hz       SUSPENDED
 3       alsa_input.hw_2_0       module-alsa-source.c    s16le 1ch 48000Hz       SUSPENDED
 4       PS3_eye_camera  module-alsa-source.c    s16le 4ch 16000Hz       SUSPENDED
+5       bluez_sink.A0_E9_DB_09_CF_FF.a2dp_sink.monitor  module-bluez5-device.c  s16le 2ch 44100Hz       SUSPENDED
 root@ba7c427:/# 
 ```
 
