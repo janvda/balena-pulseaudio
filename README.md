@@ -48,7 +48,7 @@ The Card ID and Device ID of the audio devices (speaker, headset, camera with mi
 1. Connect the audio devices to the USB ports of the raspberry pi.
 2. Restart the `pulseaudio-server` service via your BalenaCloud dashboard.
 3. open a terminal session for the `pulseaudio-server` service in your BalenaCloud dashboard.
-4. run the command `aplay -l`.  This will list all playback devices (e.g. a speaker).  See an example output of this command below.  So you can see that besides the USB device `card 2: Device [USB2.0 Device], device 0: USB Audio [USB Audio]` it is also listing the raspberry pi audio jack (= `card 0: ALSA [bcm2835 ALSA], device 0: bcm2835 ALSA [bcm2835 ALSA]` and the raspberry pi hdmi port (= `card 0: ALSA [bcm2835 ALSA], device 1: bcm2835 ALSA [bcm2835 IEC958/HDMI]`)
+4. run the command `aplay -l`.  This will list all **playback** devices (e.g. a speaker).  See an example output of this command below.  So you can see that besides the USB device `card 2: Device [USB2.0 Device], device 0: USB Audio [USB Audio]` it is also listing the raspberry pi audio jack (= `card 0: ALSA [bcm2835 ALSA], device 0: bcm2835 ALSA [bcm2835 ALSA]` and the raspberry pi hdmi port (= `card 0: ALSA [bcm2835 ALSA], device 1: bcm2835 ALSA [bcm2835 IEC958/HDMI]`)
 
 ```
 root@ba7c427:/# aplay -l
@@ -72,7 +72,7 @@ root@ba7c427:/#
 ```
 
 5. So in the above output you can easily find back the Card ID (which is 2) and the Device ID (which is 0) of the connected audio playback devices.
-6. Now, we have to do the same for the audio capture devices by running the command `arecord -l`.  See an example output below which shows 2 connected audio capture devices: playstation eye camera with micro (= `card 1: CameraB409241 [USB Camera-B4.09.24.1], device 0: USB Audio [USB Audio]`) and my speaker which also has a micronphone (= `card 2: Device [USB2.0 Device], device 0: USB Audio [USB Audio]`)
+6. Now, we have to do the same for the audio **capture** devices by running the command `arecord -l`.  See an example output below which shows 2 connected audio capture devices: playstation eye camera with micro (= `card 1: CameraB409241 [USB Camera-B4.09.24.1], device 0: USB Audio [USB Audio]`) and my speaker which also has a micronphone (= `card 2: Device [USB2.0 Device], device 0: USB Audio [USB Audio]`)
 
 ```
 root@ba7c427:/# arecord -l
@@ -128,7 +128,28 @@ device=hw:1,0 source_name=PS3_eye_camera"
 
 #### 4. Validate the configuration
 
-TBD
+The following can be done to validate the configuration;
+
+1. Open a terminal session for the `pulseaudio-server` service in your BalenaCloud dashboard.
+2. Run the command `pactl list sinks short` which will list all sinks (= audio playback devices) configured in pulseaudio.  See example output here below.  Note that besides the sinks configured via `alsa_sink<X>` variables, you will also see the `alsa_output.default` sink (=  the audio jack port of your rasperry pi) and maybe bluetooth sink if you have also configured a bluetooth device (see below).
+
+```
+root@ba7c427:/# pactl list sinks short
+1       alsa_output.default     module-alsa-sink.c      s16le 2ch 44100Hz       SUSPENDED
+2       alsa_output.hw_2_0      module-alsa-sink.c      s16le 2ch 48000Hz       SUSPENDED
+root@ba7c427:/# 
+```
+
+3. Run the command `pactl list sources short` which will list all sources (= audio capture devices) configured in pulseaudio.  See example output here below.   Note that besides the sources configured via `alsa_source<X>` variables, you will also see a `.monitor` source for each sink listed in previous step.  You might also see a source for a connected bluetooth device.
+
+```
+root@ba7c427:/# pactl list sources short
+1       alsa_output.default.monitor     module-alsa-sink.c      s16le 2ch 44100Hz       SUSPENDED
+2       alsa_output.hw_2_0.monitor      module-alsa-sink.c      s16le 2ch 48000Hz       SUSPENDED
+3       alsa_input.hw_2_0       module-alsa-source.c    s16le 1ch 48000Hz       SUSPENDED
+4       PS3_eye_camera  module-alsa-source.c    s16le 4ch 16000Hz       SUSPENDED
+root@ba7c427:/# 
+```
 
 ### B. Configuration of a Bluetooth device
 
