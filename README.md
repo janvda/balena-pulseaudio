@@ -89,7 +89,7 @@ root@ba7c427:/#
 
 7. So in the above output you can easily find back the Card ID and Device ID of the connected audio capture devices.
 
-#### 3. Set the device service variables `alsa-sink1`, `alsa-sink2`, ... , `alsa-source1`, `alsa-source2`,...
+#### 3. Set the device service variables `alsa_sink1`, `alsa_sink2`, ... , `alsa_source1`, `alsa-source2`,...
 
 Setting the below device service variables for the `pulseaudio-server`service in your BalenaCloud dashboard will assure that the `pulseaudio-server` service can play or record audio from these devices.
 
@@ -114,12 +114,12 @@ You can also specify additional options if you want.  For the possible options s
 Here below an example value for `alsa_source1`:
 
 ```
-device=hw:2,0 device=hw:1,0 source_name=PS3_eye_camera"
+device=hw:1,0 source_name=PS3_eye_camera"
 ```
 
 | Name                                            | Description |
 |------------------------------------------------ | ----- |
-| alsa_sink1 | specify here the options of your first playback audio device. |
+| alsa_sink1 | specify here the Card ID and Device ID of an audio playback device connected to one of the USB ports of your raspberry pi. The format is `device=hw:[Card ID],[Device ID]` (E.g. `device=hw:1,0`).  You can also specify other options in this variable (see above). e.g. `device=hw:1,0 sink_name=sony_speaker` |
 | alsa_sink2 | TBD |
 | alsa_sink3 | TBD |
 | alsa_source1 | TBD |
