@@ -132,17 +132,17 @@ device=hw:1,0 source_name=PS3_eye_camera"
 The following can be done to validate the configuration;
 
 1. Open a terminal session for the `pulseaudio-server` service in your BalenaCloud dashboard.
-2. Run the command `pactl list sinks short` which will list all sinks (= audio playback devices) configured in pulseaudio.  See example output here below.  Note that besides the sinks configured via `alsa_sink<X>` variables, you will also see the `alsa_output.default` sink (=  the audio jack port of your rasperry pi) and maybe bluetooth sink (see 3rd sink) if you have also configured a bluetooth device.
+2. Run the command `pactl list sinks short` which will list all sinks (= audio playback devices) configured in pulseaudio.  See example output here below.  Note that besides the sinks configured via `alsa_sink<X>` variables, you will also see the `alsa_output.default` sink (=  the audio jack port of your rasperry pi) and maybe bluetooth sink (see sink with number 4) if you have also configured a bluetooth device.
 
 ```
 root@ba7c427:/# pactl list sinks short
 1       alsa_output.default     module-alsa-sink.c      s16le 2ch 44100Hz       SUSPENDED
 2       alsa_output.hw_2_0      module-alsa-sink.c      s16le 2ch 48000Hz       SUSPENDED
-3       bluez_sink.A0_E9_DB_09_CF_FF.a2dp_sink  module-bluez5-device.c  s16le 2ch 44100Hz       SUSPENDED
-root@ba7c427:/# 
+4       bluez_sink.A0_E9_DB_09_CF_FF.headset_head_unit  module-bluez5-device.c  s16le 1ch 8000Hz      SUSPENDED
+root@ba7c427:/#
 ```
 
-3. Run the command `pactl list sources short` which will list all sources (= audio capture devices) configured in pulseaudio.  See example output here below.   Note that besides the sources configured via `alsa_source<X>` variables, you will also see a `.monitor` source for each sink listed in previous step.  You might also see a source for a connected bluetooth device.
+3. Run the command `pactl list sources short` which will list all sources (= audio capture devices) configured in pulseaudio.  See example output here below.   Note that besides the sources configured via `alsa_source<X>` variables, you will also see a `.monitor` source for each sink listed in previous step.  You might also see a source for a connected bluetooth device (see source with number 7).
 
 ```
 root@ba7c427:/# pactl list sources short
@@ -150,7 +150,8 @@ root@ba7c427:/# pactl list sources short
 2       alsa_output.hw_2_0.monitor      module-alsa-sink.c      s16le 2ch 48000Hz       SUSPENDED
 3       alsa_input.hw_2_0       module-alsa-source.c    s16le 1ch 48000Hz       SUSPENDED
 4       PS3_eye_camera  module-alsa-source.c    s16le 4ch 16000Hz       SUSPENDED
-5       bluez_sink.A0_E9_DB_09_CF_FF.a2dp_sink.monitor  module-bluez5-device.c  s16le 2ch 44100Hz       SUSPENDED
+6       bluez_sink.A0_E9_DB_09_CF_FF.headset_head_unit.monitor  module-bluez5-device.c  s16le 1ch 8000Hz       SUSPENDED
+7       bluez_source.A0_E9_DB_09_CF_FF.headset_head_unit        module-bluez5-device.c  s16le 1ch 8000Hz       SUSPENDED
 root@ba7c427:/# 
 ```
 
