@@ -96,7 +96,7 @@ Setting the below device service variables for the `pulseaudio-server`service in
 So for each of the audio **playback** devices you want to use in pulseaudio-server you must properly set an `alsa_sink<X>` device service variable (where `<X>` should be `1` or `2` or `3`)
 and for each of the audio **capture** devices you want to use you must properly set an `alsa_source<X>` device service variable.
 
-The value of `alsa_sink<X>` must be a valid option for the pulseaudio command `load-module module-alsa-sink` and the value of `alsa_source<X>` must be a valid option for the pulseaudio command `load-module module-alsa-source` ( see [free.desktop.org pulseaudio doc](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/#index4h3))
+The value of `alsa_sink<X>` must be a valid option for the pulseaudio command `load-module module-alsa-sink` and the value of `alsa_source<X>` must be a valid option for the pulseaudio command `load-module module-alsa-source`.
 
 At least you must specify the respective playback or capture device as follows:
 
@@ -104,12 +104,17 @@ At least you must specify the respective playback or capture device as follows:
 device=hw:[Card ID],[Device ID]
 ```
 
-where `[Card ID]` and [Device ID] are respectively the Card ID and the Device ID of your connected audio device that you have identified in the previous step.
+where `[Card ID]` and `[Device ID]` are respectively the Card ID and the Device ID of your connected audio device that you have identified in the previous step.
 
-You can also specify additional options if you want. See below example:
+You can also specify additional options if you want.  For the possible options see
+
+* [options for alsa_source<X> (see module-alsa-source) and alsa_sink<X> (see module-alsa-sink)](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/#index4h3)
+* [options supported by all device driver modules](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/#index1h2)
+
+Here below an example value for `alsa_source1`:
 
 ```
-device=hw:2,0 sink_name=[your_sink_name] sink_properties="[some useful sink properties for the sound panel]"
+device=hw:2,0 device=hw:1,0 source_name=PS3_eye_camera"
 ```
 
 | Name                                            | Description |
