@@ -119,12 +119,12 @@ device=hw:1,0 source_name=PS3_eye_camera"
 
 | Name                                            | Description |
 |------------------------------------------------ | ----- |
-| alsa_sink1 | specify here the Card ID and Device ID of an audio playback device connected to one of the USB ports of your raspberry pi. The format is `device=hw:[Card ID],[Device ID]` (E.g. `device=hw:1,0`).  You can also specify other options in this variable (see above). e.g. `device=hw:1,0 sink_name=sony_speaker` |
-| alsa_sink2 | TBD |
-| alsa_sink3 | TBD |
-| alsa_source1 | TBD |
-| alsa_source2 | TBD |
-| alsa_source3 | TBD |
+| alsa_sink1 | specify here the Card ID and Device ID of an audio **playback** device connected to one of the USB ports of your raspberry pi. The format is `device=hw:[Card ID],[Device ID]` (E.g. `device=hw:1,0`).  You can also specify other options in this variable (see above). e.g. `device=hw:1,0 sink_name=sony_speaker` |
+| alsa_sink2 | In case multiple audio **playback** devices are connected, you can use this variable for the 2nd connected playback device. |
+| alsa_sink3 | Same as alsa_sink2 but for 3rd connected audio playback device. |
+| alsa_source1 | specify here the Card ID and Device ID of an audio **capture** device connected to one of the USB ports of your raspberry pi. The format is `device=hw:[Card ID],[Device ID]` (E.g. `device=hw:1,0`).  You can also specify other options in this variable (see above). e.g. `device=hw:1,0 source_name=ps3_eye_camera_with_micro` |
+| alsa_source2 | same as alsa_source1 but for 2nd audio capture device connected. |
+| alsa_source3 | same as alsa_source1 but for 3rd audio capture device connected. |
 
 #### 4. Validate the configuration
 
