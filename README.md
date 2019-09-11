@@ -110,7 +110,7 @@ You can also specify additional options if you want.  For the possible options s
 
 * [options for alsa_source<X> (see module-alsa-source) and alsa_sink<X> (see module-alsa-sink)](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/#index4h3)
 * [options supported by all device driver modules](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/#index1h2)
-* [site also containing an example abougt setting these options](https://medium.com/@joao.paulo.silvasouza/how-to-configure-pulseaudio-for-multiple-devices-at-the-same-time-in-ubuntu-4943ef0c16db)
+* [site containing an example about setting these options](https://medium.com/@joao.paulo.silvasouza/how-to-configure-pulseaudio-for-multiple-devices-at-the-same-time-in-ubuntu-4943ef0c16db)
 
 Here below an example value for `alsa_source1`:
 
