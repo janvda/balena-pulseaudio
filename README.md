@@ -91,7 +91,35 @@ root@ba7c427:/#
 
 #### 3. Set the device service variables `alsa-sink1`, `alsa-sink2`, ... , `alsa-source1`, `alsa-source2`,...
 
-TBD 
+Setting the below device service variables for the `pulseaudio-server`service in your BalenaCloud dashboard will assure that the `pulseaudio-server` service can play or record audio from these devices.
+
+So for each of the audio **playback** devices you want to use in pulseaudio-server you must properly set an `alsa_sink<X>` device service variable (where `<X>` should be `1` or `2` or `3`)
+and for each of the audio **capture** devices you want to use you must properly set an `alsa_source<X>` device service variable.
+
+The value of `alsa_sink<X>` must be a valid option for the pulseaudio command `load-module module-alsa-sink` and the value of `alsa_source<X>` must be a valid option for the pulseaudio command `load-module module-alsa-source` ( see [free.desktop.org pulseaudio doc](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/#index4h3))
+
+At least you must specify the respective playback or capture device as follows:
+
+```
+device=hw:[Card ID],[Device ID]
+```
+
+where `[Card ID]` and [Device ID] are respectively the Card ID and the Device ID of your connected audio device that you have identified in the previous step.
+
+You can also specify additional options if you want. See below example:
+
+```
+device=hw:2,0 sink_name=[your_sink_name] sink_properties="[some useful sink properties for the sound panel]"
+```
+
+| Name                                            | Description |
+|------------------------------------------------ | ----- |
+| alsa_sink1 | specify here the options of your first playback audio device. |
+| alsa_sink2 | TBD |
+| alsa_sink3 | TBD |
+| alsa_source1 | TBD |
+| alsa_source2 | TBD |
+| alsa_source3 | TBD |
 
 #### 4. Validate the configuration
 
