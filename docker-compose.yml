@@ -21,7 +21,6 @@ services:
     volumes:
       - 'pulseaudio_unix_socket:/pulseaudio' # folder where pulseAudio unix socket is created.
     environment:
-      - DISABLEBLUETOOTH=true
       - UDEV=1
       - PGID=1000
       - PUID=1000
