@@ -156,8 +156,9 @@ root@ba7c427:/# pactl list sources short
 4       PS3_eye_camera  module-alsa-source.c    s16le 4ch 16000Hz       SUSPENDED
 6       bluez_sink.A0_E9_DB_09_CF_FF.headset_head_unit.monitor  module-bluez5-device.c  s16le 1ch 8000Hz       SUSPENDED
 7       bluez_source.A0_E9_DB_09_CF_FF.headset_head_unit        module-bluez5-device.c  s16le 1ch 8000Hz       SUSPENDED
-root@ba7c427:/# 
+root@ba7c427:/#
 ```
+
 ### B. Configuration of the HDMI port of the raspberry pi
 
 It is also possible to play audio via the hdmi port of the raspberry pi.  Of course in that case the hdmi port must be connected to a monitor with speakers or a TV.
@@ -278,11 +279,3 @@ PULSE_SERVER="tcp:localhost:4713" paplay LRMonoPhase4.wav
 https://github.com/mviereck/x11docker/wiki/Container-sound:-ALSA-or-Pulseaudio
 
 `PULSE_SERVER=unix:/tmp/pulseaudio.socket pactl list short`
-
-## To add (USB) audio devices
-
-On the server:
-
-1. search (alsa) audio sinks using command `aplay -l` and (alsa) audio sources using command `arecord -l`
-2. configure the audio source for pulseaudio by command `pactl load-module module-alsa-source device=hw:1,0` - you can also add this to `/etc/pulse/default.pa`
-3. configure the audio sink for pulseaudio by command `pactl load-module module-alsa-sink device=hw:2,0` - you can also add this to `/etc/pulse/default.pa`
