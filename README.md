@@ -32,6 +32,10 @@ The idea is to create a pulseaudio service (= `pulseaudio-server`) that can be r
 
 ## Configuration of the `pulseaudio-server` service
 
+A. [Configuration of Audio devices connected via USB](#a-configuration-of-audio-devices-connected-via-usb)
+B. [Configuration of HDMI port of raspberry pi](#b-configuration-of-the-hdmi-port-of-the-raspberry-pi)
+C. [Configuration of a bluetooth-device](#c-configuration-of-a-bluetooth-device)
+
 ### A. Configuration of Audio devices connected via USB
 
 If you have one or more audio devices ( speaker, camera with microphone, ...) that you want to (permanently) connect to the USB ports of the raspberry pi then they can be configured as follows:
@@ -154,8 +158,19 @@ root@ba7c427:/# pactl list sources short
 7       bluez_source.A0_E9_DB_09_CF_FF.headset_head_unit        module-bluez5-device.c  s16le 1ch 8000Hz       SUSPENDED
 root@ba7c427:/# 
 ```
+### B. Configuration of the HDMI port of the raspberry pi
 
-### B. Configuration of a Bluetooth device
+It is also possible to play audio via the hdmi port of the raspberry pi.  Of course in that case the hdmi port must be connected to a monitor with speakers or a TV.
+
+The configuration of the hdmi port is similar to the configuration of a connected USB device.
+On a raspberry pi the hdmi port is linked to Card 0 and device 1.
+So you should set device service variable `alsa_sink1` or `alsa_sink2` or `alsa_sink3` (see [3. Set the device service variables `alsa_sink1` ....](#3-set-the-device-service-variables-alsa_sink1-alsa_sink2---alsa_source1-alsa-source2)) to
+
+```
+device=hw:0,1
+```
+
+### C. Configuration of a Bluetooth device
 
 If you have a bluetooth audio device (e.g. bluetooth speaker, bluetooth head-set) and you want to play and/or record audio from this device then the following is needed:
 
