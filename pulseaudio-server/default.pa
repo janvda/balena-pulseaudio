@@ -165,12 +165,3 @@ load-module module-zeroconf-publish
 load-module module-http-protocol-tcp
 
 load-module module-native-protocol-unix auth-anonymous=1 socket=/pulseaudio/unix_socket
-
-# JVA 2019-08-24: assure connected USB microphone is properly defined as pulseaudio source.
-#load-module module-alsa-source device=hw:1,0
-#load-module module-alsa-source device=hw:2,0
-
-# JVA 2019-08-24: tried to define without succes the rapberry pi hdmi port as a pulseaudio sink.
-# commented next line as this only works (I think) when connected by hdmi.
-# load-module module-alsa-sink device=hw:0,1
-# load-module module-alsa-sink device=hw:2,0
