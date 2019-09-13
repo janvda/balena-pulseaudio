@@ -25,8 +25,7 @@ fi
 # run bluetooth connect loop
 /connect_bluetooth.sh &
 
-# removing display variable because pulseaudio libraries are using this variable if set
-# that to decide where to connect to (see https://www.freedesktop.org/wiki/Software/PulseAudio/FAQ/)
+# see issue https://github.com/janvda/balena-pulseaudio/issues/13
 unset DISPLAY
 
 echo starting pulseaudio ...
