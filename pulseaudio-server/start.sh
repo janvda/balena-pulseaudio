@@ -25,6 +25,10 @@ fi
 # run bluetooth connect loop
 /connect_bluetooth.sh &
 
+# removing display variable if set as in that case pulse audio is using this to store
+# to connect to (see https://www.freedesktop.org/wiki/Software/PulseAudio/FAQ/)
+unset DISPLAY
+
 echo starting pulseaudio ...
 pulseaudio --system --log-level=4
 echo ERROR: pulseaudio stopped
