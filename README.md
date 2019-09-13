@@ -257,9 +257,9 @@ Device A0:E9:DB:09:CF:FF (public)
 
 5. Check if you see a line with `Connected: yes` in above output and this confirms that the bluetooth connection has been properly setup.
 
-## Running pavucontrol or audacity so that its UI (user interface) is displayed on macbook.
+## Running `pavucontrol` or `audacity` so that its UI (user interface) is displayed on macbook.
 
-pavucontrol and audacity are both X11 applications.  The following steps describe how to run these X11 applications in the `pulseaudio-server` service and gets it UI (user interface) displayed on a macbook connected to the same network:
+pavucontrol and audacity are both X11 applications.  The following steps describe how to run these X11 applications in one of the pulseaudio services (e.g. `pulseaudio-client-unix` service) and get its UI (user interface) displayed on a macbook connected to the same LAN:
 
 1. On your macbook run X-windows and authorize raspberry pi as specified by below steps:
     1. Assure that your macbook is connected to the same LAN.
@@ -284,10 +284,10 @@ bash-3.2$
 3. Launch pavucontrol or audacity on the raspberry pi as specified by below steps:
    1. Within your BalenaCloud dashboard open a terminal window for the `pulseaudio-server` or `pulseaudio-client-{tcp|unix}`service.
    2. In case you want to run pavucontrol:
-       1. enter the command `DISPLAY=<ip address of macbook>:0 pavucontrol` (e.g. `DISPLAY=192.168.1.5:0 pavucontrol`) where `<ip address of macbook>`is the IP address determined in previous step.
+       1. In the terminal window: enter the command `DISPLAY=<ip address of macbook>:0 pavucontrol` (e.g. `DISPLAY=192.168.1.5:0 pavucontrol`) where `<ip address of macbook>`is the IP address determined in previous step.
        2. you should now see the `pavucontrol` UI (user interface) appearing on your macbook.
    3. In case you want to run audacity:
-       1. Enter the command `DISPLAY=<ip address of macbook>:0 audacity` (e.g. `DISPLAY=192.168.1.5:0 audacity`)
+       1. In the terminal window: Enter the command `DISPLAY=<ip address of macbook>:0 audacity` (e.g. `DISPLAY=192.168.1.5:0 audacity`)
        2. you should now see the `audacity` UI (user interface) appearing on your macbook.
 
 ## Interesting Commands
