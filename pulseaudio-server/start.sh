@@ -25,6 +25,9 @@ fi
 # run bluetooth connect loop
 /connect_bluetooth.sh &
 
+# see issue https://github.com/janvda/balena-pulseaudio/issues/13
+unset DISPLAY
+
 echo starting pulseaudio ...
 pulseaudio --log-level=4
 echo ERROR: pulseaudio stopped

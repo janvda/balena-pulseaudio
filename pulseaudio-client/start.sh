@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# see https://github.com/janvda/balena-pulseaudio/issues/13
+unset DISPLAY
+
 echo -e "STEP 1: playing LRMonoPhase4.wav"
 paplay LRMonoPhase4.wav
 
