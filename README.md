@@ -282,7 +282,7 @@ bash-3.2$
    3. select TCP/IP and the displayed `ÌPv4 Address` is the IP Address we need.
    4. Note that it is also possible to determine this IP address by running the command `ìfconfig` in a terminal window.
 3. Launch pavucontrol or audacity on the raspberry pi as specified by below steps:
-   1. Within your BalenaCloud dashboard open a terminal window for the `pulseaudio-server` service.
+   1. Within your BalenaCloud dashboard open a terminal window for the `pulseaudio-server` or `pulseaudio-client-{tcp|unix}`service.
    2. In case you want to run pavucontrol:
        1. enter the command `DISPLAY=<ip address of macbook>:0 pavucontrol` (e.g. `DISPLAY=192.168.1.5:0 pavucontrol`) where `<ip address of macbook>`is the IP address determined in previous step.
        2. you should now see the `pavucontrol` UI (user interface) appearing on your macbook.
