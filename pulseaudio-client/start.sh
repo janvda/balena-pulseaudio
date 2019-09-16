@@ -31,10 +31,14 @@ case $test_id in
    echo "... end of test 1"
    ;;
 2) echo "running test 2: "
-   echo "- Started recording audio for 10 seconds ..."
+   echo "- Starting recording audio within 5 sec !"
+   sleep 5
+   echo "- Recording for 10 seconds started ..."
    parecord --channels=1 record_session1.wav &
    sleep 10
    kill $!  #$! expands to the PID of the last process executed in the background
+   echo "- Recording finished !"
+   sleep 3
    echo "- Playing recorded audio..."
    paplay record_session1.wav
    echo "... end of test 2"
