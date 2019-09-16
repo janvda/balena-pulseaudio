@@ -10,7 +10,7 @@ echo "Listing all sources (= audio capture devices):"
 pactl list sources short
 
 case $test_id in
-"") echo "You can specify a specific test by setting \$test_id."
+"") echo "INFO: You can specify a specific test by setting \$test_id."
    ;;
 0) ;;
 1) echo "running test 1 - play audio file using paplay :"
