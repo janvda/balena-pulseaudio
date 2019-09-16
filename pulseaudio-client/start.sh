@@ -24,7 +24,7 @@ if [ "$recording_time" = "" ]; then
    recording_time=10  
 fi
 
-echo "Listing default sink and source"
+echo "Listing default sink and source:"
 pactl info | grep "Sink\|Source"
 
 case $test_id in
@@ -38,11 +38,11 @@ case $test_id in
 2) echo "Starting test 2: "
    echo "- Starting recording audio within 5 sec !"
    sleep 5
-   echo "- Recording for $recording_time seconds started ... (say something) "
+   echo "- Recording for $recording_time seconds started ... (SAY SOMETHING) "
    parecord --channels=1 record_session1.wav &
    sleep $recording_time
    parecord_pid=$!
-   echo "If you want to manually stop recording enter: kill $parecord_pid"
+   echo "[If you want to manually stop recording enter: kill $parecord_pid]"
    kill $parecord_pid  #$! expands to the PID of the last process executed in the background
    echo "- Recording finished !"
    sleep 3
