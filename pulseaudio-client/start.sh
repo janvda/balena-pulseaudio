@@ -3,16 +3,16 @@
 # see https://github.com/janvda/balena-pulseaudio/issues/13
 unset DISPLAY
 
-echo "Listing all sinks (= playback devices)"
+echo "Listing all sinks (= playback devices):"
 pactl list sinks short
 
-echo "Listing all sources (= audio capture devices)"
+echo "Listing all sources (= audio capture devices):"
 pactl list sources short
 
 case $test_id in
 "") ;;
 0) ;;
-1) echo "running test 1 - play audio file using paplay : "
+1) echo "running test 1 - play audio file using paplay :"
    paplay LRMonoPhase4.wav
    echo "... end of test 1"
    ;;
