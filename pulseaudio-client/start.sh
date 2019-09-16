@@ -7,7 +7,10 @@ echo "Listing all sinks (= playback devices):"
 pactl list sinks short
 
 echo "Listing all sources (= audio capture devices):"
-pactl list sources short
+pactl list sources short | grep -v ".monitor"
+
+echo "Listing default sink and source"
+pactl info | grep "Sink\|Source"
 
 case $test_id in
 "") echo "INFO: You can specify a specific test by setting \$test_id."
