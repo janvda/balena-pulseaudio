@@ -26,14 +26,14 @@ case $test_id in
 "") echo "INFO: You can specify a specific test by setting \$test_id."
    ;;
 0) ;;
-1) echo "running test 1 - play audio file using paplay :"
+1) echo "Starting test 1 - play audio file using paplay :"
    paplay LRMonoPhase4.wav
    echo "... end of test 1"
    ;;
-2) echo "running test 2: "
+2) echo "Starting test 2: "
    echo "- Starting recording audio within 5 sec !"
    sleep 5
-   echo "- Recording for 10 seconds started ..."
+   echo "- Recording for 10 seconds started ... (say something) "
    parecord --channels=1 record_session1.wav &
    sleep 10
    kill $!  #$! expands to the PID of the last process executed in the background
