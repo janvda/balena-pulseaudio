@@ -20,7 +20,7 @@ if [ "$default_source" != "" ]; then
 fi
 
 # set default recording time to 10 sec.
-if [ "$recording_time" != "" ]; then
+if [ "$recording_time" = "" ]; then
    recording_time=10  
 fi
 
