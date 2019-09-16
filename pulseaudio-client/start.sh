@@ -6,6 +6,14 @@ unset DISPLAY
 echo "Listing all cards (=bluetooth):"
 pactl list cards | grep "Card\|Name\|description\|Active Profile"
 
+if [ "$card_profile" != "" ]; then
+   if [ "$card_index" = "" ]; then
+      card_index=0
+   fi
+   echo "Set card profile of card $card_index to $card_profile "
+   pactl set-card-profile $card_index $card_profile
+fi
+
 echo "Listing all sinks (= playback devices):"
 pactl list sinks short
 
