@@ -264,9 +264,11 @@ pavucontrol and audacity are both X11 applications.  The following steps describ
 1. On your macbook run X-windows and authorize raspberry pi as specified by below steps:
     1. Assure that your macbook is connected to the same LAN.
     2. Install [XQuartz v2.7.11](https://www.xquartz.org) (= X Window System) on your macbook.
-    3. Launch XQuartz and open an xterm window from menu (applications > terminal)
-    4. within xterm window enter the commands `xhost +<ip address raspberry pi>` (The `<ip address raspberry pi>` can be found in the BalenaCloud dashboard).  This allows the raspberry pi to display on the XQuartz window system.  Note if the raspberry pi has 2 IP addresses (Wi-Fi and Ethernet) then enter the `xhost +` for both IP addresses.
-    5. Validate the authorizations set in previous step by running command `xhost`.  You should see something like:
+    3. Update firewall rules (under `System Preferences`> `Security & Privacy` > `Firewall Options ...`) so that it is allowing incoming connections for the `XQuartz` application.
+    4. Launch XQuartz and in its settings: go to Security tab and enable `Authenticate connections` and Àllow connections from network clients`
+    5. open an xterm window (this can be done via XQuartz menu: applications > terminal)
+    6. within xterm window enter the commands `xhost +<ip address raspberry pi>` (The `<ip address raspberry pi>` can be found in the BalenaCloud dashboard).  This allows the raspberry pi to display on the XQuartz window system.  Note if the raspberry pi has 2 IP addresses (Wi-Fi and Ethernet) then enter the `xhost +` for both IP addresses.
+    7. Validate the authorizations set in previous step by running command `xhost`.  You should see something like:
 
 ```
 bash-3.2$ xhost
