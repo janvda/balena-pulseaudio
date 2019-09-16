@@ -12,12 +12,12 @@ pactl list sources short | grep -v ".monitor"
 if [ "$default_sink" != "" ]; then
    echo "Set default sink to $default_sink"
    pactl set-default-sink $default_sink
-if
+fi
 
 if [ "$default_source" != "" ]; then
    echo "Set default source to $default_source"
    pactl set-default-source $default_source
-if
+fi
 
 echo "Listing default sink and source"
 pactl info | grep "Sink\|Source"
