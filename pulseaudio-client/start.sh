@@ -10,7 +10,8 @@ echo "Listing all sources (= audio capture devices):"
 pactl list sources short
 
 case $test_id in
-"") ;;
+"") echo "You can specify a specific test by setting \$test_id."
+   ;;
 0) ;;
 1) echo "running test 1 - play audio file using paplay :"
    paplay LRMonoPhase4.wav
@@ -25,9 +26,10 @@ case $test_id in
    paplay record_session1.wav
    echo "... end of test 2"
    ;;
-*) echo "\$test_id = $test_id is not a valid value".
+*) echo "ERROR: \$test_id (= $test_id) has not a valid value".
 esac
 
+echo "sleeping forever ..."
 while true; do
    # every hour a "zzz" is put into the log files.
    echo "    zzz"
