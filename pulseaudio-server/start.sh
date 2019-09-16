@@ -29,5 +29,5 @@ fi
 unset DISPLAY
 
 echo starting pulseaudio ...
-pulseaudio --log-level=4
+pulseaudio --log-level=2
 echo ERROR: pulseaudio stopped
