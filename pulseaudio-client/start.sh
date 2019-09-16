@@ -3,6 +3,9 @@
 # see https://github.com/janvda/balena-pulseaudio/issues/13
 unset DISPLAY
 
+echo "Listing all cards (=bluetooth):"
+pactl list cards | grep "Card\|Name\|description\|Active Profile"
+
 echo "Listing all sinks (= playback devices):"
 pactl list sinks short
 
