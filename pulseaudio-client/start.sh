@@ -41,9 +41,7 @@ case $test_id in
    echo "- Recording for $recording_time seconds started ... (SAY SOMETHING) "
    parecord --channels=1 record_session1.wav &
    sleep $recording_time
-   parecord_pid=$!
-   echo "[If you want to manually stop recording enter: kill $parecord_pid]"
-   kill $parecord_pid  #$! expands to the PID of the last process executed in the background
+   kill $! #$! expands to the PID of the last process executed in the background
    echo "- Recording finished !"
    sleep 3
    echo "- Playing recorded audio..."
