@@ -30,5 +30,5 @@ We can run a specific scenario by setting the device service variable
 | 0 | No test run |
 | 1 | play a sample audio file |
 | 2 | record audio for short period + play recorded audio |
-| 3 | run pavucontrol.  Requires `$remote_display` being set properly.
-| 4 | run audacity. Requires `$remote_display` being set properly.|
+| 3 | NOT YET IMPLEMENTED. launches pavucontrol.  Requires `$remote_display` being set properly.
+| 4 | NOT YET IMPLEMENTED. launches audacity. Requires `$remote_display` being set properly.|
