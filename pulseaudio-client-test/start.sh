@@ -59,6 +59,20 @@ case $test_id in
    paplay record_session1.wav
    echo "... end of test 2"
    ;;
+3) if [ "$remote_display" = "" ]; then
+     echo "ERROR: remote_display must be set for test 3 and is not set !"
+   else
+     echo "launching pavucontrol ..."
+     DISPLAY=$remote_display pavucontrol 
+   fi
+   ;;
+4) if [ "$remote_display" = "" ]; then
+     echo "ERROR: remote_display must be set for test 4 and is not set !"
+   else
+     echo "launching audacity ..."
+     DISPLAY=$remote_display audacity
+   fi
+   ;;
 *) echo "ERROR: \$test_id (= $test_id) has not a valid value".
 esac
 
