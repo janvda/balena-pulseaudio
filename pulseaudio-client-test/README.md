@@ -19,6 +19,7 @@ These services allow to test and demonstrate the funtionality provided by servic
 | default_sink | Specifies which sink (playback device) to use as default sink.  You can specify it by its index or name. |
 | default_source | Specifies which source (audio capture device) to use as default source.  You can specify it by its index or name. |
 | recording_time | Specifies how long (in seconds) to record audio.  This is only applicable in case recording is part of the test scenario. |
+| remote_display | defines the remote display for X-appliations. E.g. `remote_display=192.168.1.5:0` |
 
 ### Test scenarios
 
@@ -29,3 +30,5 @@ We can run a specific scenario by setting the device service variable
 | 0 | No test run |
 | 1 | play a sample audio file |
 | 2 | record audio for short period + play recorded audio |
+| 3 | run pavucontrol.  Requires `$remote_display` being set properly.
+| 4 | run audacity. Requires `$remote_display` being set properly.|
