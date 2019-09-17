@@ -1,4 +1,4 @@
-# Test Services: `pulseaudio-client-tcp` and `pulseaudio-client-unix`
+# Test services: `pulseaudio-client-tcp` and `pulseaudio-client-unix`
 
 `pulseaudio-client-tcp` and `pulseaudio-client-unix` are both based on the same docker container = `pulseaudio-client-test`.
 The only difference is how they communicate with the pulseaudio server:
@@ -32,3 +32,5 @@ We can run a specific scenario by setting the device service variable
 | 2 | record audio for short period + play recorded audio |
 | 3 | launches pavucontrol.  Requires `$remote_display` being set properly.
 | 4 | launches audacity. Requires `$remote_display` being set properly.|
+
+[back to main README](../README.md)
