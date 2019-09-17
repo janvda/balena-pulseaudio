@@ -33,7 +33,7 @@ services:
     depends_on:
       - pulseaudio-server
   pulseaudio-client-unix:
-    build: ./pulseaudio-client
+    build: ./pulseaudio-client-test
     network_mode: host
     environment:
       - PULSE_SERVER=unix:/pulseaudio/unix_socket
