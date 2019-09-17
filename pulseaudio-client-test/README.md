@@ -1,4 +1,4 @@
-# `pulseaudio-client-tcp` and `pulseaudio-client-unix`service
+# Test Services: `pulseaudio-client-tcp` and `pulseaudio-client-unix`
 
 `pulseaudio-client-tcp` and `pulseaudio-client-unix` are both based on the same docker container = `pulseaudio-client-test`.
 The only difference is how they communicate with the pulseaudio server:
