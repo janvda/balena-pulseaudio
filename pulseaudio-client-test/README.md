@@ -12,7 +12,7 @@ These services allow to test and demonstrate the funtionality provided by servic
 
 | Name                                            | Description |
 |------------------------------------------------ | ----- |
-| PULSE_SERVER | Normally You should not set this variable.  It is set in the docker-compose.yml file |
+| PULSE_SERVER | Normally You should not set this variable.  It is set in the docker-compose.yml file as follows `PULSE_SERVER=tcp:localhost:4713` for `pulseaudio-client-tcp` and `PULSE_SERVER=unix:/pulseaudio/unix_socket` for `pulseaudio-client-unix`. |
 | test_id | specifies the test scenario to run (see below) |
 | card_profile | if specified then the connected bluetooth device with index = `$card_index` will be set to this profile.  Typical values are `a2dp_sink`, `headset_head_unit`and `off` |
 | card_index | default value is `0`. For its meaning see description `card_profile`|
