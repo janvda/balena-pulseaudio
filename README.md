@@ -33,8 +33,8 @@ The idea is to create a pulseaudio service (= `pulseaudio-server`) that can be r
 ## Services
 This balena application consists of following services:
 
-* `pulseaudio-server` : the core service running pulseaudio server.
-* `pulseaudio-client-tcp` and `pulseaudio-client-unix` are 2 test services based on the same docker container `pulseaudio-client-test`. For its documentation and configuration [README](pulseaudio-client-test/README.md)
+* `pulseaudio-server` : the core service running pulseaudio server.  For its configuration see below.
+* `pulseaudio-client-tcp` and `pulseaudio-client-unix` are 2 test services based on the same docker container `pulseaudio-client-test`. For its documentation and configuration [README](pulseaudio-client-test/README.md) !!
 
 ## Configuration of the `pulseaudio-server` service
 
