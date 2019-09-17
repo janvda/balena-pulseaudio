@@ -6,7 +6,7 @@ The only difference is how they communicate with the pulseaudio server:
 * `pulseaudio-client-tcp` use TCP sockets
 * `pulseaudio-client-unix` uses unix sockets.
 
-These services allow to test and demonstrate the funtionality provided by the `pulseaudio-server`service by properly setting device service variables. The core of this logic is encoded in the `start.sh` script.
+These services allow to test and demonstrate the funtionality provided by service `pulseaudio-server`.  This can be done by properly setting device service variables. The core of this logic is encoded in the `start.sh` script.
 
 ## Device Service Variables
 
