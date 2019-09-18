@@ -3,6 +3,8 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:buster-run
 RUN apt-get update && apt-get install -y \
      pulseaudio pavucontrol \
      audacity \
+     samba \
+     cifs-utils \
      wget \
      && apt-get clean && rm -rf /var/lib/apt/lists/*
 
