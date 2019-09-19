@@ -39,6 +39,9 @@ services:
       - PULSE_SERVER=unix:/pulseaudio/unix_socket
     depends_on:
       - pulseaudio-server
+    ports:
+      - "139:139"
+      - "445:445"
     volumes:
       - 'pulseaudio_unix_socket:/pulseaudio'  # folder where pulseAudio unix socket is stored.
 
