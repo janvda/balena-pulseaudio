@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /data
+
 if [ "$smbd" = 1 ]; then
   echo "STEP 2: Starting samba daemon: this will create samba share //<IP address raspberry pi>/data"
   service smbd start
