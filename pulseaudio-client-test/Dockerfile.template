@@ -10,6 +10,9 @@ RUN apt-get update && apt-get install -y \
 
 RUN wget https://www.kozco.com/tech/LRMonoPhase4.wav
 
+COPY smb_data_share.conf /tmp/
+RUN cat /tmp/smb_data_share.conf >> /etc/samba/smb.conf
+
 # Start app
 COPY start.sh /start.sh
 CMD ["bash", "/start.sh"]

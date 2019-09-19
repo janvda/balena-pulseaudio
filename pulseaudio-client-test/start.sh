@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$smbd" = 1 ]; then
+  echo "STEP 2: Starting samba daemon: this will create samba share //<IP address raspberry pi>/data"
+  service smbd start
+fi
+
 # see https://github.com/janvda/balena-pulseaudio/issues/13
 unset DISPLAY
 
