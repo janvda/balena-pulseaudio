@@ -20,6 +20,7 @@ These services allow to test and demonstrate the funtionality provided by servic
 | default_source | Specifies which source (audio capture device) to use as default source.  You can specify it by its index or name. |
 | recording_time | Specifies how long (in seconds) to record audio.  This is only applicable in case recording is part of the test scenario. |
 | remote_display | defines the remote display for X-appliations. E.g. `remote_display=192.168.1.5:0` |
+| smbd | if set to `1` then this assures that the samba deamon is running which will make the `\data` folder accessible as a windows share at `smb:\\<IP address raspberry pi>\data`>).  In order to get no conflicts, do NOT set this for both services. |
 
 ### Test scenarios
 
@@ -30,7 +31,7 @@ We can run a specific scenario by setting the device service variable
 | 0 | No test run |
 | 1 | play a sample audio file |
 | 2 | record audio for short period + play recorded audio |
-| 3 | launches pavucontrol.  Requires `$remote_display` being set properly.
-| 4 | launches audacity. Requires `$remote_display` being set properly.|
+| 3 | launches [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/).  Requires `$remote_display` being set properly.
+| 4 | launches [audacity](https://www.audacityteam.org/). Requires`$remote_display` being set properly. Note that audacity is working but due to the remote X server setup the audacity user interface is not very responsive. |
 
 [back to main README](../README.md)
