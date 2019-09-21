@@ -28,6 +28,10 @@ fi
 # see issue https://github.com/janvda/balena-pulseaudio/issues/13
 unset DISPLAY
 
+if [ "log_level" = "" ]; then
+  log_level=2  # default log level
+fi
+
 echo starting pulseaudio ...
-pulseaudio --log-level=2
+pulseaudio --log-level=$log_level
 echo ERROR: pulseaudio stopped
