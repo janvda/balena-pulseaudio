@@ -1,37 +1,96 @@
-# Test services: `pulseaudio-client-tcp` and `pulseaudio-client-unix`
+# balena-pulseaudio
 
-`pulseaudio-client-tcp` and `pulseaudio-client-unix` are both based on the same docker container = `pulseaudio-client-test`.
-The only difference is how they communicate with the pulseaudio server:
+## Introduction
 
-* `pulseaudio-client-tcp` uses a TCP socket.
-* `pulseaudio-client-unix` uses unix socket.
+This balena application runs a pulseaudio server and demonstrates how it can be used for playing and recording audio on a raspberry pi.  It also supports playing and recording audio from bluetooth audio devices (bluetooth speakers, bluetooth headsets, ...)
 
-These services allow to test and demonstrate the functionality provided by service `pulseaudio-server`.  This can be done by properly setting device service variables. The core of this logic is encoded in the [start.sh](start.sh) script.
+## Required Hardware
 
-## Device Service Variables
+1. Raspberry pi (although it is most likely very easy to port this to other devices)
+2. For playing audio the following can be used:
+   1. headphone, earphone, ... plugged into the headphone jack of the raspberry pi.
+   2. TV, monitor with speaker, ... connected to hdmi port of the raspberry pi.
+   3. bluetooth speaker, bluetooth headset,...
+   4. (DAC) HAT with audio device or speaker connected to it.
+3. For recording audio the following can be used:
+   1. USB microphone, USB camera with microphone, ...
+   2. bluetooth headset, bluetooth speaker with microphone
+   3. HAT with one or more microphones
 
-| Name                                            | Description |
-|------------------------------------------------ | ----- |
-| PULSE_SERVER | Normally You should not set this variable.  It is set in the docker-compose.yml file as follows `PULSE_SERVER=tcp:localhost:4713` for `pulseaudio-client-tcp` and `PULSE_SERVER=unix:/pulseaudio/unix_socket` for `pulseaudio-client-unix`. |
-| test_id | specifies the test scenario to run (see below) |
-| card_profile | if specified then the connected bluetooth device with index = `$card_index` will be set to this profile.  Typical values are `a2dp_sink`, `headset_head_unit`and `off` |
-| card_index | default value is `0`. For its meaning see description `card_profile`|
-| default_sink | Specifies which sink (playback device) to use as default sink.  You can specify it by its index or name. |
-| default_source | Specifies which source (audio capture device) to use as default source.  You can specify it by its index or name. |
-| recording_time | Specifies how long (in seconds) to record audio.  This is only applicable in case recording is part of the test scenario. |
-| remote_display | defines the remote display for X-appliations. E.g. `remote_display=192.168.1.5:0` |
-| smbd | if set to `1` then this assures that the samba deamon is running which will make the folder (= `\data`) containing the (recorded) audio files accessible as a windows share at `smb:\\<IP address raspberry pi>\data` for `guest` user.  In order to get no conflicts, do NOT set this for both services.|
+## Rationale
 
-### Test scenarios
+The idea is to create a pulseaudio service (= `pulseaudio-server`) that can be reused in other balena applications requiring an audio interface.  This pulseaudio service is the only service having an interface with the audio hardware (including connected bluetooth devices): all other services requiring audio should do this via this pulseaudio service.
 
-We can run a specific scenario by setting the device service variable `test_id`.
+## Features
 
-| test_id                                   | Description |
-|------------------------------------------ | ----- |
-| 0 | No test run |
-| 1 | play a sample audio file |
-| 2 | record audio for short period + play recorded audio |
-| 3 | launches [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/).  Requires that variable `remote_display` is properly. |
-| 4 | launches [audacity](https://www.audacityteam.org/). Requires that variable `remote_display` is properly. Note that audacity is working but due to the remote X server setup the audacity user interface is not very responsive. |
+1. service `pulseaudio-client-tcp` demonstrates how a service can communicate with the `pulseaudio-server` via TCP.
+2. service `pulseaudio-client-unix` demonstrates how a service can communicate with the `pulseaudio-server` via a unix socket.
+3. demonstrate how commands `paplay`and `parecord` can be used to play and record audio.
+4. Support changing/showing any pulseaudio setting through command `pactl`.
+5. Support scanning/connecting/monitoring of bluetooth devices through command `bluetoothctl`
+6. Supports `pavucontrol` and `audacity`.  This requires an X-server (e.g. XQuartz on macbook) that is connected to the same local network.
 
-[back to main README](../README.md)
+## Services
+This balena application consists of following services:
+
+* `pulseaudio-server` : the core service running the pulseaudio server.  For its documentation and configuration see its [README](pulseaudio-server/README.md)
+* `pulseaudio-client-tcp` and `pulseaudio-client-unix` are 2 test services based on the same docker container `pulseaudio-client-test`. For its documentation and configuration see its [README](pulseaudio-client-test/README.md) !!
+
+
+## Running `pavucontrol` or `audacity` so that its UI (user interface) is displayed on macbook.
+
+pavucontrol and audacity are both X11 applications.  The following steps describe how to run these X11 applications in one of the pulseaudio services (e.g. `pulseaudio-client-unix` service) and get its UI (user interface) displayed on a macbook connected to the same LAN:
+
+1. On your macbook run X-windows and authorize raspberry pi as specified by below steps:
+    1. Assure that your macbook is connected to the same LAN.
+    2. Install [XQuartz v2.7.11](https://www.xquartz.org) (= X Window System) on your macbook.
+    3. Update firewall rules (under `System Preferences`> `Security & Privacy` > `Firewall Options ...`) so that it is allowing incoming connections for the `XQuartz` application.
+    4. Launch XQuartz and in its settings: go to Security tab and enable `Authenticate connections` and Àllow connections from network clients`
+    5. open an xterm window (this can be done via XQuartz menu: applications > terminal)
+    6. within xterm window enter the commands `xhost +<ip address raspberry pi>` (The `<ip address raspberry pi>` can be found in the BalenaCloud dashboard).  This allows the raspberry pi to display on the XQuartz window system.  Note if the raspberry pi has 2 IP addresses (Wi-Fi and Ethernet) then enter the `xhost +` for both IP addresses.
+    7. Validate the authorizations set in previous step by running command `xhost`.  You should see something like:
+
+```
+bash-3.2$ xhost
+access control enabled, only authorized clients can connect
+INET:ba7c427.lan
+INET:192.168.1.58
+bash-3.2$ 
+```
+
+2. Determine the Wi-Fi IP address of your macbook as specified by below steps:
+   1. on your macbook: go to system preferences > network. 
+   2. Select Wi-Fi > Advanced...
+   3. select TCP/IP and the displayed `ÌPv4 Address` is the IP Address we need.
+   4. Note that it is also possible to determine this IP address by running the command `ìfconfig` in a terminal window.
+3. Launch pavucontrol or audacity on the raspberry pi as specified by below steps:
+   1. Within your BalenaCloud dashboard open a terminal window for the `pulseaudio-server` or `pulseaudio-client-{tcp|unix}`service.
+   2. In case you want to run pavucontrol:
+       1. In the terminal window: enter the command `DISPLAY=<ip address of macbook>:0 pavucontrol` (e.g. `DISPLAY=192.168.1.5:0 pavucontrol`) where `<ip address of macbook>`is the IP address determined in previous step.
+       2. you should now see the `pavucontrol` UI (user interface) appearing on your macbook.
+   3. In case you want to run audacity:
+       1. In the terminal window: Enter the command `DISPLAY=<ip address of macbook>:0 audacity` (e.g. `DISPLAY=192.168.1.5:0 audacity`)
+       2. you should now see the `audacity` UI (user interface) appearing on your macbook.
+
+## Interesting Commands
+
+### Change card profile (e.g. headset, a2dp) of bluetooth device
+
+1. Assure bluetooth device is connected (`bluetoothctl`) *TO BE DOCUMENTED*
+2. Identify card number and profile names by command: `pactl list cards`
+3. Change profile by command: `pactl set-card-profile <cardindex> <profilename>`.  E.g.
+   1. `pactl set-card-profile 0 headset_head_unit`
+   2. `pactl set-card-profile 0 a2dp_sink`
+
+## On the Client
+
+below commands will list all the loaded modules, sinks and sources and play an audio file
+
+```
+PULSE_SERVER="tcp:localhost:4713" pactl list short
+PULSE_SERVER="tcp:localhost:4713" paplay LRMonoPhase4.wav
+```
+
+https://github.com/mviereck/x11docker/wiki/Container-sound:-ALSA-or-Pulseaudio
+
+`PULSE_SERVER=unix:/tmp/pulseaudio.socket pactl list short`
