@@ -5,7 +5,7 @@
 - [A. Configuration of Audio devices connected via USB](#a-configuration-of-audio-devices-connected-via-usb)
 - [B. Configuration of HDMI port of raspberry pi](#b-configuration-of-the-hdmi-port-of-the-raspberry-pi)
 - [C. Configuration of a bluetooth-device](#c-configuration-of-a-bluetooth-device)
-- [D. Configuration of logging level](#d-configuration-of-logging-level)
+- [D. Configuration of logging level](#d-configuration-of-the-logging-level)
 
 ### A. Configuration of Audio devices connected via USB
 
