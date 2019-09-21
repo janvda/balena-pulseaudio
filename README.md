@@ -42,6 +42,12 @@ This balena application consists of following services:
 - [B. Configuration of HDMI port of raspberry pi](#b-configuration-of-the-hdmi-port-of-the-raspberry-pi)
 - [C. Configuration of a bluetooth-device](#c-configuration-of-a-bluetooth-device)
 
+FYI The logging level can be set by following Device Service Variable:
+
+| Name | Description |
+|------|-------------|
+| log_level | specifies the level of logging.  Should be a number between 0 and 4 (default level is 2): 0 is error, 1 is warn, 2 is notice, 3 is info and 4 is debug |
+
 ### A. Configuration of Audio devices connected via USB
 
 If you have one or more audio devices ( speaker, camera with microphone, ...) that you want to (permanently) connect to the USB ports of the raspberry pi then they can be configured as follows:
