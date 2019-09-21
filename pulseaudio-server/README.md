@@ -1,16 +1,11 @@
 # pulseaudio-server service
 
-## Configuration of the `pulseaudio-server` service
+## Configuration of the service
 
 - [A. Configuration of Audio devices connected via USB](#a-configuration-of-audio-devices-connected-via-usb)
 - [B. Configuration of HDMI port of raspberry pi](#b-configuration-of-the-hdmi-port-of-the-raspberry-pi)
 - [C. Configuration of a bluetooth-device](#c-configuration-of-a-bluetooth-device)
-
-FYI The logging level can be set by following Device Service Variable:
-
-| Name | Description |
-|------|-------------|
-| log_level | specifies the level of logging.  Should be a number between 0 and 4 (default level is 2): 0 is error, 1 is warn, 2 is notice, 3 is info and 4 is debug |
+- [D. Configuration of logging level](#d-configuration-of-logging-level)
 
 ### A. Configuration of Audio devices connected via USB
 
@@ -232,6 +227,15 @@ Device A0:E9:DB:09:CF:FF (public)
 ```
 
 5. Check if you see a line with `Connected: yes` in above output and this confirms that the bluetooth connection has been properly setup.
+
+### D. Configuration of the logging level.
+
+The logging level can be set by following Device Service Variable:
+
+| Name | Description |
+|------|-------------|
+| log_level | specifies the level of logging.  Should be a number between 0 and 4 (default level is 2): 0 is error, 1 is warn, 2 is notice, 3 is info and 4 is debug |
+
 
 ## Running `pavucontrol` or `audacity` so that its UI (user interface) is displayed on macbook.
 
