@@ -3,10 +3,10 @@
 `pulseaudio-client-tcp` and `pulseaudio-client-unix` are both based on the same docker container = `pulseaudio-client-test`.
 The only difference is how they communicate with the pulseaudio server:
 
-* `pulseaudio-client-tcp` use TCP sockets
-* `pulseaudio-client-unix` uses unix sockets.
+* `pulseaudio-client-tcp` uses a TCP socket.
+* `pulseaudio-client-unix` uses unix socket.
 
-These services allow to test and demonstrate the funtionality provided by service `pulseaudio-server`.  This can be done by properly setting device service variables. The core of this logic is encoded in the [start.sh](start.sh) script.
+These services allow to test and demonstrate the functionality provided by service `pulseaudio-server`.  This can be done by properly setting device service variables. The core of this logic is encoded in the [start.sh](start.sh) script.
 
 ## Device Service Variables
 
@@ -20,7 +20,7 @@ These services allow to test and demonstrate the funtionality provided by servic
 | default_source | Specifies which source (audio capture device) to use as default source.  You can specify it by its index or name. |
 | recording_time | Specifies how long (in seconds) to record audio.  This is only applicable in case recording is part of the test scenario. |
 | remote_display | defines the remote display for X-appliations. E.g. `remote_display=192.168.1.5:0` |
-| smbd | if set to `1` then this assures that the samba deamon is running which will make the `\data` folder accessible as a windows share at `smb:\\<IP address raspberry pi>\data`>).  In order to get no conflicts, do NOT set this for both services. |
+| smbd | if set to `1` then this assures that the samba deamon is running which will make the folder (= `\data`) containing the (recorded) audio files accessible as a windows share at `smb:\\<IP address raspberry pi>\data` for `guest` user).  In order to get no conflicts, do NOT set this for both services.|
 
 ### Test scenarios
 
