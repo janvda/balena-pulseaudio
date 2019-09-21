@@ -1,4 +1,4 @@
-# pulseaudio-server service
+# `pulseaudio-server` service
 
 ## Configuration of the service
 
@@ -235,39 +235,3 @@ The logging level can be set by following Device Service Variable:
 | Name | Description |
 |------|-------------|
 | log_level | specifies the level of logging.  Should be a number between 0 and 4 (default level is 2): 0 is error, 1 is warn, 2 is notice, 3 is info and 4 is debug |
-
-
-## Running `pavucontrol` or `audacity` so that its UI (user interface) is displayed on macbook.
-
-pavucontrol and audacity are both X11 applications.  The following steps describe how to run these X11 applications in one of the pulseaudio services (e.g. `pulseaudio-client-unix` service) and get its UI (user interface) displayed on a macbook connected to the same LAN:
-
-1. On your macbook run X-windows and authorize raspberry pi as specified by below steps:
-    1. Assure that your macbook is connected to the same LAN.
-    2. Install [XQuartz v2.7.11](https://www.xquartz.org) (= X Window System) on your macbook.
-    3. Update firewall rules (under `System Preferences`> `Security & Privacy` > `Firewall Options ...`) so that it is allowing incoming connections for the `XQuartz` application.
-    4. Launch XQuartz and in its settings: go to Security tab and enable `Authenticate connections` and Àllow connections from network clients`
-    5. open an xterm window (this can be done via XQuartz menu: applications > terminal)
-    6. within xterm window enter the commands `xhost +<ip address raspberry pi>` (The `<ip address raspberry pi>` can be found in the BalenaCloud dashboard).  This allows the raspberry pi to display on the XQuartz window system.  Note if the raspberry pi has 2 IP addresses (Wi-Fi and Ethernet) then enter the `xhost +` for both IP addresses.
-    7. Validate the authorizations set in previous step by running command `xhost`.  You should see something like:
-
-```
-bash-3.2$ xhost
-access control enabled, only authorized clients can connect
-INET:ba7c427.lan
-INET:192.168.1.58
-bash-3.2$ 
-```
-
-2. Determine the Wi-Fi IP address of your macbook as specified by below steps:
-   1. on your macbook: go to system preferences > network. 
-   2. Select Wi-Fi > Advanced...
-   3. select TCP/IP and the displayed `ÌPv4 Address` is the IP Address we need.
-   4. Note that it is also possible to determine this IP address by running the command `ìfconfig` in a terminal window.
-3. Launch pavucontrol or audacity on the raspberry pi as specified by below steps:
-   1. Within your BalenaCloud dashboard open a terminal window for the `pulseaudio-server` or `pulseaudio-client-{tcp|unix}`service.
-   2. In case you want to run pavucontrol:
-       1. In the terminal window: enter the command `DISPLAY=<ip address of macbook>:0 pavucontrol` (e.g. `DISPLAY=192.168.1.5:0 pavucontrol`) where `<ip address of macbook>`is the IP address determined in previous step.
-       2. you should now see the `pavucontrol` UI (user interface) appearing on your macbook.
-   3. In case you want to run audacity:
-       1. In the terminal window: Enter the command `DISPLAY=<ip address of macbook>:0 audacity` (e.g. `DISPLAY=192.168.1.5:0 audacity`)
-       2. you should now see the `audacity` UI (user interface) appearing on your macbook.
