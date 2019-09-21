@@ -3,10 +3,18 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:buster-run
 RUN apt-get update && apt-get install -y \
      pulseaudio pavucontrol \
      audacity \
+     samba \
+     cifs-utils \
+     smbclient \
      wget \
      && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://www.kozco.com/tech/LRMonoPhase4.wav
+
+RUN mkdir -p /data; cd /data; wget https://www.kozco.com/tech/LRMonoPhase4.wav
+
+COPY smb_data_share.conf /tmp/
+RUN cat /tmp/smb_data_share.conf >> /etc/samba/smb.conf
+
 
 # Start app
 COPY start.sh /start.sh

@@ -30,6 +30,12 @@ The idea is to create a pulseaudio service (= `pulseaudio-server`) that can be r
 5. Support scanning/connecting/monitoring of bluetooth devices through command `bluetoothctl`
 6. Supports `pavucontrol` and `audacity`.  This requires an X-server (e.g. XQuartz on macbook) that is connected to the same local network.
 
+## Services
+This balena application consists of following services:
+
+* `pulseaudio-server` : the core service running pulseaudio server.  For its configuration see below.
+* `pulseaudio-client-tcp` and `pulseaudio-client-unix` are 2 test services based on the same docker container `pulseaudio-client-test`. For its documentation and configuration [README](pulseaudio-client-test/README.md) !!
+
 ## Configuration of the `pulseaudio-server` service
 
 - [A. Configuration of Audio devices connected via USB](#a-configuration-of-audio-devices-connected-via-usb)
