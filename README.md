@@ -40,14 +40,6 @@ This balena application consists of following services:
 
 ## Interesting Commands
 
-### Change card profile (e.g. headset, a2dp) of bluetooth device
-
-1. Assure bluetooth device is connected (`bluetoothctl`) *TO BE DOCUMENTED*
-2. Identify card number and profile names by command: `pactl list cards`
-3. Change profile by command: `pactl set-card-profile <cardindex> <profilename>`.  E.g.
-   1. `pactl set-card-profile 0 headset_head_unit`
-   2. `pactl set-card-profile 0 a2dp_sink`
-
 ## On the Client
 
 below commands will list all the loaded modules, sinks and sources and play an audio file

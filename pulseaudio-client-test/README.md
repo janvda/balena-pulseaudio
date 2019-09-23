@@ -34,6 +34,20 @@ We can run a specific scenario by setting the device service variable `test_id`.
 | 3 | launches [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/).  Requires that variable `remote_display` is properly set. For display on macbook read [section below](README.md#running-pavucontrol-or-audacity-so-that-its-ui-user-interface-is-displayed-on-macbook).|
 | 4 | launches [audacity](https://www.audacityteam.org/). Requires that variable `remote_display` is properly set.  For display on macbook read [section below](README.md#running-pavucontrol-or-audacity-so-that-its-ui-user-interface-is-displayed-on-macbook).  Note that audacity is working but due to the remote X server setup the audacity user interface is not very responsive. |
 
+## Manually changing card profile of a connected bluetooth device
+
+Bluetooth audio devices might support multiple card profiles.  Typically there are 3 profiles:
+* `a2dp_sink`
+* `headset_head_unit`
+* `off`
+
+Instead of using the device service variable (`card_profile`and `card_index`) you can also manually set the card profile by executing the following commands in a terminal window for this service in the balenaCloud dashboard:
+1. Assure that the bluetooth device is connected to the pulseaudio-server.
+2. Identify card number and profile names by command: `pactl list cards`
+2. Change profile by command: `pactl set-card-profile <cardindex> <profilename>`. E.g.
+   * `pactl set-card-profile 0 headset_head_unit`
+   * `pactl set-card-profile 0 a2dp_sink`
+
 ## Running `pavucontrol` or `audacity` so that its UI (user interface) is displayed on macbook.
 
 pavucontrol and audacity are both X11 applications.  The following steps describe how to run these X11 applications in one of the pulseaudio services (e.g. `pulseaudio-client-unix` service) and get its UI (user interface) displayed on a macbook connected to the same LAN:
