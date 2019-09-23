@@ -60,7 +60,8 @@ bash-3.2$
    2. Select Wi-Fi > Advanced...
    3. select TCP/IP and the displayed `ÌPv4 Address` is the IP Address we need.
    4. Note that it is also possible to determine this IP address by running the command `ìfconfig` in a terminal window.
-3. Launch pavucontrol or audacity on the raspberry pi as specified by below steps:
+3. Set device service variable `remote_display`to `<ip address found in step2>:0`(e.g. `192.168.1.5:0`) and `test_id` to `3` for service `pulseaudio-client-tcp` or `pulseaudio-client-unix`.  This will make that pavucontrol is automatically launched at startup by the server.  If you want to launch audacity at startup you have to set the `test_id` to 4.
+4. Instead of step 3 you can of course also manually launch pavucontrol or audacity on the raspberry pi as specified by below steps:
    1. Within your BalenaCloud dashboard open a terminal window for the `pulseaudio-server` or `pulseaudio-client-{tcp|unix}`service.
    2. In case you want to run pavucontrol:
        1. In the terminal window: enter the command `DISPLAY=<ip address of macbook>:0 pavucontrol` (e.g. `DISPLAY=192.168.1.5:0 pavucontrol`) where `<ip address of macbook>`is the IP address determined in previous step.
@@ -68,6 +69,5 @@ bash-3.2$
    3. In case you want to run audacity:
        1. In the terminal window: Enter the command `DISPLAY=<ip address of macbook>:0 audacity` (e.g. `DISPLAY=192.168.1.5:0 audacity`)
        2. you should now see the `audacity` UI (user interface) appearing on your macbook.
-4. Instead of step 3 you can also automatically launch pavucontrol and audacity by properly setting the devcie service variables `test_id` and `remote_display` for the service `pulseaudio-client-tcp`or `pulseaudio-client-unix`
 
 [back to main README](../README.md)
