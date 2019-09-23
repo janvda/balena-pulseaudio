@@ -33,8 +33,10 @@ The idea is to create a pulseaudio service (= `pulseaudio-server`) that can be r
 ## Services
 This balena application consists of following services:
 
-* `pulseaudio-server` : the core service running the pulseaudio server.  For its documentation and configuration see its [README](pulseaudio-server/README.md)
-* `pulseaudio-client-tcp` and `pulseaudio-client-unix` are 2 test services based on the same docker container `pulseaudio-client-test`. For its documentation and configuration see its [README](pulseaudio-client-test/README.md) !!
+* `pulseaudio-server` : the core service running the pulseaudio server.  
+   * For its documentation and configuration see [pulseaudio-server/README.md](pulseaudio-server/README.md)
+* `pulseaudio-client-tcp` and `pulseaudio-client-unix` are 2 test services based on the same docker container `pulseaudio-client-test`. 
+   * For its documentation and configuration see [pulseaudio-client-test/README.md](pulseaudio-client-test/README.md)
 
 
 ## Running `pavucontrol` or `audacity` so that its UI (user interface) is displayed on macbook.
@@ -71,6 +73,7 @@ bash-3.2$
    3. In case you want to run audacity:
        1. In the terminal window: Enter the command `DISPLAY=<ip address of macbook>:0 audacity` (e.g. `DISPLAY=192.168.1.5:0 audacity`)
        2. you should now see the `audacity` UI (user interface) appearing on your macbook.
+4. Instead of step 3 you can also automatically launch pavucontrol and audacity by properly setting the devcie service variables `test_id` and `remote_display` for the service `pulseaudio-client-tcp`or `pulseaudio-client-unix` (see [test scenarios](https://github.com/janvda/balena-pulseaudio/blob/master/pulseaudio-client-test/README.md#test-scenarios))
 
 ## Interesting Commands
 
