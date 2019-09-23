@@ -45,4 +45,12 @@ services:
       - "445:445"
     volumes:
       - 'pulseaudio_unix_socket:/pulseaudio'  # folder where pulseAudio unix socket is stored.
+  node-red:
+    build: ./node-red
+    network_mode: host
+    environment:
+      - PULSE_SERVER=tcp:localhost:4713
+    depends_on:
+      - pulseaudio-server
+
 
