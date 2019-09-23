@@ -56,7 +56,7 @@ case $test_id in
 2) echo "Starting test 2: "
    echo "- Starting recording audio within 5 sec !"
    paplay ./test_id_2/step1_welcome.wav
-   sleep 5
+   sleep 3
    echo "- Recording for $recording_time seconds started ... (SAY SOMETHING) "
    paplay ./test_id_2/step2_recording_starts.wav
    parecord --channels=1 record_session1.wav &
@@ -64,7 +64,7 @@ case $test_id in
    kill $! #$! expands to the PID of the last process executed in the background
    echo "- Recording finished !"
    paplay ./test_id_2/step3_recording_finished.wav
-   sleep 3
+   sleep 2
    paplay ./test_id_2/step4_play_recording.wav
    echo "- Playing recorded audio..."
    paplay record_session1.wav
