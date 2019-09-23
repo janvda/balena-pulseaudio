@@ -31,8 +31,8 @@ We can run a specific scenario by setting the device service variable `test_id`.
 | 0 | No test run |
 | 1 | play a sample audio file |
 | 2 | record audio for short period + play recorded audio |
-| 3 | launches [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/).  Requires that variable `remote_display` is properly. For display on macbook read [here](README.md#running-pavucontrol-or-audacity-so-that-its-ui-user-interface-is-displayed-on-macbook).|
-| 4 | launches [audacity](https://www.audacityteam.org/). Requires that variable `remote_display` is properly.  For display on macbook read [here](README.md#running-pavucontrol-or-audacity-so-that-its-ui-user-interface-is-displayed-on-macbook).  Note that audacity is working but due to the remote X server setup the audacity user interface is not very responsive. |
+| 3 | launches [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/).  Requires that variable `remote_display` is properly set. For display on macbook read [section below](README.md#running-pavucontrol-or-audacity-so-that-its-ui-user-interface-is-displayed-on-macbook).|
+| 4 | launches [audacity](https://www.audacityteam.org/). Requires that variable `remote_display` is properly set.  For display on macbook read [section below](README.md#running-pavucontrol-or-audacity-so-that-its-ui-user-interface-is-displayed-on-macbook).  Note that audacity is working but due to the remote X server setup the audacity user interface is not very responsive. |
 
 ## Running `pavucontrol` or `audacity` so that its UI (user interface) is displayed on macbook.
 
