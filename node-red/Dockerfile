@@ -16,5 +16,5 @@ RUN npm install node-red-contrib-resinio
 RUN npm install node-red-dashboard
 RUN npm install node-red-contrib-credentials
 
-#COPY ./settings.js /data/settings.js
+COPY ./settings.js /data/settings.js
 #COPY ./flows.json  /data/flows.json
