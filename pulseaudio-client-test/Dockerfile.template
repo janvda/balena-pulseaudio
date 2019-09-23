@@ -12,6 +12,9 @@ RUN apt-get update && apt-get install -y \
 
 RUN mkdir -p /data; cd /data; wget https://www.kozco.com/tech/LRMonoPhase4.wav
 
+RUN mkdir -p /data/test_id_2
+COPY test_id_2_audio_files/* /data/test_id_2/
+
 COPY smb_data_share.conf /tmp/
 RUN cat /tmp/smb_data_share.conf >> /etc/samba/smb.conf
 

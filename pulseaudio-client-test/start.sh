@@ -55,6 +55,7 @@ case $test_id in
    ;;
 2) echo "Starting test 2: "
    echo "- Starting recording audio within 5 sec !"
+   paplay 
    sleep 5
    echo "- Recording for $recording_time seconds started ... (SAY SOMETHING) "
    parecord --channels=1 record_session1.wav &
