@@ -1,5 +1,20 @@
 # `pulseaudio-server` service
 
+## Using this service (PULSE_SERVER)
+
+If other services (which are further reffered as `pulseaudio client service`) want to play, record and/or control audio then they must properly set the environment variable `PULSE_SERVER`.
+
+E.g. the 2 commands here below will list all the loaded modules, sinks and sources and play an audio file.  If the pulseaudio client service is not running on the same device as the pulseaudio-server then you must change`localhost` by the IP address of the device where the pulseaudio-server is running.
+
+```
+PULSE_SERVER="tcp:localhost:4713" pactl list short
+PULSE_SERVER="tcp:localhost:4713" paplay LRMonoPhase4.wav
+```
+
+In case the pulseaudio client service is running on the same device as the pulseaudio-server then you can also communicate through unix domain sockets as described in the example below.  Note that in this case you must assure that `/pulseaudio/unix_socket` refers to the same socket file created by the pulseaudio-server.
+
+`PULSE_SERVER=unix:/pulseaudio/unix_socket pactl list short`
+
 ## Configuration of the service
 
 - [A. Configuration of Audio devices connected via USB](#a-configuration-of-audio-devices-connected-via-usb)

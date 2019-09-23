@@ -38,17 +38,3 @@ This balena application consists of following services:
 * `pulseaudio-client-tcp` and `pulseaudio-client-unix` are 2 test services based on the same docker container `pulseaudio-client-test`. 
    * For its documentation and configuration see [pulseaudio-client-test/README.md](pulseaudio-client-test/README.md)
 
-## Interesting Commands
-
-## On the Client
-
-below commands will list all the loaded modules, sinks and sources and play an audio file
-
-```
-PULSE_SERVER="tcp:localhost:4713" pactl list short
-PULSE_SERVER="tcp:localhost:4713" paplay LRMonoPhase4.wav
-```
-
-https://github.com/mviereck/x11docker/wiki/Container-sound:-ALSA-or-Pulseaudio
-
-`PULSE_SERVER=unix:/tmp/pulseaudio.socket pactl list short`
