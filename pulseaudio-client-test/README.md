@@ -31,8 +31,8 @@ We can run a specific scenario by setting the device service variable `test_id`.
 | 0 | No test run |
 | 1 | play a sample audio file |
 | 2 | record audio for short period + play recorded audio |
-| 3 | launches [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/).  Requires that variable `remote_display` is properly. |
-| 4 | launches [audacity](https://www.audacityteam.org/). Requires that variable `remote_display` is properly. Note that audacity is working but due to the remote X server setup the audacity user interface is not very responsive. |
+| 3 | launches [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/).  Requires that variable `remote_display` is properly. For display on macbook read [here](README.md#running-pavucontrol-or-audacity-so-that-its-ui-user-interface-is-displayed-on-macbook).|
+| 4 | launches [audacity](https://www.audacityteam.org/). Requires that variable `remote_display` is properly.  For display on macbook read [here](README.md#running-pavucontrol-or-audacity-so-that-its-ui-user-interface-is-displayed-on-macbook).  Note that audacity is working but due to the remote X server setup the audacity user interface is not very responsive. |
 
 ## Running `pavucontrol` or `audacity` so that its UI (user interface) is displayed on macbook.
 
@@ -60,7 +60,7 @@ bash-3.2$
    2. Select Wi-Fi > Advanced...
    3. select TCP/IP and the displayed `ÌPv4 Address` is the IP Address we need.
    4. Note that it is also possible to determine this IP address by running the command `ìfconfig` in a terminal window.
-3. Set device service variable `remote_display`to `<ip address found in step2>:0`(e.g. `192.168.1.5:0`) and `test_id` to `3` for service `pulseaudio-client-tcp` or `pulseaudio-client-unix`.  This will make that pavucontrol is automatically launched at startup by the server.  If you want to launch audacity at startup you have to set the `test_id` to 4.
+3. Set device service variable `remote_display=<ip address found in previous step>:0` (e.g. `192.168.1.5:0`) and `test_id=3` for service `pulseaudio-client-tcp` or `pulseaudio-client-unix`.  This will make that pavucontrol is automatically launched at startup by the server.  If you want to launch audacity at startup you have to set the `test_id=4`.
 4. Instead of step 3 you can of course also manually launch pavucontrol or audacity on the raspberry pi as specified by below steps:
    1. Within your BalenaCloud dashboard open a terminal window for the `pulseaudio-server` or `pulseaudio-client-{tcp|unix}`service.
    2. In case you want to run pavucontrol:
