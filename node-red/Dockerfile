@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install nano
 # for the node-red service in the BalenaCloud dashboard.
 RUN npm install -g --unsafe-perm node-red-admin
 
+# see https://stackoverflow.com/questions/53026557/error-listen-eacces-0-0-0-080-when-deploying-docker-image-nodered-node-red-doc
+RUN sudo setcap 'cap_net_bind_service=+ep'  $(eval readlink -f `which node`)
 USER node-red
 
 RUN npm install node-red-contrib-resinio
