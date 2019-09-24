@@ -5,6 +5,8 @@ FROM nodered/node-red-docker:0.20.7-rpi-v8
 USER root
 RUN apt-get update && apt-get install nano
 
+# upgraded node.js to current latest version 8.16.1
+# apparently the version in the docker image is pretty old.
 RUN npm cache clean -f ; npm install -g n; n 8.16.1
 
 # Following command installs node-red-admin which is needed if you want to create a hashed password 
