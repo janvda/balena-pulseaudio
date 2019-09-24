@@ -105,6 +105,9 @@ module.exports = {
         }]
     },
 
+    // https://stackoverflow.com/questions/48270905/node-red-node-credentials?rq=1
+    credentialSecret: "suidhfqiuhetqzeltbnabvwd",
+
 
     // To password protect the node-defined HTTP endpoints (httpNodeRoot), or
     // the static content (httpStatic), the following properties can be used.
