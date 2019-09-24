@@ -5,6 +5,8 @@ FROM nodered/node-red-docker:0.20.7-rpi-v8
 USER root
 RUN apt-get update && apt-get install nano
 
+RUN npm cache clean -f ; npm install -g n; n 8.16.1
+
 # Following command installs node-red-admin which is needed if you want to create a hashed password 
 # for the node-red editor.  For that run command "node-red-admin hash-pw" in a terminal window
 # for the node-red service in the BalenaCloud dashboard.
