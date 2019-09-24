@@ -1,6 +1,5 @@
 #see https://hub.docker.com/r/nodered/node-red-docker
 FROM nodered/node-red-docker:0.20.7-rpi-v8
-#FROM nodered/node-red-docker:rpi-v8
 
 # installing editor nano 
 USER root
@@ -24,4 +23,3 @@ RUN npm install node-red-dashboard
 RUN npm install node-red-contrib-credentials
 
 COPY ./settings.js /data/settings.js
-#COPY ./flows.json  /data/flows.json
