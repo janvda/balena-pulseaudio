@@ -54,5 +54,12 @@ services:
       - PORT=80  # so this allows to access node-red via the public URL
     depends_on:
       - pulseaudio-server
+  nfs-server:
+    image: itsthenetwork/nfs-server-alpine:11-arm
+    network_mode: host
+    volumes:
+       - 'shared_data:/data'
+    environment:
+      - SHARED_DIRECTORY=/nfsshare
 
 
