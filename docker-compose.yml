@@ -60,6 +60,6 @@ services:
     volumes:
        - 'shared_data:/data'
     environment:
-      - SHARED_DIRECTORY=/nfsshare
+      - SHARED_DIRECTORY=/data
 
 
