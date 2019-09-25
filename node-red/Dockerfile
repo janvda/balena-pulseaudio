@@ -3,7 +3,10 @@ FROM nodered/node-red-docker:0.20.7-rpi-v8
 
 # installing editor nano 
 USER root
-RUN apt-get update && apt-get install nano
+
+RUN apt-get update && apt-get install -y \
+     nano  \
+     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # upgraded node.js to current latest version 8.16.1
 # apparently the version in the docker image is pretty old.
