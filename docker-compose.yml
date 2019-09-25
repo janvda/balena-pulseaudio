@@ -1,7 +1,7 @@
 version: '2'
 volumes:
   pulseaudio_unix_socket:  # shared volume where pulseaudio unix socket will be stored.
-  node-red-data:
+  shared_data:
 services:
   pulseaudio-server:
     # based on https://github.com/woahbase/alpine-pulseaudio
@@ -46,11 +46,12 @@ services:
       - "445:445"
     volumes:
       - 'pulseaudio_unix_socket:/pulseaudio'  # folder where pulseAudio unix socket is stored.
+      - 'shared_data:/shared_data'
   node-red:
     build: ./node-red
     network_mode: host
     volumes:
-       - 'node-red-data:/data'
+       - 'shared_data:/data'
     environment:
       - PULSE_SERVER=tcp:localhost:4713
       - PORT=80  # so this allows to access node-red via the public URL
