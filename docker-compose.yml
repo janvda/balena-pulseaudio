@@ -56,7 +56,8 @@ services:
       - pulseaudio-server
   samba:
     #  hostname: samba  # doesn't work
-    image: dastrasmue/rpi-samba 
+    #image: dastrasmue/rpi-samba 
+    image: dperson/samba:rpi
     network_mode: host
     command:  -u "jan:passw0rd!67" -s "node-red-data:/mount/nodered_data:rw:jan"  
     volumes:
