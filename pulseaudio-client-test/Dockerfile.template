@@ -14,9 +14,10 @@ RUN mkdir -p /data; cd /data; wget https://www.kozco.com/tech/LRMonoPhase4.wav
 RUN mkdir -p /data/test_id_2
 COPY test_id_2_audio_files/* /data/test_id_2/
 
+# samba share stuff
 COPY smb_data_share.conf /tmp/
 RUN cat /tmp/smb_data_share.conf >> /etc/samba/smb.conf
-
+RUN useradd --uid 1000 -ms /bin/bash samba_user
 
 # Start app
 COPY start.sh /start.sh
