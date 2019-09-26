@@ -60,6 +60,9 @@ services:
     image: dperson/samba:rpi
     network_mode: host
     command:  -u "jan;passw0rd!67" -s "node-red-data;/mount/nodered_data;yes;no;no" 
+    environment:
+      - USERID=1000
+      - GROUPID=1000
     volumes:
        - 'shared_data:/mount/nodered_data'
     #ports:
