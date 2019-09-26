@@ -18,8 +18,6 @@ services:
       - "/dev/bus/usb:/dev/bus/usb"
     cap_add:
       - NET_ADMIN
-    ports:
-      - "4713:4713"
     volumes:
       - 'pulseaudio_unix_socket:/pulseaudio' # folder where pulseAudio unix socket is created.
     environment:
