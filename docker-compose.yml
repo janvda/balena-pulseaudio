@@ -1,7 +1,8 @@
 version: '2'
 volumes:
   pulseaudio_unix_socket:  # shared volume where pulseaudio unix socket will be stored.
-  shared_data:
+  node_red_data:           # shared volume containing the /data of the node-red service
+  pulseaudio_client_unix_data:  # shared volume containing the /data of the pulseaudio-client-unix service
 services:
   pulseaudio-server:
     # based on https://github.com/woahbase/alpine-pulseaudio
@@ -43,34 +44,29 @@ services:
       - pulseaudio-server
     volumes:
       - 'pulseaudio_unix_socket:/pulseaudio'  # folder where pulseAudio unix socket is stored.
-      - 'shared_data:/shared_data'
+      - 'pulseaudio_client_unix_data:/data'
   node-red:
     build: ./node-red
     network_mode: host
     volumes:
-       - 'shared_data:/data'
+       - 'node_red_data:/data'
     environment:
       - PULSE_SERVER=tcp:localhost:4713
       - PORT=80  # so this allows to access node-red via the public URL
     depends_on:
       - pulseaudio-server
   samba:
-    #  hostname: samba  # doesn't work
-    #image: dastrasmue/rpi-samba 
     image: dperson/samba:rpi
     network_mode: host
-    command:  -u "jan;passw0rd!67" -s "node-red-data;/mount/nodered_data;yes;no;no" 
+    command:  -u "jan;passw0rd!67" -s "node-red-data;/mount/node_red_data;yes;no;no"
+    # we set USERID and GROUPID to the same UID/GID of user node-red of the node-red service.
+    # This assures that we can write/edit files on the samba share used by Node-RED.
     environment:
       - USERID=1000
       - GROUPID=1000
     volumes:
-       - 'shared_data:/mount/nodered_data'
-    #ports:
-    #  - "137:137"
-    #  - "137:137/udp"
-    # - "139:139"
-    # - "445:445"
-    #  - "445:445/udp"
+       - 'node_red_data:/mount/node_red_data'
+       - 'pulseaudio_client_unix_data:/mount/pulseaudio_client_unix_data'
   nfs-server:
     image: itsthenetwork/nfs-server-alpine:11-arm
     privileged: true
