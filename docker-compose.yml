@@ -54,6 +54,19 @@ services:
       - PORT=80  # so this allows to access node-red via the public URL
     depends_on:
       - pulseaudio-server
+  samba:
+    #  hostname: samba  # doesn't work
+    image: dastrasmue/rpi-samba 
+    network_mode: host
+    command:  -u "jan:passw0rd!67" -s "node-red-data:/mount/nodered_data:rw:jan"  
+    volumes:
+       - 'shared_data:/mount/nodered_data'
+    ports:
+    #  - "137:137"
+    #  - "137:137/udp"
+    # - "139:139"
+    # - "445:445"
+    #  - "445:445/udp"
   nfs-server:
     image: itsthenetwork/nfs-server-alpine:11-arm
     privileged: true
