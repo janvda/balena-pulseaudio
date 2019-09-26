@@ -3,7 +3,7 @@
 cd /data
 
 if [ "$smbd" = 1 ]; then
-  echo "Starting samba daemon: this will create samba share //<IP address raspberry pi>/data"
+  echo "Starting samba daemon: this will create samba share //<IP address raspberry pi>/my_shared_data"
   service smbd start
 fi
 
