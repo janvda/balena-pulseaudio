@@ -58,7 +58,9 @@ services:
   samba:
     image: dperson/samba:rpi
     network_mode: host
-    command:  -u "jan;passw0rd!67" -s "node-red-data;/mount/node_red_data;yes;no;no"
+    command:  -u "jan;passw0rd!67" \
+              -s "node-red-data;/mount/node_red_data;yes;no;no" \
+              -s "pulseaudio-client-unix-data;/mount/pulseaudio_client_unix_data;yes;no;no"
     # we set USERID and GROUPID to the same UID/GID of user node-red of the node-red service.
     # This assures that we can write/edit files on the samba share used by Node-RED.
     environment:
@@ -72,7 +74,7 @@ services:
     privileged: true
     network_mode: host
     volumes:
-       - 'shared_data:/data'
+       - 'node_red_data:/data'
     environment:
       - SHARED_DIRECTORY=/data
 
