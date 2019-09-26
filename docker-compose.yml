@@ -59,7 +59,7 @@ services:
     #image: dastrasmue/rpi-samba 
     image: dperson/samba:rpi
     network_mode: host
-    command:  -u "jan;passw0rd!67" -v "node-red-data;/mount/nodered_data" 
+    command:  -u "jan;passw0rd!67" -s "node-red-data;/mount/nodered_data" 
     volumes:
        - 'shared_data:/mount/nodered_data'
     #ports:
