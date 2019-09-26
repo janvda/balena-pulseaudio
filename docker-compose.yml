@@ -61,7 +61,7 @@ services:
     command:  -u "jan:passw0rd!67" -s "node-red-data:/mount/nodered_data:rw:jan"  
     volumes:
        - 'shared_data:/mount/nodered_data'
-    ports:
+    #ports:
     #  - "137:137"
     #  - "137:137/udp"
     # - "139:139"
