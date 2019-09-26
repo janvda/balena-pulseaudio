@@ -37,4 +37,5 @@ This balena application consists of following services:
    * For its documentation and configuration see [pulseaudio-server/README.md](pulseaudio-server/README.md)
 * `pulseaudio-client-tcp` and `pulseaudio-client-unix` are 2 test services based on the same docker container `pulseaudio-client-test`. 
    * For its documentation and configuration see [pulseaudio-client-test/README.md](pulseaudio-client-test/README.md)
-
+* `node-red`: demonstrates the `node-red-contrib-pulseaudio` node (TO BE IMPLEMENTED)
+* `samba`: Gives access (as windows share) to the `\data` folder of the `node-red` service and the `pulseaudio-client-unix` service (see [docker-compose.yml](./docker-compose.yml))
