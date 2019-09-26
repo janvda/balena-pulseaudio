@@ -75,5 +75,3 @@ services:
        - 'node_red_data:/data'
     environment:
       - SHARED_DIRECTORY=/data
-
-
