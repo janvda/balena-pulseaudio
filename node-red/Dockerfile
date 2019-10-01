@@ -18,7 +18,7 @@ FROM nodered/node-red:1.0.0-1-12-arm32v7
 #RUN npm install -g --unsafe-perm node-red-admin
 
 # see https://stackoverflow.com/questions/53026557/error-listen-eacces-0-0-0-080-when-deploying-docker-image-nodered-node-red-doc
-# RUN sudo setcap 'cap_net_bind_service=+ep'  $(eval readlink -f `which node`)
+RUN sudo setcap 'cap_net_bind_service=+ep'  $(eval readlink -f `which node`)
 # USER node-red
 
 RUN npm install node-red-contrib-resinio
