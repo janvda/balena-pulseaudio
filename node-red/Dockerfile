@@ -1,6 +1,6 @@
 #see https://hub.docker.com/r/nodered/node-red-docker
 #FROM nodered/node-red-docker:0.20.7-rpi-v8
-FROM nodered/node-red-docker:rpi
+FROM nodered/node-red:1.0.0-1-12-arm32v7
 # installing editor nano 
 #USER root
 
