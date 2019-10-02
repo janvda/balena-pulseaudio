@@ -2,4 +2,12 @@
 # see more about dockerfile templates here: https://www.balena.io/docs/learn/develop/dockerfile/
 FROM balenalib/%%BALENA_MACHINE_NAME%%-debian-python:3-buster-build
 
+# pulseaudio must be installed as python library pulsectl is using libpulse.so.0
+# which is part of package pulseaudio
+RUN apt-get update && apt-get install -y \
+     pulseaudio \
+     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+pip install pulsectl
+
 CMD ["sleep", "3600"]
