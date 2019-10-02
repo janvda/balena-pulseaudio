@@ -45,7 +45,7 @@ services:
       - 'pulseaudio_unix_socket:/pulseaudio'  # folder where pulseAudio unix socket is stored.
       - 'pulseaudio_client_unix_data:/data'
   python:
-    build:./python
+    build: ./python
     network_mode: host
     volumes:
        - 'python_data:/data'
