@@ -21,6 +21,6 @@ RUN npm install node-red-contrib-credentials
 
 RUN npm install node-red-node-pi-gpio
 # see https://gpiozero.readthedocs.io/en/stable/remote_gpio.html#preparing-the-raspberry-pi
-RUN sudo pip install gpiozero pigpio
+RUN pip install gpiozero pigpio
 
 COPY ./settings.js /data/settings.js
