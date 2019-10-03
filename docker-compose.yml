@@ -47,6 +47,7 @@ services:
   python:
     build: ./python
     network_mode: host
+    privileged: true
     volumes:
       - 'python_data:/data'
     environment:
