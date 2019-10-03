@@ -54,8 +54,8 @@ services:
     depends_on:
       - pulseaudio-server
   mqtt:
-    #image: arm32v6/eclipse-mosquitto:1.6.2 #https://hub.docker.com/_/eclipse-mosquitto
-    image: panuwitp/mosquitto-arm
+    image: arm32v6/eclipse-mosquitto #https://hub.docker.com/_/eclipse-mosquitto
+    #image: panuwitp/mosquitto-arm
     network_mode: host  
     ports:
       - "1883:1883"
