@@ -13,4 +13,4 @@ COPY test_id_2_audio_files/* /data/test_id_2/
 
 # Start app
 COPY start.sh /start.sh
-CMD ["bash", "/start.sh"]
+CMD ["bash", "./start.sh"]
