@@ -14,10 +14,9 @@ RUN setcap 'cap_net_bind_service=+ep'  $(eval readlink -f `which node`)
 
 # see https://gpiozero.readthedocs.io/en/stable/remote_gpio.html#preparing-the-raspberry-pi
 # install pip
-RUN apt-get update && \
-    apt-get install -yq --no-install-recommends  python-pip  && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk update && \
+    apk add python-pip  && \
+    rm -rf /var/cache/apk/*
 RUN pip install gpiozero pigpio
 
 ######### Changing back to node-red user #####################
