@@ -48,10 +48,9 @@ services:
     build: ./python
     network_mode: host
     volumes:
-       - 'python_data:/data'
+      - 'python_data:/data'
     environment:
       - PULSE_SERVER=tcp:localhost:4713
-      - PORT=80  # so this allows to access node-red via the public URL
     depends_on:
       - pulseaudio-server
   mqtt:
@@ -72,9 +71,9 @@ services:
     image: dperson/samba:rpi
     network_mode: host
     command:  -u "user1;badpassword" -s "node-red-data;/mount/node_red_data;yes;no;no" -s "pulseaudio-client-unix-data;/mount/pulseaudio_client_unix_data;yes;no;no"
+    environment:
     # we set USERID and GROUPID to the same UID/GID of user node-red of the node-red service.
     # This assures that we can write/edit files on the samba share used by Node-RED.
-    environment:
       - USERID=1000
       - GROUPID=1000
     volumes:
