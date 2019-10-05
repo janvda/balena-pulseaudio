@@ -52,6 +52,7 @@ services:
       - 'pa-mqtt-data:/data'
     environment:
       - PULSE_SERVER=tcp:localhost:4713
+      - mqtt_broker=localhost
     depends_on:
       - pulseaudio-server
   mqtt:
