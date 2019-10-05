@@ -17,10 +17,10 @@ if __name__ == '__main__':
         mqttPort  =  1883  if ( os.environ.get("mqtt_port")   is None ) else int(os.environ["mqtt_port"])
 
         def on_mqtt_connect(client, userdata, flags, rc):
-           print("Connected With Result Code "+rc)
+           print("MQTT Connected With Result Code "+rc)
 
         def on_mqtt_message(client, userdata, message):
-           print("Message Recieved: "+message.payload.decode())
+           print("MQTT Message Recieved: "+message.payload.decode())
 
         mqttClient=mqtt.Client("pa-mqtt")
         mqttClient.on_connect = on_mqtt_connect
