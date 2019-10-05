@@ -3,7 +3,7 @@ volumes:
   pulseaudio_unix_socket:  # shared volume where pulseaudio unix socket will be stored.
   node_red_data:           # shared volume containing the /data of the node-red service
   pulseaudio_client_unix_data:  # shared volume containing the /data of the pulseaudio-client-unix service
-  python_data:
+  pa-mqtt-data:
 services:
   pulseaudio-server:
     # based on https://github.com/woahbase/alpine-pulseaudio
@@ -44,12 +44,12 @@ services:
     volumes:
       - 'pulseaudio_unix_socket:/pulseaudio'  # folder where pulseAudio unix socket is stored.
       - 'pulseaudio_client_unix_data:/data'
-  python:
-    build: ./python
+  pa-mqtt:
+    build: ./pa-mqtt
     network_mode: host
     privileged: true
     volumes:
-      - 'python_data:/data'
+      - 'pa-mqtt-data:/data'
     environment:
       - PULSE_SERVER=tcp:localhost:4713
     depends_on:
