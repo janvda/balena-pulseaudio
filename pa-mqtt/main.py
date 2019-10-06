@@ -11,6 +11,10 @@ if __name__ == '__main__':
 
         # connect to pulseaudio server
         pulse = pulsectl.Pulse('pa-mqtt')
+        print("getting sink list")
+        sinkList=pulse.sink_list()
+        print(str(sinkList))
+
 
         # MQTT client setup
         mqttBroker= "mqtt" if ( os.environ.get("mqtt_broker") is None ) else os.environ["mqtt_broker"]
@@ -24,6 +28,9 @@ if __name__ == '__main__':
 
         def on_mqtt_get_sinks(client, userdata, message):
            print("MQTT_get_sinks message received: ["+ message.topic+"] "+str(message.payload))
+           print("getting sink list")
+           sinkList=pulse.sink_list()
+           print(str(sinkList))
 
         mqttClient=mqtt.Client("pa-mqtt")
         mqttClient.on_connect = on_mqtt_connect # on_connect doesn't seem to work ??
