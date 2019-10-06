@@ -11,10 +11,6 @@ if __name__ == '__main__':
 
         # connect to pulseaudio server
         pulse = pulsectl.Pulse('pa-mqtt')
-        print("getting sink list")
-        sinkList=pulse.sink_list()
-        print(str(sinkList))
-
 
         # MQTT client setup
         mqttBroker= "mqtt" if ( os.environ.get("mqtt_broker") is None ) else os.environ["mqtt_broker"]
@@ -24,13 +20,17 @@ if __name__ == '__main__':
            print("MQTT Connected With Result Code "+rc)
 
         def on_mqtt_message(client, userdata, message):
-           print("MQTT message received: ["+ message.topic+"] "+str(message.payload))
+           print("WARNING: unsupported MQTT command received: ["+ message.topic+"] "+str(message.payload))
 
         def on_mqtt_get_sinks(client, userdata, message):
            print("MQTT_get_sinks message received: ["+ message.topic+"] "+str(message.payload))
-           print("getting sink list")
            sinkList=pulse.sink_list()
            print(str(sinkList))
+           mqttClient.publish("pa-mqtt/cmd-rsp/get-sinks",
+                           str(sinkList),
+                           1,    # qos= 2 - deliver exactly once
+                           False) # tell broker to retain this message so that it gets delivered
+
 
         mqttClient=mqtt.Client("pa-mqtt")
         mqttClient.on_connect = on_mqtt_connect # on_connect doesn't seem to work ??
