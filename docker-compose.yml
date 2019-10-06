@@ -1,9 +1,9 @@
 version: '2'
 volumes:
   pulseaudio_unix_socket:  # shared volume where pulseaudio unix socket will be stored.
-  node_red_data:           # shared volume containing the /data of the node-red service
   pulseaudio_client_unix_data:  # shared volume containing the /data of the pulseaudio-client-unix service
-  pa-mqtt-data:
+  pulseaudio2mqtt-data:
+  node_red_data:           # shared volume containing the /data of the node-red service
 services:
   pulseaudio-server:
     # based on https://github.com/woahbase/alpine-pulseaudio
@@ -44,12 +44,12 @@ services:
     volumes:
       - 'pulseaudio_unix_socket:/pulseaudio'  # folder where pulseAudio unix socket is stored.
       - 'pulseaudio_client_unix_data:/data'
-  pa-mqtt:
-    build: ./pa-mqtt
+  pulseaudio2mqtt:
+    build: ./pulseaudio2mqtt
     network_mode: host
     privileged: true
     volumes:
-      - 'pa-mqtt-data:/data'
+      - 'pulseaudio2mqtt-data:/data'
     environment:
       - PULSE_SERVER=tcp:localhost:4713
       - mqtt_broker=localhost
@@ -74,7 +74,7 @@ services:
   samba:
     image: dperson/samba:rpi
     network_mode: host
-    command:  -u "user1;badpassword" -s "node-red-data;/mount/node_red_data;yes;no;no" -s "pa-mqtt-data;/mount/pa-mqtt-data;yes;no;no" -s "pulseaudio-client-unix-data;/mount/pulseaudio_client_unix_data;yes;no;no"
+    command:  -u "user1;badpassword" -s "node-red-data;/mount/node_red_data;yes;no;no" -s "pa-mqtt-data;/mount/pulseaudio2mqtt-data;yes;no;no" -s "pulseaudio-client-unix-data;/mount/pulseaudio_client_unix_data;yes;no;no"
     environment:
     # we set USERID and GROUPID to the same UID/GID of user node-red of the node-red service.
     # This assures that we can write/edit files on the samba share used by Node-RED.
@@ -82,7 +82,7 @@ services:
       - GROUPID=1000
     volumes:
        - 'node_red_data:/mount/node_red_data'
-       - 'pa-mqtt-data:/mount/pa-mqtt-data'
+       - 'pulseaudio2mqtt-data:/mount/pulseaudio2mqtt-data'
        - 'pulseaudio_client_unix_data:/mount/pulseaudio_client_unix_data'
   nfs-server:
     image: itsthenetwork/nfs-server-alpine:11-arm
