@@ -20,14 +20,18 @@ if __name__ == '__main__':
            print("MQTT Connected With Result Code "+rc)
 
         def on_mqtt_message(client, userdata, message):
-           print("MQTT Message Recieved: "+message.payload.decode())
+           print("MQTT message received: ["+ message.topic+"] "+str(message.payload))
+
+        def on_mqtt_get_sinks(client, userdata, message):
+           print("MQTT_get_sinks message received: ["+ message.topic+"] "+str(message.payload))
 
         mqttClient=mqtt.Client("pa-mqtt")
-        mqttClient.on_connect = on_mqtt_connect
+        mqttClient.on_connect = on_mqtt_connect # on_connect doesn't seem to work ??
         mqttClient.on_message = on_mqtt_message
         mqttClient.connect(mqttBroker,mqttPort)
 
-        mqttClient.subscribe("pa-mqtt/cmd", qos=1)
+        mqttClient.subscribe("pa-mqtt/cmd/#", qos=1)
+        mqttClient.message_callback_add("pa-mqtt/cmd/get-sinks", on_mqtt_get_sinks)
 
         # Publish the details of the device we are listening to
         mqttClient.publish("pa-mqtt",
@@ -35,6 +39,7 @@ if __name__ == '__main__':
                            2,    # qos= 2 - deliver exactly once
                            True) # tell broker to retain this message so that it gets delivered
 
+        # start the mqtt loop
         mqttClient.loop_forever()
 
 
