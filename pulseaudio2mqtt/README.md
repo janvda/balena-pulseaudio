@@ -1,12 +1,12 @@
 # Service pulseaudio2mqtt
 
-This service provides an mqtt interface to a pulseaudio server.  So, other applications can send commands (via publishing appropriate MQTT message) to this service to control the audio volume, list the sinks (audio playback devices), list the sources (audio capture devices), ... of the audio devices controlled by the pulseaudio server.
+This service provides an MQTT interface to a pulseaudio server.  So, other applications can send commands (via publishing appropriate MQTT messages) to this service to control the audio volume, list the sinks (audio playback devices), list the sources (audio capture devices), ... of the audio devices controlled by the pulseaudio server.
 
-The idea is to provide same functionality over MQTT as pavucontrol excluding the real time volume monitoring.
+The idea is to provide same functionality over MQTT as [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/) (excluding the real time volume monitoring).
 
 ## Interface
 
-The MQTT responses will have similar structure as the Data Structures documented at [PulseAudio 13.0](https://freedesktop.org/software/pulseaudio/doxygen/annotated.html)
+The MQTT responses will have similar structure as the data structures documented at [PulseAudio 13.0](https://freedesktop.org/software/pulseaudio/doxygen/annotated.html)
 
 ## Design
 
