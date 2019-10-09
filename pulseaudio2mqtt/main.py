@@ -52,7 +52,7 @@ if __name__ == '__main__':
         pulse = pulsectl.Pulse('pulseaudio2mqtt')
 
         # MQTT client setup
-        mqttBroker= "mqtt" if ( os.environ.get("mqtt_broker") is None ) else os.environ["mqtt_broker"]
+        mqttBroker= "localhost" if ( os.environ.get("mqtt_broker") is None ) else os.environ["mqtt_broker"]
         mqttPort  =  1883  if ( os.environ.get("mqtt_port")   is None ) else int(os.environ["mqtt_port"])
 
         def on_mqtt_connect(client, userdata, flags, rc):
