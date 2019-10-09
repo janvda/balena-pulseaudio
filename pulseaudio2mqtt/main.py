@@ -2,8 +2,6 @@ import pulsectl, json, os, time
 import paho.mqtt.client as mqtt
 from datetime import datetime
 
-pulse = pulsectl.Pulse('pulseaudio2mqtt')
-
 ############## FUNCTION TO CONVERT the PULSECTL OBJECTS INTO JSON strings #################
 def unsupported_type2json(obj):
    return '{ "UNSUPPORTED TYPE - ' + str(type(obj)) + '" : "obj=' + str(obj) + '"}'
@@ -20,23 +18,23 @@ def list2json(obj):
    json_str += "]"
    return json_str
 
-def PulseSinkInfo2json(obj):
-   json_str = '{ "PulseSinkInfo" : { "index":'       + str(obj.index)  + ','   + \
-                                    '"description":"'+ obj.description + '",'  + \
-                                    '"name":"'       + obj.name        + '",'  + \
-                                    '"mute":'        + str(obj.mute)   + ','   + \
-                                    '"volume":'      + object2json(obj.volume) + '}}'
+def sink_info2json(obj):
+   json_str = '{ "sink_info" : { "index":'        + str(obj.index)  + ','   + \
+                                 '"description":"'+ obj.description + '",'  + \
+                                 '"name":"'       + obj.name        + '",'  + \
+                                 '"mute":'        + str(obj.mute)   + ','   + \
+                                 '"cvolume":'      + object2json(obj.volume) + '}}'
    return json_str
 
 # outputs a string like { "value_flat" : 1.0 , "values" : [1.0, 1.0] }
-def PulseVolumeInfo2json(obj):
-   json_str =  '{ "value_flat" :' + str(obj.value_flat) + ' , "values" :' + str(obj.values) + '}'
+def cvolume2json(obj):
+   json_str =  '{ "channels" :' + str(obj.value_flat) + ' , "values" :' + str(obj.values) + '}'
    return json_str
 
 type2json_func = {
    list                              : list2json,
-   pulsectl.pulsectl.PulseSinkInfo   : PulseSinkInfo2json,
-   pulsectl.pulsectl.PulseVolumeInfo : PulseVolumeInfo2json
+   pulsectl.pulsectl.PulseSinkInfo   : sink_info2json,
+   pulsectl.pulsectl.PulseVolumeInfo : cvolume2json
 }
 
 def object2json(obj):
