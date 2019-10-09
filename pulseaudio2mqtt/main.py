@@ -4,7 +4,7 @@ from datetime import datetime
 
 pulse = pulsectl.Pulse('pulseaudio2mqtt')
 
-############## FUNCTION TO CONVERT the PULSECTL OBJECT INTO JSON strings #################
+############## FUNCTION TO CONVERT the PULSECTL OBJECTS INTO JSON strings #################
 def unsupported_type2json(obj):
    return '{ "UNSUPPORTED TYPE - ' + str(type(obj)) + '" : "obj=' + str(obj) + '"}'
 
@@ -52,7 +52,7 @@ if __name__ == '__main__':
         pulse = pulsectl.Pulse('pulseaudio2mqtt')
 
         # MQTT client setup
-        mqttBroker= "localhost" if ( os.environ.get("mqtt_broker") is None ) else os.environ["mqtt_broker"]
+        mqttBroker= "mqtt" if ( os.environ.get("mqtt_broker") is None ) else os.environ["mqtt_broker"]
         mqttPort  =  1883  if ( os.environ.get("mqtt_port")   is None ) else int(os.environ["mqtt_port"])
 
         def on_mqtt_connect(client, userdata, flags, rc):
@@ -73,9 +73,9 @@ if __name__ == '__main__':
         def on_mqtt_get_sink_input_list(client, userdata, message):
            print("MQTT_get_sink_input_list message received: ["+ message.topic+"] "+str(message.payload))
            sinkInputList=pulse.sink_input_list()
-           print(str(sinkInputList))
+           print(object2json(sinkInputList))
            mqttClient.publish("pulseaudio2mqtt/cmd-rsp/get-sink-input-list",
-                           str(sinkInputList),
+                           object2json(sinkInputList),
                            1,    # qos= 2 - deliver exactly once
                            False) # tell broker to retain this message so that it gets delivered
 
