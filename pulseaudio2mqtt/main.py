@@ -75,7 +75,7 @@ if __name__ == '__main__':
            sinkInputList=pulse.sink_input_list()
            print(str(sinkInputList))
            mqttClient.publish("pulseaudio2mqtt/cmd-rsp/get-sink-input-list",
-                           str(sinkInputList[0]),
+                           str(sinkInputList),
                            1,    # qos= 2 - deliver exactly once
                            False) # tell broker to retain this message so that it gets delivered
 
