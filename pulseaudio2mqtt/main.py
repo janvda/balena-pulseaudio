@@ -41,7 +41,7 @@ def sink_input_info2json(obj):
                     '"cvolume":'     + object2json(obj.volume) + '}}'
    return json_str
 
-# outputs a string like { "value_flat" : 1.0 , "values" : [1.0, 1.0] }
+# outputs a string like { "channels" : 2, "values" : [1.0, 1.0] }
 def cvolume2json(obj):
    json_str =  '{ "channels" :' + str(len(obj.values)) + ' , "values" :' + str(obj.values) + '}'
    return json_str
