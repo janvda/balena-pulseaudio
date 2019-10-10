@@ -18,12 +18,27 @@ def list2json(obj):
    json_str += "]"
    return json_str
 
+def dict2json(obj):
+   # replade single quote by double quotes
+   return str(obj).replace("'",'"')
+
 def sink_info2json(obj):
    json_str = '{ "sink_info" : { "index":'        + str(obj.index)  + ','   + \
                                  '"description":"'+ obj.description + '",'  + \
                                  '"name":"'       + obj.name        + '",'  + \
                                  '"mute":'        + str(obj.mute)   + ','   + \
+                                 '"proplist":'     + object2json(obj.proplist)  + ','  + \
                                  '"cvolume":'      + object2json(obj.volume) + '}}'
+   return json_str
+
+def sink_input_info2json(obj):
+   json_str = '{ "sink_input_info" : \
+                  { "index":'        + str(obj.index)  + ','   + \
+                    '"name":"'       + obj.name        + '",'  + \
+                    '"sink":'        + str(obj.sink)   + ','   + \
+                    '"mute":'        + str(obj.mute)   + ','   + \
+                    '"proplist":'    + object2json(obj.proplist)   + ','  + \
+                    '"cvolume":'     + object2json(obj.volume) + '}}'
    return json_str
 
 # outputs a string like { "value_flat" : 1.0 , "values" : [1.0, 1.0] }
@@ -32,9 +47,11 @@ def cvolume2json(obj):
    return json_str
 
 type2json_func = {
-   list                              : list2json,
-   pulsectl.pulsectl.PulseSinkInfo   : sink_info2json,
-   pulsectl.pulsectl.PulseVolumeInfo : cvolume2json
+   list                                 : list2json,
+   dict                                 : dict2json,
+   pulsectl.pulsectl.PulseSinkInfo      : sink_info2json,
+   pulsectl.pulsectl.PulseVolumeInfo    : cvolume2json,
+   pulsectl.pulsectl.PulseSinkInputInfo : sink_input_info2json
 }
 
 def object2json(obj):
