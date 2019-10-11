@@ -76,20 +76,20 @@ if __name__ == '__main__':
         def on_mqtt_message(client, userdata, message):
            print("WARNING: unsupported MQTT command received: ["+ message.topic+"] "+str(message.payload))
 
-        def on_mqtt_get_sinks(client, userdata, message):
+        def on_mqtt_get_sink_info_list(client, userdata, message):
            print("MQTT_get_sinks message received: ["+ message.topic+"] "+str(message.payload))
            sinkList=pulse.sink_list()
            print(object2json(sinkList))
-           mqttClient.publish("pulseaudio2mqtt/cmd-rsp/get-sinks",
+           mqttClient.publish("pulseaudio2mqtt/cmd_rsp/get_sink_info_list",
                            object2json(sinkList),
                            1,    # qos= 2 - deliver exactly once
                            False) # tell broker to retain this message so that it gets delivered
 
-        def on_mqtt_get_sink_input_list(client, userdata, message):
+        def on_mqtt_get_sink_input_info_list(client, userdata, message):
            print("MQTT_get_sink_input_list message received: ["+ message.topic+"] "+str(message.payload))
            sinkInputList=pulse.sink_input_list()
            print(object2json(sinkInputList))
-           mqttClient.publish("pulseaudio2mqtt/cmd-rsp/get-sink-input-list",
+           mqttClient.publish("pulseaudio2mqtt/cmd_rsp/get_sink_info_list",
                            object2json(sinkInputList),
                            1,    # qos= 2 - deliver exactly once
                            False) # tell broker to retain this message so that it gets delivered
@@ -101,8 +101,8 @@ if __name__ == '__main__':
         mqttClient.connect(mqttBroker,mqttPort)
 
         mqttClient.subscribe("pulseaudio2mqtt/cmd/#", qos=1)
-        mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get-sinks", on_mqtt_get_sinks)
-        mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get-sink-input-list", on_mqtt_get_sink_input_list)
+        mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_sink_info_list", on_mqtt_get_sink_info_list)
+        mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_sink_input_info_list", on_mqtt_get_sink_input_info_list)
 
         # Publish the details of the device we are listening to
         mqttClient.publish("pulseaudio2mqtt",
