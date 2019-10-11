@@ -32,6 +32,26 @@ def server_info2json(obj):
                                  '"cookie":'      + str(obj.cookie) + '}}'
    return json_str
 
+def card_info2json(obj):
+   json_str = '{ "card_info" : { "index":'              + str(obj.index)         + ','  + \
+                                 '"name":"'             + obj.name               + '",' + \
+                                 '"owner_module":'      + str(obj.owner_module)  + ','  + \
+                                 '"driver":"'           + obj.driver             + '",' + \
+                                 '"n_profiles":'       + str(obj.n_profiles)    + ','  + \
+                                 '"profile_active":'   + object2json(obj.profile_active) + ','  + \
+                                 '"profile_list":'     + object2json(obj.profile_list) + ','  + \
+                                 '"propplist":'        + object2json(obj.proplist)   + '}}'
+   return json_str
+
+def card_profile_info2json(obj):
+   json_str = '{ "card_profile_info" : { "name":"'    + obj.name           + '",' + \
+                                 '"description":"'    + obj.description    + '",' + \
+                                 '"n_sinks":'         + str(obj.n_sinks)   + ','  + \
+                                 '"n_sources":'       + str(obj.n_sources) + ','  + \
+                                 '"priority":'        + str(obj.priority)  + ','  + \
+                                 '"available":'       + str(obj.available) + '}}'
+   return json_str
+
 def sink_info2json(obj):
    json_str = '{ "sink_info" : { "index":'        + str(obj.index)  + ','   + \
                                  '"description":"'+ obj.description + '",'  + \
@@ -79,6 +99,8 @@ type2json_func = {
    list                                 : list2json,
    dict                                 : dict2json,
    pulsectl.pulsectl.PulseServerInfo    : server_info2json,
+   pulsectl.pulsectl.PulseCardInfo      : card_info2json,
+   pulsectl.pulsectl.PulseCardProfileInfo : card_profile_info2json,
    pulsectl.pulsectl.PulseSinkInfo      : sink_info2json,
    pulsectl.pulsectl.PulseSourceInfo    : source_info2json,
    pulsectl.pulsectl.PulseVolumeInfo    : cvolume2json,
@@ -107,7 +129,16 @@ if __name__ == '__main__':
 
         def on_mqtt_message(client, userdata, message):
            print("WARNING: unsupported MQTT command received: ["+ message.topic+"] "+str(message.payload))
- 
+
+        def on_mqtt_get_card_list(client, userdata, message):
+           print("MQTT: get_card_list_received: ["+ message.topic+"] "+str(message.payload))
+           cardList=pulse.card_list()
+           print(object2json(cardList))
+           mqttClient.publish("pulseaudio2mqtt/cmd_rsp/get_card_list",
+                           object2json(cardList),
+                           1,    # qos= 2 - deliver exactly once
+                           False) # tell broker to retain this message so that it gets delivered
+
         def on_mqtt_get_server_info(client, userdata, message):
            print("MQTT: get_server_info received: ["+ message.topic+"] "+str(message.payload))
            serverInfo=pulse.server_info()
@@ -160,6 +191,7 @@ if __name__ == '__main__':
 
         mqttClient.subscribe("pulseaudio2mqtt/cmd/#", qos=1)
         mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_server_info", on_mqtt_get_server_info)
+        mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_card_list", on_mqtt_get_card_list)
         mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_sink_info_list", on_mqtt_get_sink_info_list)
         mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_source_info_list", on_mqtt_get_source_info_list)
         mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_sink_input_info_list", on_mqtt_get_sink_input_info_list)
