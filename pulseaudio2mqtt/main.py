@@ -50,6 +50,16 @@ def sink_input_info2json(obj):
                     '"cvolume":'     + object2json(obj.volume) + '}}'
    return json_str
 
+def source_output_info2json(obj):
+   json_str = '{ "source_output_info" : \
+                  { "index":'        + str(obj.index)  + ','   + \
+                    '"name":"'       + obj.name        + '",'  + \
+                    '"source":'      + str(obj.source)   + ','   + \
+                    '"mute":'        + str(obj.mute)   + ','   + \
+                    '"proplist":'    + object2json(obj.proplist)   + ','  + \
+                    '"cvolume":'     + object2json(obj.volume) + '}}'
+   return json_str
+
 # outputs a string like { "channels" : 2, "values" : [1.0, 1.0] }
 def cvolume2json(obj):
    json_str =  '{ "channels" :' + str(len(obj.values)) + ' , "values" :' + str(obj.values) + '}'
@@ -61,7 +71,8 @@ type2json_func = {
    pulsectl.pulsectl.PulseSinkInfo      : sink_info2json,
    pulsectl.pulsectl.PulseSourceInfo    : source_info2json,
    pulsectl.pulsectl.PulseVolumeInfo    : cvolume2json,
-   pulsectl.pulsectl.PulseSinkInputInfo : sink_input_info2json
+   pulsectl.pulsectl.PulseSinkInputInfo : sink_input_info2json,
+   pulsectl.pulsectl.PulseSourceOutputInfo : source_output_info2json
 }
 
 def object2json(obj):
