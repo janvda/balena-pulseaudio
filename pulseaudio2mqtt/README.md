@@ -14,11 +14,12 @@ The supported command/queries are a subset of what is documented at:
 
 | method | response |
 |--------|-------------|
+| `get_server_info`| returns `server_info` (includes name of default sink/source) |
 | `get_(sink|source)_info_list` | returns an array of `(sink|source)_info` |
 | `get_(sink_input|soure_output)_info_list` | returns an array of  `(sink_input|source_output)_info`|
-| `set_(sink|source)_volume_by_index` | |
-| `set_(sink|source)_mute_by_index` | |
-| `set_(sink_input|source_output)_volume` ||
+| `set_(sink|source)_volume_by_index` | to be implemented|
+| `set_(sink|source)_mute_by_index` | to be implemented|
+| `set_(sink_input|source_output)_volume` | to be implemented |
 
 ## Design
 
