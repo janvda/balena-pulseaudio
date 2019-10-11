@@ -87,7 +87,7 @@ if __name__ == '__main__':
            print("WARNING: unsupported MQTT command received: ["+ message.topic+"] "+str(message.payload))
 
         def on_mqtt_get_sink_info_list(client, userdata, message):
-           print("MQTT_get_sinks message received: ["+ message.topic+"] "+str(message.payload))
+           print("MQTT: get_sink_info_list received: ["+ message.topic+"] "+str(message.payload))
            sinkList=pulse.sink_list()
            print(object2json(sinkList))
            mqttClient.publish("pulseaudio2mqtt/cmd_rsp/get_sink_info_list",
@@ -105,7 +105,7 @@ if __name__ == '__main__':
                            False) # tell broker to retain this message so that it gets delivered
 
         def on_mqtt_get_sink_input_info_list(client, userdata, message):
-           print("MQTT_get_sink_input_list message received: ["+ message.topic+"] "+str(message.payload))
+           print("MQTT: get_sink_input_info_list message received: ["+ message.topic+"] "+str(message.payload))
            sinkInputList=pulse.sink_input_list()
            print(object2json(sinkInputList))
            mqttClient.publish("pulseaudio2mqtt/cmd_rsp/get_sink_info_list",
