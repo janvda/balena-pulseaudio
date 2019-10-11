@@ -31,6 +31,15 @@ def sink_info2json(obj):
                                  '"cvolume":'      + object2json(obj.volume) + '}}'
    return json_str
 
+def source_info2json(obj):
+   json_str = '{ "source_info" : { "index":'        + str(obj.index)  + ','   + \
+                                 '"description":"'+ obj.description + '",'  + \
+                                 '"name":"'       + obj.name        + '",'  + \
+                                 '"mute":'        + str(obj.mute)   + ','   + \
+                                 '"proplist":'     + object2json(obj.proplist)  + ','  + \
+                                 '"cvolume":'      + object2json(obj.volume) + '}}'
+   return json_str
+
 def sink_input_info2json(obj):
    json_str = '{ "sink_input_info" : \
                   { "index":'        + str(obj.index)  + ','   + \
@@ -50,6 +59,7 @@ type2json_func = {
    list                                 : list2json,
    dict                                 : dict2json,
    pulsectl.pulsectl.PulseSinkInfo      : sink_info2json,
+   pulsectl.pulsectl.PulseSourceInfo    : source_info2json,
    pulsectl.pulsectl.PulseVolumeInfo    : cvolume2json,
    pulsectl.pulsectl.PulseSinkInputInfo : sink_input_info2json
 }
@@ -85,6 +95,15 @@ if __name__ == '__main__':
                            1,    # qos= 2 - deliver exactly once
                            False) # tell broker to retain this message so that it gets delivered
 
+        def on_mqtt_get_source_info_list(client, userdata, message):
+           print("MQTT: get_source_info_list received: ["+ message.topic+"] "+str(message.payload))
+           sourceList=pulse.source_list()
+           print(object2json(sourceList))
+           mqttClient.publish("pulseaudio2mqtt/cmd_rsp/get_source_info_list",
+                           object2json(sourceList),
+                           1,    # qos= 2 - deliver exactly once
+                           False) # tell broker to retain this message so that it gets delivered
+
         def on_mqtt_get_sink_input_info_list(client, userdata, message):
            print("MQTT_get_sink_input_list message received: ["+ message.topic+"] "+str(message.payload))
            sinkInputList=pulse.sink_input_list()
@@ -102,6 +121,7 @@ if __name__ == '__main__':
 
         mqttClient.subscribe("pulseaudio2mqtt/cmd/#", qos=1)
         mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_sink_info_list", on_mqtt_get_sink_info_list)
+        mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_source_info_list", on_mqtt_get_source_info_list)
         mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_sink_input_info_list", on_mqtt_get_sink_input_info_list)
 
         # Publish the details of the device we are listening to

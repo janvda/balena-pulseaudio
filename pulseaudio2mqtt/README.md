@@ -9,6 +9,7 @@ The idea is to provide same functionality over MQTT as [pavucontrol](https://fre
 The MQTT responses will have similar structure as the data structures documented at [PulseAudio 13.0](https://freedesktop.org/software/pulseaudio/doxygen/annotated.html)
 
 The supported command/queries are a subset of what is documented at:
+
 * [PulseAudio 13.0 - Server Query and Control](https://freedesktop.org/software/pulseaudio/doxygen/introspect.html)
 
 | method | response |
@@ -19,9 +20,9 @@ The supported command/queries are a subset of what is documented at:
 | `set_(sink|source)_mute_by_index` | |
 | `set_(sink_input|source_output)_volume` ||
 
-
 ## Design
 
-This service is a python program that uses 
+This service is a python program that uses
+
 * the [pulsectl](https://pypi.org/project/pulsectl/) library to communicate with a pulseaudio server
 * the [paho-mqtt](https://pypi.org/project/paho-mqtt/) library to implement the mqtt interface.
