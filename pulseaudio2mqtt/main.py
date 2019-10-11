@@ -22,6 +22,16 @@ def dict2json(obj):
    # replade single quote by double quotes
    return str(obj).replace("'",'"')
 
+def server_info2json(obj):
+   json_str = '{ "server_info" : { "user_name":"'       + obj.user_name       + '",'  + \
+                                 '"host_name":"'        + obj.host_name       + '",'  + \
+                                 '"server_version":"'   + obj.server_version  + '",'  + \
+                                 '"server_name":"'      + obj.server_name     + '",'  + \
+                                 '"default_sink_name":"'   + obj.default_sink_name    + '",'  + \
+                                 '"default_source_name":"' + obj.default_source_name  + '",'  + \
+                                 '"cookie":'      + str(obj.cookie) + '}}'
+   return json_str
+
 def sink_info2json(obj):
    json_str = '{ "sink_info" : { "index":'        + str(obj.index)  + ','   + \
                                  '"description":"'+ obj.description + '",'  + \
@@ -68,6 +78,7 @@ def cvolume2json(obj):
 type2json_func = {
    list                                 : list2json,
    dict                                 : dict2json,
+   pulsectl.pulsectl.PulseServerInfo    : server_info2json,
    pulsectl.pulsectl.PulseSinkInfo      : sink_info2json,
    pulsectl.pulsectl.PulseSourceInfo    : source_info2json,
    pulsectl.pulsectl.PulseVolumeInfo    : cvolume2json,
@@ -96,6 +107,15 @@ if __name__ == '__main__':
 
         def on_mqtt_message(client, userdata, message):
            print("WARNING: unsupported MQTT command received: ["+ message.topic+"] "+str(message.payload))
+ 
+        def on_mqtt_get_server_info(client, userdata, message):
+           print("MQTT: get_server_info received: ["+ message.topic+"] "+str(message.payload))
+           serverInfo=pulse.server_info()
+           print(object2json(serverInfo))
+           mqttClient.publish("pulseaudio2mqtt/cmd_rsp/get_server_info",
+                           object2json(serverInfo),
+                           1,    # qos= 2 - deliver exactly once
+                           False) # tell broker to retain this message so that it gets delivered
 
         def on_mqtt_get_sink_info_list(client, userdata, message):
            print("MQTT: get_sink_info_list received: ["+ message.topic+"] "+str(message.payload))
@@ -139,6 +159,7 @@ if __name__ == '__main__':
         mqttClient.connect(mqttBroker,mqttPort)
 
         mqttClient.subscribe("pulseaudio2mqtt/cmd/#", qos=1)
+        mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_server_info", on_mqtt_get_server_info)
         mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_sink_info_list", on_mqtt_get_sink_info_list)
         mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_source_info_list", on_mqtt_get_source_info_list)
         mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_sink_input_info_list", on_mqtt_get_sink_input_info_list)
