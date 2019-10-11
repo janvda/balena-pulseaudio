@@ -108,11 +108,19 @@ if __name__ == '__main__':
            print("MQTT: get_sink_input_info_list message received: ["+ message.topic+"] "+str(message.payload))
            sinkInputList=pulse.sink_input_list()
            print(object2json(sinkInputList))
-           mqttClient.publish("pulseaudio2mqtt/cmd_rsp/get_sink_info_list",
+           mqttClient.publish("pulseaudio2mqtt/cmd_rsp/get_sink_input_info_list",
                            object2json(sinkInputList),
                            1,    # qos= 2 - deliver exactly once
                            False) # tell broker to retain this message so that it gets delivered
-
+                     
+        def on_mqtt_get_source_output_info_list(client, userdata, message):
+           print("MQTT: get_source_output_info_list message received: ["+ message.topic+"] "+str(message.payload))
+           sourceOutputList=pulse.source_output_list()
+           print(object2json(sourceOutputList))
+           mqttClient.publish("pulseaudio2mqtt/cmd_rsp/get_source_output_info_list",
+                           object2json(sourceOutputList),
+                           1,    # qos= 2 - deliver exactly once
+                           False) # tell broker to retain this message so that it gets delivered
 
         mqttClient=mqtt.Client("pulseaudio2mqtt")
         mqttClient.on_connect = on_mqtt_connect # on_connect doesn't seem to work ??
@@ -123,6 +131,7 @@ if __name__ == '__main__':
         mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_sink_info_list", on_mqtt_get_sink_info_list)
         mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_source_info_list", on_mqtt_get_source_info_list)
         mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_sink_input_info_list", on_mqtt_get_sink_input_info_list)
+        mqttClient.message_callback_add("pulseaudio2mqtt/cmd/get_source_output_info_list", on_mqtt_get_source_output_info_list)
 
         # Publish the details of the device we are listening to
         mqttClient.publish("pulseaudio2mqtt",
