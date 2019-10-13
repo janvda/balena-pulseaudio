@@ -82,7 +82,7 @@ services:
       - GROUPID=1000
     volumes:
        - 'node_red_data:/mount/node_red_data'
-       - 'pulseaudio2mqtt-data:/mount/pulseaudio2mqtt-data'
+       - 'pulseaudio-rest-api-data:/mount/pulseaudio-rest-api-data'
        - 'pulseaudio_client_unix_data:/mount/pulseaudio_client_unix_data'
   nfs-server:
     image: itsthenetwork/nfs-server-alpine:11-arm
