@@ -1,20 +1,12 @@
 # inspired by https://kite.com/blog/python/flask-restful-api-tutorial/
 from flask import Flask, request
-import pulsectl, json, os, time
+import pulsectl, os, time
 import jsonpickle
 
 app = Flask(__name__)
 
 # Connect to pulseaudio server
 pulse = pulsectl.Pulse('pulseaudio2mqtt')
-
-class PulseAudioJSONEncorder(json.JSONEncoder):
-    def default(self,obj):
-        if ( type(obj) == pulsectl.pulsectl.PulseServerInfo) :
-            return PulseAudioJSONEncorder.default(self,   
-                             { "user_name": 10,
-                               "host_name": "ikke" } )
-        return json.JSONEncoder.default(self, obj)
 
 @app.route('/')
 def index():
