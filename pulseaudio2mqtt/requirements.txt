@@ -1,2 +1,4 @@
 paho-mqtt==1.4.0
 pulsectl==19.10
+flask==1.1.1
+jsonpickle==1.2

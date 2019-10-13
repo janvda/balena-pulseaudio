@@ -20,7 +20,7 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 # This will main.py in our root to the working  directory in the container
-COPY main.py main.py
+COPY app.py app.py
 
 # installing pa-mixer-mk3 (also based on pulsectl)
 RUN wget https://raw.githubusercontent.com/mk-fg/pulseaudio-mixer-cli/master/pa-mixer-mk3.py
