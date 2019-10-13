@@ -2,7 +2,7 @@ version: '2'
 volumes:
   pulseaudio_unix_socket:  # shared volume where pulseaudio unix socket will be stored.
   pulseaudio_client_unix_data:  # shared volume containing the /data of the pulseaudio-client-unix service
-  pulseaudio2mqtt-data:
+  pulseaudio-rest-api-data:
   node_red_data:           # shared volume containing the /data of the node-red service
 services:
   pulseaudio-server:
@@ -44,15 +44,15 @@ services:
     volumes:
       - 'pulseaudio_unix_socket:/pulseaudio'  # folder where pulseAudio unix socket is stored.
       - 'pulseaudio_client_unix_data:/data'
-  pulseaudio2mqtt:
-    build: ./pulseaudio2mqtt
+  pulseaudio-rest-api:
+    build: ./pulseaudio-rest-api
     network_mode: host
     privileged: true
     volumes:
-      - 'pulseaudio2mqtt-data:/data'
+      - 'pulseaudio-rest-api-data:/data'
     environment:
       - PULSE_SERVER=tcp:localhost:4713
-      - mqtt_broker=localhost
+      #- mqtt_broker=localhost
     depends_on:
       - pulseaudio-server
   mqtt:
