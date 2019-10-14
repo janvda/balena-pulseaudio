@@ -44,8 +44,26 @@ def getSourceOutputList():
   pulsectlObject=pulse.source_output_list()
   return jsonpickle.encode(pulsectlObject)
 
+@app.route('/default_sink_volume', methods=['GET', 'PUT'])
+def DefaultSinkVolume():
+  if request.method == 'GET':
+    defaultSinkVolume=pulse.volume_get_all_chans(pulse.get_sink_by_name(pulse.server_info().default_sink_name))
+    return jsonpickle.encode(defaultSinkVolume)
+  if request.method == 'PUT':
+    try:
+      newVolume = float(request.data) # read volume from body (msg.payload in node-red)
+      assert(newVolume>=0 and newVolume <= 2), "Volume [=" + str(newVolume) +  "] must be between 0 and 2"
+      # TBD add interval checking
+      x=pulse.volume_set_all_chans(pulse.get_sink_by_name(pulse.server_info().default_sink_name), newVolume)
+      return jsonpickle.encode(newVolume)
+    except ValueError:
+      return "not a float", 400
+    except AssertionError as error:
+      return str(error), 400
+
+
+# TO BE DELETED HERE BELOW
 @app.route('/sink_volume_set/<index>', methods=['POST'])
 def getSinkVolumeSet(index):
-  volume = request.data # read volume from body (msg.payload in node-red)
   sink=pulse.sink_list()[int(index)]
-  return jsonpickle.encode(sink)
+  return "TO BE IMPLEMENTED"
