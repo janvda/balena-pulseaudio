@@ -25,4 +25,4 @@ COPY app.py app.py
 # installing pa-mixer-mk3 (also based on pulsectl)
 RUN wget https://raw.githubusercontent.com/mk-fg/pulseaudio-mixer-cli/master/pa-mixer-mk3.py
 
-CMD ["flask", "run"]
+CMD ["flask", "run", "--host=0.0.0.0"]
