@@ -91,7 +91,7 @@ def DefaultSinkVolume():
 
 
 # TO BE DELETED HERE BELOW
-@app.route('/sink_volume_set/<index>', methods=['POST'])
-def getSinkVolumeSet(index):
-  sink=pulse.sink_list()[int(index)]
-  return "TO BE IMPLEMENTED"
+#@app.route('/sink_volume_set/<index>', methods=['POST'])
+#def getSinkVolumeSet(index):
+#  sink=pulse.sink_list()[int(index)]
+#  return "TO BE IMPLEMENTED"
