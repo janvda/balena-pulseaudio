@@ -44,6 +44,34 @@ def getSourceOutputList():
   pulsectlObject=pulse.source_output_list()
   return jsonpickle.encode(pulsectlObject)
 
+@app.route('/default_sink_index', methods=['GET', 'PUT'])
+def DefaultSinkIndex():
+  if request.method == 'GET':
+    try:
+      defaultSinkName=pulse.server_info().default_sink_name
+      print(defaultSinkName)
+      indexes=[x.index for x in pulse.sink_list() if x.name == defaultSinkName]  # list of all elements with .n==30
+      print(indexes)
+      assert(len(indexes)>0),"No sink found with default_sink_name - bug in pulsectl ?"
+      return str(indexes[0])
+    except AssertionError as error:
+      return str(error), 500
+    except:
+      return "Unknow Error",500
+  if request.method == 'PUT':
+    try:
+      NewDefaultSinkIndex = int(request.data) # read volume from body (msg.payload in node-red)
+      # next functin is not correct as it is expecting the index.
+      sinks=[x for x in pulse.sink_list() if x.index == NewDefaultSinkIndex ]
+      assert(len(sinks)!=0), "No sink found with index = " + str(NewDefaultSinkIndex)
+      assert(len(sinks)==1), "Multiple sinks found with index = " + str(NewDefaultSinkIndex)
+      pulse.sink_default_set(sinks[0])
+      return str(NewDefaultSinkIndex)
+    except AssertionError as error:
+      return str(error), 400
+    except:
+      return "Unknow Error",400
+
 @app.route('/default_sink_volume', methods=['GET', 'PUT'])
 def DefaultSinkVolume():
   if request.method == 'GET':
