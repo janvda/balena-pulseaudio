@@ -7,45 +7,65 @@ import pydoc
 app = Flask(__name__)
 
 # Connect to pulseaudio server
-pulse = pulsectl.Pulse('pulseaudio2mqtt')
+pulse = pulsectl.Pulse('pulseaudio2mqtt', connect=False)
+
+def pulseConnectIfNeeded():
+  # This method must be called in every flask route function as this
+  # will assure that it will reconnect to the pulseaudio server
+  # if needed.
+  if (not pulse.connected):
+    pulse.connect()
+
+try:
+  pulseConnectIfNeeded()
+except pulsectl.PulseError as error:
+  print(error)
 
 @app.route('/')
 def help():
     pulseHelpHtml=pydoc.render_doc(pulse,renderer=pydoc.HTMLDoc())
     return pulseHelpHtml
 
+
 @app.route('/server_info')
 def getServerInfo():
+  pulseConnectIfNeeded()
   pulsectlObject=pulse.server_info()
   return jsonpickle.encode(pulsectlObject)
 
 @app.route('/card_list')
 def getCardInfo():
+  pulseConnectIfNeeded()
   pulsectlObject=pulse.card_list()
   return jsonpickle.encode(pulsectlObject)
 
 @app.route('/sink_list')
 def getSinkList():
+  pulseConnectIfNeeded()
   pulsectlObject=pulse.sink_list()
   return jsonpickle.encode(pulsectlObject)
 
 @app.route('/source_list')
 def getSourceList():
+  pulseConnectIfNeeded()
   pulsectlObject=pulse.source_list()
   return jsonpickle.encode(pulsectlObject)
 
 @app.route('/sink_input_list')
 def getSinkInputList():
+  pulseConnectIfNeeded()
   pulsectlObject=pulse.sink_input_list()
   return jsonpickle.encode(pulsectlObject)
 
 @app.route('/source_output_list')
 def getSourceOutputList():
+  pulseConnectIfNeeded()
   pulsectlObject=pulse.source_output_list()
   return jsonpickle.encode(pulsectlObject)
 
 @app.route('/default_sink_index', methods=['GET', 'PUT'])
 def DefaultSinkIndex():
+  pulseConnectIfNeeded()
   if request.method == 'GET':
     try:
       defaultSinkName=pulse.server_info().default_sink_name
@@ -74,6 +94,7 @@ def DefaultSinkIndex():
 
 @app.route('/default_sink_volume', methods=['GET', 'PUT'])
 def DefaultSinkVolume():
+  pulseConnectIfNeeded()
   if request.method == 'GET':
     defaultSinkVolume=pulse.volume_get_all_chans(pulse.get_sink_by_name(pulse.server_info().default_sink_name))
     return jsonpickle.encode(defaultSinkVolume)
