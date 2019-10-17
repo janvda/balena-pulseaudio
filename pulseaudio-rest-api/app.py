@@ -6,8 +6,8 @@ import pydoc
 
 app = Flask(__name__)
 
-# Connect to pulseaudio server
-pulse = pulsectl.Pulse('pulseaudio2mqtt', connect=False)
+# Prepare session with pulseaudio server
+pulse = pulsectl.Pulse('pulseaudio-rest-api', connect=False, threading_lock=True)
 
 def pulseConnectIfNeeded():
   # This method must be called in every flask route function as this
