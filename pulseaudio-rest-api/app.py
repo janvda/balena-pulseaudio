@@ -137,6 +137,24 @@ def DefaultSinkVolume():
     except AssertionError as error:
       return str(error), 400
 
+@app.route('/default_source_volume', methods=['GET', 'PUT'])
+def DefaultSourceVolume():
+  pulseConnectIfNeeded()
+  if request.method == 'GET':
+    defaultSourceVolume=pulse.volume_get_all_chans(pulse.get_source_by_name(pulse.server_info().default_source_name))
+    return jsonpickle.encode(defaultSourceVolume)
+  if request.method == 'PUT':
+    try:
+      newVolume = float(request.data) # read volume from body (msg.payload in node-red)
+      assert(newVolume>=0 and newVolume <= 2), "Volume [=" + str(newVolume) +  "] must be between 0 and 2"
+      # TBD add interval checking
+      x=pulse.volume_set_all_chans(pulse.get_source_by_name(pulse.server_info().default_source_name), newVolume)
+      return jsonpickle.encode(newVolume)
+    except ValueError:
+      return "not a float", 400
+    except AssertionError as error:
+      return str(error), 400
+
 
 # TO BE DELETED HERE BELOW
 #@app.route('/sink_volume_set/<index>', methods=['POST'])
