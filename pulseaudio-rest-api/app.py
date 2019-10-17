@@ -70,7 +70,7 @@ def DefaultSinkIndex():
     try:
       defaultSinkName=pulse.server_info().default_sink_name
       print(defaultSinkName)
-      indexes=[x.index for x in pulse.sink_list() if x.name == defaultSinkName]  # list of all elements with .n==30
+      indexes=[x.index for x in pulse.sink_list() if x.name == defaultSinkName] 
       print(indexes)
       assert(len(indexes)>0),"No sink found with default_sink_name - bug in pulsectl ?"
       return str(indexes[0])
@@ -80,13 +80,40 @@ def DefaultSinkIndex():
       return "Unknow Error",500
   if request.method == 'PUT':
     try:
-      NewDefaultSinkIndex = int(request.data) # read volume from body (msg.payload in node-red)
-      # next functin is not correct as it is expecting the index.
+      NewDefaultSinkIndex = int(request.data) # read index from body (=msg.payload in node-red)
       sinks=[x for x in pulse.sink_list() if x.index == NewDefaultSinkIndex ]
       assert(len(sinks)!=0), "No sink found with index = " + str(NewDefaultSinkIndex)
       assert(len(sinks)==1), "Multiple sinks found with index = " + str(NewDefaultSinkIndex)
       pulse.sink_default_set(sinks[0])
       return str(NewDefaultSinkIndex)
+    except AssertionError as error:
+      return str(error), 400
+    except:
+      return "Unknow Error",400
+
+@app.route('/default_source_index', methods=['GET', 'PUT'])
+def DefaultSourceIndex():
+  pulseConnectIfNeeded()
+  if request.method == 'GET':
+    try:
+      defaultSourceName=pulse.server_info().default_source_name
+      print(defaultSourceName)
+      indexes=[x.index for x in pulse.source_list() if x.name == defaultSourceName] 
+      print(indexes)
+      assert(len(indexes)>0),"No source found with default_source_name - bug in pulsectl ?"
+      return str(indexes[0])
+    except AssertionError as error:
+      return str(error), 500
+    except:
+      return "Unknow Error",500
+  if request.method == 'PUT':
+    try:
+      NewDefaultSourceIndex = int(request.data) # read index from body (=msg.payload in node-red)
+      sources=[x for x in pulse.source_list() if x.index == NewDefaultSourceIndex ]
+      assert(len(sources)!=0), "No source found with index = " + str(NewDefaultSourceIndex)
+      assert(len(sources)==1), "Multiple sinks found with index = " + str(NewDefaultSourceIndex)
+      pulse.source_default_set(sources[0])
+      return str(NewDefaultSourceIndex)
     except AssertionError as error:
       return str(error), 400
     except:
