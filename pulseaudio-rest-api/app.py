@@ -155,6 +155,41 @@ def DefaultSourceVolume():
     except AssertionError as error:
       return str(error), 400
 
+@app.route('/default_sink_mute', methods=['GET', 'PUT'])
+def DefaultSinkMute():
+  pulseConnectIfNeeded()
+  if request.method == 'GET':
+    defaultSinkMute=pulse.get_sink_by_name(pulse.server_info().default_sink_name).mute
+    return str(defaultSinkMute)
+  if request.method == 'PUT':
+    try:
+      newMute = int(request.data) # read volume from body (msg.payload in node-red)
+      assert(newMute ==0 or newMute==1), "Mute [=" + str(newMute) +  "] must be 0 (=not muted) or 1 (=muted)."
+      # TBD add interval checking
+      x=pulse.sink_mute(pulse.get_sink_by_name(pulse.server_info().default_sink_name).index,newMute)
+      return str(newMute)
+    except ValueError:
+      return "not an int", 400
+    except AssertionError as error:
+      return str(error), 400
+
+@app.route('/default_source_mute', methods=['GET', 'PUT'])
+def DefaultSourceMute():
+  pulseConnectIfNeeded()
+  if request.method == 'GET':
+    defaultSourceMute=pulse.get_source_by_name(pulse.server_info().default_source_name).mute
+    return str(defaultSourceMute)
+  if request.method == 'PUT':
+    try:
+      newMute = int(request.data) # read volume from body (msg.payload in node-red)
+      assert(newMute ==0 or newMute==1), "Mute [=" + str(newMute) +  "] must be 0 (=not muted) or 1 (=muted)."
+      # TBD add interval checking
+      x=pulse.source_mute(pulse.get_source_by_name(pulse.server_info().default_source_name).index,newMute)
+      return str(newMute)
+    except ValueError:
+      return "not an int", 400
+    except AssertionError as error:
+      return str(error), 400
 
 # TO BE DELETED HERE BELOW
 #@app.route('/sink_volume_set/<index>', methods=['POST'])
