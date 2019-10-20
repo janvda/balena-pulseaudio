@@ -19,4 +19,8 @@ USER node-red
 RUN npm install node-red-dashboard
 RUN npm install node-red-contrib-credentials
 
+# install my version of node-red-contrib-balena that is extended with extra nodes to start/stop/restart service
+# a node to retrieve the state of all services.
+RUN npm install https://github.com/janvda/node-red-contrib-balena.git#service_start_stop_nodes
+
 COPY ./settings.js /data/settings.js
