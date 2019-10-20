@@ -15,7 +15,7 @@ RUN setcap 'cap_net_bind_service=+ep'  $(eval readlink -f `which node`)
 ######### Changing back to node-red user #####################
 USER node-red
 
-RUN npm install node-red-contrib-resinio
+RUN npm install node-red-contrib-balena
 RUN npm install node-red-dashboard
 RUN npm install node-red-contrib-credentials
 
