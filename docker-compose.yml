@@ -68,10 +68,11 @@ services:
     network_mode: host
     volumes:
        - 'node_red_data:/data'
+    labels:
+      io.balena.features.supervisor-api: '1' # is needed for node-red-contrib-balena nodes
     environment:
       - PULSE_SERVER=tcp:localhost:4713
       - PORT=80  # so this allows to access node-red via the public URL
-      - io.balena.features.supervisor-api=true  # is needed for node-red-contrib-balena nodes
     depends_on:
       - pulseaudio-server
   samba:
