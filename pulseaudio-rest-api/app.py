@@ -191,6 +191,23 @@ def DefaultSourceMute():
     except AssertionError as error:
       return str(error), 400
 
+# expect a json body with following 2 fields { index : <card index> , name : <profile name> }
+@app.route('/card_profile_set_by_index', methods=['PUT'])
+def CardProfileSetByIndex():
+  pulseConnectIfNeeded()
+  if request.method == 'PUT':
+    try:
+      content = request.get_json()
+      print(content)
+      #assert(newMute ==0 or newMute==1), "Mute [=" + str(newMute) +  "] must be 0 (=not muted) or 1 (=muted)."
+      # TBD add interval checking
+      x=pulse.card_profile_set_by_index()
+      return str(content)
+    except ValueError:
+      return "not an int", 400
+    except AssertionError as error:
+      return str(error), 400
+
 # TO BE DELETED HERE BELOW
 #@app.route('/sink_volume_set/<index>', methods=['POST'])
 #def getSinkVolumeSet(index):
