@@ -199,12 +199,15 @@ def CardProfileSetByIndex():
     try:
       content = request.get_json()
       print(content)
-      #assert(newMute ==0 or newMute==1), "Mute [=" + str(newMute) +  "] must be 0 (=not muted) or 1 (=muted)."
-      # TBD add interval checking
-      x=pulse.card_profile_set_by_index()
-      return str(content)
+      index = int(content['index'])
+      name = content['name']
+      assert(name != ''), "profile name not specified or blank"
+      x=pulse.card_profile_set_by_index(index,name)
+      return str(x)
+    except IndexError:
+      return "IndexError: " + str(error), 400
     except ValueError:
-      return "not an int", 400
+      return "index not specified or not an int", 400
     except AssertionError as error:
       return str(error), 400
 
