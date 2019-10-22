@@ -191,7 +191,7 @@ def DefaultSourceMute():
     except AssertionError as error:
       return str(error), 400
 
-# expect a json body with following 2 fields { index : <card index> , name : <profile name> }
+# expects a json body as input with following 2 fields { "index" : <card index> , "name" : <profile name> }
 @app.route('/card_profile_set_by_index', methods=['PUT'])
 def CardProfileSetByIndex():
   pulseConnectIfNeeded()
@@ -203,9 +203,9 @@ def CardProfileSetByIndex():
       name = content['name']
       assert(name != ''), "profile name not specified or blank"
       x=pulse.card_profile_set_by_index(index,name)
-      return str(x)
-    except pulsectl.PulseOperationFailed:
-      return "pulsectl.PulseOperationFailed (name not correct ?):" + str(error), 400
+      return "OK"
+    except pulsectl.PulseOperationInvalid:
+      return "pulsectl.PulseOperationInvalid (name not correct ?):" + str(error), 400
     except keyError:
       return "keyError: json input is expected with key:" + str(error), 400
     except IndexError:
