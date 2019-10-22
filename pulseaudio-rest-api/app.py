@@ -198,7 +198,7 @@ def CardProfileSetByIndex():
   if request.method == 'PUT':
     try:
       content = request.get_json()
-      print(content)
+      #print(content)
       index = int(content['index'])
       name = content['name']
       assert(name != ''), "profile name not specified or blank"
