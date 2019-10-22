@@ -13,7 +13,7 @@ PULSE_SERVER="tcp:localhost:4713" paplay LRMonoPhase4.wav
 
 In case the pulseaudio client service is running on the same device as the pulseaudio-server then you can also communicate through unix domain sockets as described in the example below.  Note that in this case you must assure that `/pulseaudio/unix_socket` refers to the same socket file created by the pulseaudio-server.
 
-````
+```
 PULSE_SERVER=unix:/pulseaudio/unix_socket pactl list short
 ```
 
