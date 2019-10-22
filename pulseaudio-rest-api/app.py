@@ -204,6 +204,10 @@ def CardProfileSetByIndex():
       assert(name != ''), "profile name not specified or blank"
       x=pulse.card_profile_set_by_index(index,name)
       return str(x)
+    except pulsectl.PulseOperationFailed:
+      return "pulsectl.PulseOperationFailed (name not correct ?):" + str(error), 400
+    except keyError:
+      return "keyError: json input is expected with key:" + str(error), 400
     except IndexError:
       return "IndexError: " + str(error), 400
     except ValueError:
