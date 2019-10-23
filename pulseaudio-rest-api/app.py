@@ -217,6 +217,40 @@ def CardProfileSetByIndex():
     except AssertionError as error:
       return str(error), 400
 
+# expects a json body as input with following 3 fields 
+#      { 
+#        "source"     : <index or name of source, if not specified then default source is used > , 
+#        "timeout"    : <duration in sec - e.g. 0.8 >, 
+#        "stream_idx" : <optional, if specified monitors the stream with this index linked to the source>
+#      }
+@app.route('/get_peak_sample)
+def GetPeakSample():
+  pulseConnectIfNeeded()
+  try:
+    content = request.get_json()
+    print(content)
+    source  = content['index']
+    timeout = content['timeout']
+    assert( timeout is not None ), "timeout must be specified"
+    assert( isinstance(timeout, (int,float))), "timeout must be float"
+    stream_idx = content['stream_idx']
+    assert( (stream_idx is None) or (isinstance(stream_idx, int)), "If stream_idx is specified then it must be a number"
+    peak_value=pulse.get_peak_sample(source,timeout,stream_idx)
+  return str(peak_value)
+  except TypeError as error:
+    return "TypeError (input is not of type json):" + str(error), 400
+  except pulsectl.PulseOperationFailed as error:
+    return "pulsectl.PulseOperationFailed (name and/or index are not correct):" + str(error), 404
+  except KeyError as error:
+    return "keyError: json input is expected with key:" + str(error), 400
+  except IndexError as error:
+    return "IndexError: " + str(error), 400
+  except ValueError:
+    return "index not specified or not an int", 400
+  except AssertionError as error:
+    return str(error), 400
+
+
 # TO BE DELETED HERE BELOW
 #@app.route('/sink_volume_set/<index>', methods=['POST'])
 #def getSinkVolumeSet(index):
