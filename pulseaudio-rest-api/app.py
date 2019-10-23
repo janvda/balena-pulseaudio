@@ -234,9 +234,9 @@ def GetPeakSample():
     assert( timeout is not None ), "timeout must be specified"
     assert( isinstance(timeout, (int,float))), "timeout must be float"
     stream_idx = content['stream_idx']
-    assert( (stream_idx is None) or (isinstance(stream_idx, int)), "If stream_idx is specified then it must be a number"
+    assert( (stream_idx is None) or (isinstance(stream_idx, int))), "If stream_idx is specified then it must be a number"
     peak_volume = pulse.get_peak_sample(source,timeout,stream_idx)
-  return str(peak_volume)
+    return str(peak_volume)
   except TypeError as error:
     return "TypeError (input is not of type json):" + str(error), 400
   except pulsectl.PulseOperationFailed as error:
