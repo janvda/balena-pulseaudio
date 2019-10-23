@@ -217,26 +217,25 @@ def CardProfileSetByIndex():
     except AssertionError as error:
       return str(error), 400
 
-# expects a json body as input with following 3 fields 
-#      { 
+# expects the following arguments:
 #        "source"     : <index or name of source, if not specified then default source is used > , 
 #        "timeout"    : <duration in sec - e.g. 0.8 >, 
 #        "stream_idx" : <optional, if specified monitors the stream with this index linked to the source>
-#      }
 @app.route('/get_peak_sample')
 def GetPeakSample():
   pulseConnectIfNeeded()
   try:
-    content = request.get_json()
-    print(content)
-    source  = content['index']
-    timeout = content['timeout']
-    assert( timeout is not None ), "timeout must be specified"
-    assert( isinstance(timeout, (int,float))), "timeout must be float"
-    stream_idx = content['stream_idx']
-    assert( (stream_idx is None) or (isinstance(stream_idx, int))), "If stream_idx is specified then it must be a number"
-    peak_volume = pulse.get_peak_sample(source,timeout,stream_idx)
-    return str(peak_volume)
+    sourceString  = request.args.get('source')
+    source  = int(sourceString) if sourceString is not None else None
+
+    timeoutString = request.args.get('timeout')
+    assert( timeoutString is not None ), "timeout must be specified"
+    timeout = float(timeoutString)
+
+    streamIdxString = request.args.get('stream_idx')
+    streamIdx = int(streamIdxString) if streamIdxString is not None else None
+    peakVolume = pulse.get_peak_sample(source,timeout,streamIdx)
+    return str(peakVolume)
   except TypeError as error:
     return "TypeError (input is not of type json):" + str(error), 400
   except pulsectl.PulseOperationFailed as error:
