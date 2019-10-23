@@ -19,7 +19,7 @@ This balena application runs a pulseaudio server and demonstrates how it can be 
 
 ## Rationale
 
-The idea is to create a pulseaudio service (= `pulseaudio-server`) and a REST interface (= `pulseaudio-rest-api`service) for audio control (setting volume, mute, unmute, specify default sink (audio playback device) or sink (audio capture device), ...) that can be reused in other balena applications requiring an audio interface.  The pulseaudio service is the only service having an interface with the audio hardware (including connected bluetooth devices): all other services requiring audio should communicate with the pulseaudio service AND use the REST interface for controlling the audio.
+The idea is to create a pulseaudio service (= `pulseaudio-server`) and a REST interface (= `pulseaudio-rest-api` service) for audio control (_e.g. setting volume, mute, unmute, specify default sink (audio playback device) or sink (audio capture device), ..._) that can be reused in other balena applications requiring an audio interface.  The pulseaudio service is the only service having an interface with the audio hardware (_includes connected bluetooth devices_): all other services requiring audio should communicate with the pulseaudio service AND use the REST interface for controlling the audio.
 
 ## Features
 
