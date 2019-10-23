@@ -207,7 +207,7 @@ def CardProfileSetByIndex():
     except TypeError as error:
       return "TypeError (input is not of type json):" + str(error), 400
     except pulsectl.PulseOperationFailed as error:
-      return "pulsectl.PulseOperationFailed (name and/or index are not correct):" + str(error), 400
+      return "pulsectl.PulseOperationFailed (name and/or index are not correct):" + str(error), 404
     except KeyError as error:
       return "keyError: json input is expected with key:" + str(error), 400
     except IndexError as error:
