@@ -24,3 +24,4 @@ RUN npm install node-red-contrib-credentials
 RUN npm install https://github.com/janvda/node-red-contrib-balena.git#service_start_stop_nodes
 
 COPY ./settings.js /data/settings.js
+COPY ./flows.json  /data/flows.json
