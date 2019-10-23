@@ -129,7 +129,6 @@ def DefaultSinkVolume():
     try:
       newVolume = float(request.data) # read volume from body (msg.payload in node-red)
       assert(newVolume>=0 and newVolume <= 2), "Volume [=" + str(newVolume) +  "] must be between 0 and 2"
-      # TBD add interval checking
       x=pulse.volume_set_all_chans(pulse.get_sink_by_name(pulse.server_info().default_sink_name), newVolume)
       return jsonpickle.encode(newVolume)
     except ValueError:
@@ -147,7 +146,6 @@ def DefaultSourceVolume():
     try:
       newVolume = float(request.data) # read volume from body (msg.payload in node-red)
       assert(newVolume>=0 and newVolume <= 2), "Volume [=" + str(newVolume) +  "] must be between 0 and 2"
-      # TBD add interval checking
       x=pulse.volume_set_all_chans(pulse.get_source_by_name(pulse.server_info().default_source_name), newVolume)
       return jsonpickle.encode(newVolume)
     except ValueError:
@@ -165,7 +163,6 @@ def DefaultSinkMute():
     try:
       newMute = int(request.data) # read volume from body (msg.payload in node-red)
       assert(newMute ==0 or newMute==1), "Mute [=" + str(newMute) +  "] must be 0 (=not muted) or 1 (=muted)."
-      # TBD add interval checking
       x=pulse.sink_mute(pulse.get_sink_by_name(pulse.server_info().default_sink_name).index,newMute)
       return str(newMute)
     except ValueError:
@@ -183,7 +180,6 @@ def DefaultSourceMute():
     try:
       newMute = int(request.data) # read volume from body (msg.payload in node-red)
       assert(newMute ==0 or newMute==1), "Mute [=" + str(newMute) +  "] must be 0 (=not muted) or 1 (=muted)."
-      # TBD add interval checking
       x=pulse.source_mute(pulse.get_source_by_name(pulse.server_info().default_source_name).index,newMute)
       return str(newMute)
     except ValueError:
@@ -248,10 +244,3 @@ def GetPeakSample():
     return "index not specified or not an int", 400
   except AssertionError as error:
     return str(error), 400
-
-
-# TO BE DELETED HERE BELOW
-#@app.route('/sink_volume_set/<index>', methods=['POST'])
-#def getSinkVolumeSet(index):
-#  sink=pulse.sink_list()[int(index)]
-#  return "TO BE IMPLEMENTED"
