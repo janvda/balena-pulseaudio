@@ -1,6 +1,6 @@
 # Service `pulseaudio-rest-api`
 
-This service provides a REST HTTP interface to control the pulseaudio server.  So, other applications can send commands (via sending appropriate http request) to this service in order to control the audio volume, mute/unmute the audio, get information about connected audio devices, ...
+This service provides a REST HTTP interface to control the pulseaudio server.  So, other applications can send commands (via sending appropriate http request) to this service in order to control the audio volume, mute/unmute, get information about connected audio devices, ...
 
 The idea is to provide same functionality as [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/)
 
@@ -30,15 +30,10 @@ The supported command/queries are a subset of what is documented at  [PulseAudio
 | `/source_input_list`| GET | returns an array of `source_input_info` objects in json format.|
 | `/card_list`| GET | returns an array of `card_info` objects in json format.|
 | `/card_profile_set_by_index`| PUT | input is JSON with structure { "index" : `index_of_card`, "name" : `profile_name` }.  So this request changes the profile of the card with index = `index_of_card` to the profile with name = `profile_name`. |
-| `/default_sink_index`| GET, PUT | `GET` : get the index of the default sink; `PUT`: changes the default sink to the sink with the specified index. |
+| `/default_sink_index`| GET, PUT | `GET` : get the index of the default sink; `PUT`: changes the default sink to the sink with the index specified in the body. |
 | `/default_source_index`| GET, PUT | similar as `/default_sink_index` |
-| `/default_sink_volume`| GET, PUT | `GET`: get the volume (a number between 0 and 2, 1 stands for 100%) of the default sink; `PUT`: sets the volume of the default sink to the volume specified. |
+| `/default_sink_volume`| GET, PUT | `GET`: get the volume (a number between 0 and 2, 1 stands for 100%) of the default sink; `PUT`: sets the volume of the default sink to the volume specified in the body. |
 | `/default_source_volume`| GET, PUT | similar as `/default_sink_volume` |
-
-changes the card profile of the card with `source_input_info` objects in json format.|
-
-| `get_card_list`| |
-
-| `set_(sink|source)_volume_by_index` | to be implemented|
-| `set_(sink|source)_mute_by_index` | to be implemented|
-| `set_(sink_input|source_output)_volume` | to be implemented |
+| `/default_sink_mute`| GET, PUT | mute = `1` and unmute = `0`. `GET` returns the mute/unmute state of the default sink; `PUT`: mutes/unmutes the default sink depending on the value (`1`or `0`) specified in the body.|
+| `/default_source_mute`| GET, PUT | similar as `/default_sink_mute` |
+| `/get_peak_sample`| GET | supports 3 parameters: `timeout` (mandatory), `source` (optional), `stream_idx` (optional).  It will measure the peak volume of the default source for the period specified by `timeout` in seconds.  If you want to measure it from a different source then specify the index of that source in parameter `source`.  If you want to measure it for a specific audio stream then specify |
