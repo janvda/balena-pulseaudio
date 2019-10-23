@@ -6,7 +6,7 @@ The idea is to provide same functionality as [pavucontrol](https://freedesktop.o
 
 ## Design
 
-This service is realized by the python program [app.py](app.py) which is based on: 
+This service is realized by the python program ["app.py"](app.py) which is based on: 
 * [flask](https://flask.palletsprojects.com/en/1.1.x/) library to handle the http requests
 * [pulsectl](https://pypi.org/project/pulsectl/) library to communicate with a pulseaudio server
 
@@ -14,9 +14,7 @@ This service is realized by the python program [app.py](app.py) which is based o
 
 The responses will have similar structure as the data structures documented at [PulseAudio 13.0](https://freedesktop.org/software/pulseaudio/doxygen/annotated.html)
 
-The supported command/queries are a subset of what is documented at:
-
-* [PulseAudio 13.0 - Server Query and Control](https://freedesktop.org/software/pulseaudio/doxygen/introspect.html)
+The supported command/queries are a subset of what is documented at  [PulseAudio 13.0 - Server Query and Control](https://freedesktop.org/software/pulseaudio/doxygen/introspect.html)
 
 | method | response |
 |--------|-------------|
