@@ -223,7 +223,7 @@ def CardProfileSetByIndex():
 #        "timeout"    : <duration in sec - e.g. 0.8 >, 
 #        "stream_idx" : <optional, if specified monitors the stream with this index linked to the source>
 #      }
-@app.route('/get_peak_sample)
+@app.route('/get_peak_sample')
 def GetPeakSample():
   pulseConnectIfNeeded()
   try:
